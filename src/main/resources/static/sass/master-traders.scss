@@ -1,0 +1,15 @@
+@import 'global/_reset.scss';
+@import 'global/_variables.scss';
+@import 'global/_navigation.scss';
+@import 'global/_header.scss';
+
+@import 'blocks/testimonials_carousel.scss';
+
+@import 'blocks/master.scss';
+@import 'blocks/master_portfolio.scss';
+@import 'blocks/disclaimer.scss';
+
+
+.header {
+	background: #070915 url(../img/bg-master-traders.jpg) center 0 no-repeat;
+}

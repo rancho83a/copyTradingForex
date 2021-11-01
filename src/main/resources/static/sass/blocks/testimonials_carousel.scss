@@ -1,0 +1,93 @@
+.testimonials_carousel {
+	padding: 45px 30px 30px;
+	background: #fff;
+	margin-bottom: 10px;
+}
+.item {
+	font-family: Open Sans;
+	font-size: 17px;
+	line-height: 25px;
+	font-style: italic;
+	padding: 0 60px;
+	text-align: center;
+	margin: 0 auto;
+	.dots {
+		margin: 27px 0 8px;
+		span {
+			display: inline-block;
+			background: $color_gold;
+			width: 5px;
+			height: 5px;
+			overflow: hidden;
+			margin: 0 3px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+		}
+	}
+	.cite {
+		@include font(Crimson Text,17px,400,0px);
+		line-height: 21px;
+		font-style: normal;
+		display: block;
+		margin-bottom: 25px;
+	}
+}
+ul.slick-dots {
+	text-align: center;
+	li {
+		display: inline-block;
+		margin: 0 10px;
+		button {
+			border: none;
+			font-size: 0;
+			width: 12px;
+			height: 12px;
+			border-radius: 50%;
+			background: rgba(0,0,0,.15);
+			cursor: pointer;
+			&:hover {
+				background: rgba(0,0,0,.25);
+			}
+		}
+	}
+	li.slick-active {
+		position: relative;
+		button {
+			background: $color_gold;
+			width: 10px;
+			height: 8px;
+			border-radius: 1px;
+			padding-bottom: 4px;
+			margin: 0 1px;
+			&::before {
+				content: "";
+				display: block;
+				width: 8px;
+				height: 8px;
+				-webkit-border-radius: 1px;
+				border-radius: 1px;
+				position: absolute;
+				left: 2px;
+				top: 8px;
+				background: $color_gold;
+				-webkit-transform: rotate(45deg);
+				transform: rotate(45deg);
+			}			
+		}
+	}
+}
+
+.testimon_text {
+	background: #fff;
+	padding: 30px 30px 15px;
+	width: 65%;
+	display: inline-block;
+	h3 {
+		font-size: 20px;
+		line-height: 22px;
+	}
+	p {
+		margin-top: 17px;
+		
+	}
+}

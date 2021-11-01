@@ -1,0 +1,114 @@
+/*section our contacts*/
+.wr-our_contacts {
+	padding-top: 20px;
+}
+.follow_us {
+	padding: 30px;
+	background: #fff;
+	margin-bottom: 15px;
+	display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    @media (max-width: 991px) {
+    	padding: 20px 30px 5px;
+    }
+    @media (max-width: 767px) {
+		max-width: 340px;
+	    margin: 20px auto;
+	}
+	@media (max-width: 575px) {
+		max-width: 340px;
+	    padding: 20px 17px 5px;
+	}
+	h2 {
+		width: 100%;
+		font-size: 20px;
+	    line-height: 22px;
+	    font-weight: 600;
+	    letter-spacing: 2px;
+	    @media (max-width: 767px) {
+			margin-bottom: 15px;
+		}
+	}
+	
+	
+}
+
+.social_contact {
+	font-size: 14px;
+	display: inline-block;
+	a {
+		height: 30px;
+		width: 140px;
+		display: flex;
+		margin-bottom: 17px;
+		@media (max-width: 991px) {
+			width: 125px;
+			height: 27px;
+		}
+		@media (max-width: 575px) {
+			width: 110px;
+			height: 25px;
+		}
+	}
+	&_inst,
+	&_telegram {		
+		img:first-child {
+			width: 27%;
+		}
+		img:last-child {
+			width: 73%;
+		}
+	}
+	/*&_telegram {		
+		img:first-child {
+			width: 30px;
+		}
+		img:last-child {
+			width: 110px;
+		}
+	}*/
+}
+
+.phone_email {
+	padding: 30px;
+	background: #d3b564;
+	@media (max-width: 991px) {
+		padding: 20px 30px;
+	}
+	@media (max-width: 767px) {
+		margin: 0 auto 20px;
+	}
+	@media (max-width: 575px) {
+		max-width: 297px;	    
+	    padding: 20px 15px;
+	}
+	p {
+		color: #fff;
+		font-size: 14px;
+		
+	}
+	a {
+		display: block;
+		margin-top: 12px;
+		color: $color_dblue;
+		font-size: 21px;
+		line-height: 25px;
+		font-family: "Crimson Text", Arial, Tahoma, sans-serif;
+		@media (max-width: 991px) {
+			padding-top: 0;
+			line-height: 15px;
+			font-size: 19px;
+		}
+		@media (max-width: 575px) {
+			line-height: 11px;
+		    font-size: 17px;
+		}
+	}
+	.p_grey {
+		color: #7c7156;
+		margin-top: 5px;
+		font-size: 13px;
+		line-height: 17px;
+	}
+}

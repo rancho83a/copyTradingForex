@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+ <html lang="en">
+ 	<head>
+ 		<!-- META -->
+ 		<meta charset="utf-8">
+ 		<meta name="viewport" content="width=device-width, inicial-scale=1.0">
+ 		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<![endif]-->
+
+ 		<!-- FAVICON -->
+ 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+
+ 		<!-- SEO -->
+ 		<meta name="Description" content="">
+ 		<meta name="Rating" content="">    
+ 		<meta name="Author" content="">
+ 		<meta name="robots" content="noindex">
+
+ 		<!-- CONFIG -->
+ 		<meta name="format-detection" content="telephone=no">
+ 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ 		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134605534-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-134605534-1');
+		</script>
+
+ 		<!-- Стили -->
+ 		<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
+ 		<link rel="stylesheet" href="css/balanced-statement.min.css">
+
+
+ 		<title>Balanced Portfolio Statement</title>
+
+ 	</head>
+
+ 	<body>
+
+ 		<!-- [if lt IE 10]>
+ 			<p class="browsehappy">You're using <strong>OLD version of Internet Explorer</strong>. Please, <a href="http://browsehappy.com/>update your browser</a> to see more opportunities in browser!</p>
+ 		<![endif]-->
+
+ 		<!-- popup for Balanced button -->
+ 		<div class="popup jsPopupBalstat">
+ 			<h3>Balanced Portfolio</h3>
+ 			<ul class="nav nav-tabs" id="myTab1" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="chart1-tab" data-toggle="tab" href="#chart1" role="tab" aria-controls="chart" aria-selected="true">Chart</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" id="portfolio1-tab" data-toggle="tab" href="#portfolio1" role="tab" aria-controls="portfolio" aria-selected="true">Portfolio Statement</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profit11-tab" data-toggle="tab" href="#profit11" role="tab" aria-controls="profit11" aria-selected="false">Revenue from reinvesting profits</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profit22-tab" data-toggle="tab" href="#profit22" role="tab" aria-controls="profit22" aria-selected="false">Revenue profit's withdraw</a>
+				</li>
+				<li class="nav-item"> <!-- add class="disabled" to disable the tab -->
+					<a class="nav-link" id="statement_bal-tab" data-toggle="tab" href="#statement_bal" role="tab" aria-controls="statement_bal" aria-selected="false">Statement and Report
+						<p class="hint">Only for registered users</p>
+					</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTab1Content">
+
+				<div class="tab-pane fade show active" id="chart1" role="tabpanel" aria-labelledby="chart1-tab">
+					<div class="chartdiv_bal"></div>
+					<div class="chartdiv_dyn" style="display: none;"></div> <!-- If there is not this div, .js will be interrupted by mistake "this div wasn't found" -->
+				</div>
+
+				<div class="tab-pane fade" id="portfolio1" role="tabpanel" aria-labelledby="portfolio1-tab">
+					<div class="wr-for-table">
+						<table class="table">
+							<thead class="fixed">
+								<tr>
+									<th>Month/ Year</th>
+									<th>Start Date</th>
+									<th>Finish Date</th>
+									<th>Start Balance, USD</th>
+									<th>Finish Balance, USD</th>
+									<th>Profit, USD</th>
+									<th>Withdrawal, USD</th>
+									<th>Deposit, USD</th>
+									<th>Profit, %</th>
+									<th>Monthly Result, %</th>
+									<th>General Result, %</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr_l">
+									<td rowspan="2">03/2020</td>
+									<td>2.3</td>
+									<td>31.3</td>
+									<td>9084,12</td>
+									<td>10403,49</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>14,52</td>
+									<td rowspan="2">18,36</td>
+									<td rowspan="2">123,2</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.3</td>
+									<td>2.3</td>
+									<td>8889,88</td>
+									<td>9084,12</td>
+									<td>341,26</td>
+									<td>147,02</td>
+									<td> </td>
+									<td>3,84</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2020</td>
+									<td>1.2</td>
+									<td>29.2</td>
+									<td>10550,47</td>
+									<td>8889,88</td>
+									<td>-1660,59</td>
+									<td> </td>
+									<td> </td>
+									<td>-15,74</td>
+									<td>-15,74</td>
+									<td>104,8</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="4">01/2020</td>
+									<td>31.1</td>
+									<td>31.1</td>
+									<td>10720,08</td>
+									<td>10550,47</td>
+									<td>0,00</td>
+									<td>169,61</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="4">-15,11</td>
+									<td rowspan="4">120,6</td>
+								</tr>
+								<tr class="tr_l">
+									<td>8.1</td>
+									<td>30.1</td>
+									<td>12064,94</td>
+									<td>10720,08</td>
+									<td>-1344,86</td>
+									<td> </td>
+									<td> </td>
+									<td>-11,15</td>
+								</tr>
+								<tr class="tr_l">
+									<td>3.1</td>
+									<td>8.1</td>
+									<td>12293,41</td>
+									<td>12064,94</td>
+									<td>0,00</td>
+									<td>228,47</td>
+									<td> </td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.1</td>
+									<td>2.1</td>
+									<td>12800,16</td>
+									<td>12293,41</td>
+									<td>-506,75</td>
+									<td> </td>
+									<td> </td>
+									<td>-3,96</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="2">12/2019</td>
+									<td>3.12</td>
+									<td>31.12</td>
+									<td>13980,71</td>
+									<td>12800,16</td>
+									<td>-1180,55</td>
+									<td> </td>
+									<td> </td>
+									<td>-8,44</td>
+									<td rowspan="2">4,77</td>
+									<td rowspan="2">135,7</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.12</td>
+									<td>2.12</td>
+									<td>13254,14</td>
+									<td>13980,71</td>
+									<td>1750,89</td>
+									<td>1024,32</td>
+									<td> </td>
+									<td>13,21</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="2">11/2019</td>
+									<td>2.11</td>
+									<td>30.11</td>
+									<td>17818,3</td>
+									<td>13254,14</td>
+									<td>-4564,16</td>
+									<td> </td>
+									<td> </td>
+									<td>-25,62</td>
+									<td rowspan="2">-28,64</td>
+									<td rowspan="2">130,9</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.11</td>
+									<td>1.11</td>
+									<td>18692,77</td>
+									<td>17818,3</td>
+									<td>-565,09</td>
+									<td>309,38</td>
+									<td> </td>
+									<td>-3,02</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2019</td>
+									<td>1.10</td>
+									<td>31.10</td>
+									<td>18968,37</td>
+									<td>18692,77</td>
+									<td>-275,60</td>
+									<td> </td>
+									<td> </td>
+									<td>-1,45</td>
+									<td>-1,45</td>
+									<td>159,5</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="3">09/2019</td>
+									<td>30.9</td>
+									<td>30.9</td>
+									<td>19245,33</td>
+									<td>18968,37</td>
+									<td>0,00</td>
+									<td>276,96</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="3">32,06</td>
+									<td rowspan="3">161,0</td>
+								</tr>
+								<tr class="tr_l">
+									<td>3.9</td>
+									<td>29.9</td>
+									<td>14600,12</td>
+									<td>19245,33</td>
+									<td>4645,21</td>
+									<td> </td>
+									<td> </td>
+									<td>31,82</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.9</td>
+									<td>2.9</td>
+									<td>14865,49</td>
+									<td>14600,12</td>
+									<td>36,15</td>
+									<td>301,52</td>
+									<td> </td>
+									<td>0,24</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="2">08/2019</td>
+									<td>2.8</td>
+									<td>31.8</td>
+									<td>29425,91</td>
+									<td>14865,49</td>
+									<td>-14560,42</td>
+									<td> </td>
+									<td> </td>
+									<td>-49,48</td>
+									<td rowspan="2">-49,69</td>
+									<td rowspan="2">128,9</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.8</td>
+									<td>1.8</td>
+									<td>29927,89</td>
+									<td>29425,91</td>
+									<td>-62,05</td>
+									<td>439,93</td>
+									<td> </td>
+									<td>-0,21</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2019</td>
+									<td>1.7</td>
+									<td>31.7</td>
+									<td>28358,65</td>
+									<td>29927,89</td>
+									<td>1569,24</td>
+									<td> </td>
+									<td> </td>
+									<td>5,53</td>
+									<td>5,53</td>
+									<td>178,6</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="2">06/2019</td>
+									<td>28.6</td>
+									<td>30.6</td>
+									<td>28698,6</td>
+									<td>28358,65</td>
+									<td>0,00</td>
+									<td>339,95</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="2">6,38</td>
+									<td rowspan="2">173,1</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.6</td>
+									<td>27.6</td>
+									<td>26977,06</td>
+									<td>28698,6</td>
+									<td>1721,54</td>
+									<td> </td>
+									<td> </td>
+									<td>6,38</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="3">05/2019</td>
+									<td>31.5</td>
+									<td>31.5</td>
+									<td>27494,78</td>
+									<td>26977,06</td>
+									<td>0,00</td>
+									<td>517,72</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="3">-37,91</td>
+									<td rowspan="3">166,7</td>
+								</tr>
+								<tr class="tr_l">
+									<td>2.5</td>
+									<td>30.5</td>
+									<td>43346</td>
+									<td>27494,78</td>
+									<td>-15851,22</td>
+									<td> </td>
+									<td> </td>
+									<td>-36,57</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.5</td>
+									<td>1.5</td>
+									<td>46253,65</td>
+									<td>43346</td>
+									<td>-620,66</td>
+									<td>2286,99</td>
+									<td> </td>
+									<td>-1,34</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2019</td>
+									<td>1.4</td>
+									<td>30.4</td>
+									<td>36787,9</td>
+									<td>46253,65</td>
+									<td>9465,75</td>
+									<td></td>
+									<td></td>
+									<td>25,73</td>
+									<td>25,7</td>
+									<td>204,6</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="3">03/2019</td>
+									<td>29.3</td>
+									<td>31.3</td>
+									<td>37167,33</td>
+									<td>36787,9</td>
+									<td>105,28</td>
+									<td>484,71</td>
+									<td> </td>
+									<td>0,28</td>
+									<td rowspan="3">-12,8</td>
+									<td rowspan="3">178,9</td>
+								</tr>
+								<tr class="tr_l">
+									<td>4.3</td>
+									<td>28.3</td>
+									<td>43508,2</td>
+									<td>37167,33</td>
+									<td>-6340,87</td>
+									<td> </td>
+									<td> </td>
+									<td>-14,57</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.3</td>
+									<td>3.3</td>
+									<td>52134,96</td>
+									<td>43508,2</td>
+									<td>765,39</td>
+									<td>9392,15</td>
+									<td> </td>
+									<td>1,47</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="6">02/2019</td>
+									<td>27.2</td>
+									<td>28.2</td>
+									<td>46176,22</td>
+									<td>52134,96</td>
+									<td>5958,74</td>
+									<td> </td>
+									<td> </td>
+									<td>12,90</td>
+									<td rowspan="6">73,0</td>
+									<td rowspan="6">191,7</td>
+								</tr>
+								<tr class="tr_d">
+									<td>26.2</td>
+									<td>26.2</td>
+									<td>55676,22</td>
+									<td>46176,22</td>
+									<td>0,00</td>
+									<td>9500,00</td>
+									<td> </td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10.2</td>
+									<td>25.2</td>
+									<td>44606,45</td>
+									<td>55676,22</td>
+									<td>11069,77</td>
+									<td> </td>
+									<td> </td>
+									<td>24,82</td>
+								</tr>
+								<tr class="tr_d">
+									<td>9.2</td>
+									<td>9.2</td>
+									<td>46638,4</td>
+									<td>44606,45</td>
+									<td>-1781,95</td>
+									<td>250,00</td>
+									<td> </td>
+									<td>-3,82</td>
+								</tr>
+								<tr class="tr_d">
+									<td>2.2</td>
+									<td>8.2</td>
+									<td>34503,83</td>
+									<td>46638,4</td>
+									<td>12134,57</td>
+									<td> </td>
+									<td> </td>
+									<td>35,17</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.2</td>
+									<td>1.2</td>
+									<td>33649,74</td>
+									<td>34503,83</td>
+									<td>1324,69</td>
+									<td>470,60</td>
+									<td> </td>
+									<td>3,94</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="2">01/2019</td>							
+									<td>3.1</td>
+									<td>31.1</td>
+									<td>35986,4</td>
+									<td>33649,74</td>
+									<td>-2336,66</td>
+									<td></td>
+									<td></td>
+									<td>-6,49</td>
+									<td rowspan="2">-6,5</td>
+									<td rowspan="2">118,7</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.1</td>							
+									<td>2.1</td>
+									<td>36895,46</td>
+									<td>35986,4</td>
+									<td>0,00</td>
+									<td>909,06</td>
+									<td></td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="9">12/2018</td>
+									<td>21.12</td>
+									<td>31.12</td>
+									<td>39951,29</td>
+									<td>36895,46</td>
+									<td>0,00</td>
+									<td>3055,83</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="9">68,6</td>
+									<td rowspan="9">125,2</td>
+								</tr>
+								<tr class="tr_d">
+									<td>20.12</td>
+									<td>20.12</td>
+									<td>37622,98</td>
+									<td>39951,29</td>
+									<td>2328,31</td>
+									<td> </td>
+									<td> </td>
+									<td>6,19</td>
+								</tr>
+								<tr class="tr_d">
+									<td>19.12</td>
+									<td>19.12</td>
+									<td>37175,72</td>
+									<td>37622,98</td>
+									<td>2643,22</td>
+									<td>2195,96</td>
+									<td> </td>
+									<td>7,11</td>
+								</tr>
+								<tr class="tr_d">
+									<td>18.12</td>
+									<td>18.12</td>
+									<td>31377,23</td>
+									<td>37175,72</td>
+									<td>8607,38</td>
+									<td>2808,89</td>
+									<td> </td>
+									<td>27,43</td>
+								</tr>
+								<tr class="tr_d">
+									<td>13.12</td>
+									<td>17.12</td>
+									<td>30234,67</td>
+									<td>31377,23</td>
+									<td>1142,56</td>
+									<td> </td>
+									<td> </td>
+									<td>3,78</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12.12</td>
+									<td>12.12</td>
+									<td>27869,63</td>
+									<td>30234,67</td>
+									<td>2494,89</td>
+									<td>129,85</td>
+									<td> </td>
+									<td>8,95</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10.12</td>
+									<td>11.12</td>
+									<td>31712,11</td>
+									<td>27869,63</td>
+									<td>-3842,48</td>
+									<td> </td>
+									<td> </td>
+									<td>-12,12</td>
+								</tr>
+								<tr class="tr_d">
+									<td>7.12</td>
+									<td>9.12</td>
+									<td>30564,1</td>
+									<td>31712,11</td>
+									<td>1279,13</td>
+									<td>131,12</td>
+									<td> </td>
+									<td>4,19</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.12</td>
+									<td>6.12</td>
+									<td>24834,39</td>
+									<td>30564,1</td>
+									<td>5729,71</td>
+									<td> </td>
+									<td> </td>
+									<td>23,07</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="15">11/2018</td>
+									<td>30.11</td>
+									<td>30.11</td>
+									<td>28260,81</td>
+									<td>24834,39</td>
+									<td>-3294,90</td>
+									<td>131,52</td>
+									<td> </td>
+									<td>-11,66</td>
+									<td rowspan="15">-11,4</td>
+									<td rowspan="15">56,6</td>
+								</tr>
+								<tr class="tr_l">
+									<td>26.11</td>
+									<td>29.11</td>
+									<td>24042,97</td>
+									<td>28260,81</td>
+									<td>4217,84</td>
+									<td> </td>
+									<td> </td>
+									<td>17,54</td>
+								</tr>
+								<tr class="tr_l">
+									<td>23.11</td>
+									<td>23.11</td>
+									<td>27570,64</td>
+									<td>24042,97</td>
+									<td>-3468,14</td>
+									<td>59,53</td>
+									<td> </td>
+									<td>-12,58</td>
+								</tr>
+								<tr class="tr_l">
+									<td>20.11</td>
+									<td>22.11</td>
+									<td>27298,01</td>
+									<td>27570,64</td>
+									<td>272,63</td>
+									<td> </td>
+									<td> </td>
+									<td>1,00</td>
+								</tr>
+								<tr class="tr_l">
+									<td>16.11</td>
+									<td>19.11</td>
+									<td>27108,09</td>
+									<td>27298,01</td>
+									<td>258,77</td>
+									<td>68,85</td>
+									<td> </td>
+									<td>0,95</td>
+								</tr>
+								<tr class="tr_l">
+									<td>15.11</td>
+									<td>15.11</td>
+									<td>27120,77</td>
+									<td>27108,09</td>
+									<td>-12,68</td>
+									<td> </td>
+									<td> </td>
+									<td>-0,05</td>
+								</tr>
+								<tr class="tr_l">
+									<td>14.11</td>
+									<td>14.11</td>
+									<td>27983,93</td>
+									<td>27120,77</td>
+									<td>-825,02</td>
+									<td>38,14</td>
+									<td> </td>
+									<td>-2,95</td>
+								</tr>
+								<tr class="tr_l">
+									<td>13.11</td>
+									<td>13.11</td>
+									<td>31748,62</td>
+									<td>27983,93</td>
+									<td>-3713,32</td>
+									<td>51,37</td>
+									<td> </td>
+									<td>-11,70</td>
+								</tr>
+								<tr class="tr_l">
+									<td>9.11</td>
+									<td>12.11</td>
+									<td>33696,26</td>
+									<td>31748,62</td>
+									<td>-1914,73</td>
+									<td>32,91</td>
+									<td> </td>
+									<td>-5,68</td>
+								</tr>
+								<tr class="tr_l">
+									<td>8.11</td>
+									<td>8.11</td>
+									<td>34553,91</td>
+									<td>33696,26</td>
+									<td>-818,95</td>
+									<td>38,70</td>
+									<td> </td>
+									<td>-2,37</td>
+								</tr>
+								<tr class="tr_l">
+									<td>7.11</td>
+									<td>7.11</td>
+									<td>34223,07</td>
+									<td>34553,91</td>
+									<td>363,67</td>
+									<td>32,83</td>
+									<td> </td>
+									<td>1,06</td>
+								</tr>
+								<tr class="tr_l">
+									<td>6.11</td>
+									<td>6.11</td>
+									<td>32200,01</td>
+									<td>34223,07</td>
+									<td>2023,06</td>
+									<td> </td>
+									<td> </td>
+									<td>6,28</td>
+								</tr>
+								<tr class="tr_l">
+									<td>5.11</td>
+									<td>5.11</td>
+									<td>33750,35</td>
+									<td>32200,01</td>
+									<td>-1528,54</td>
+									<td>21,80</td>
+									<td> </td>
+									<td>-4,53</td>
+								</tr>
+								<tr class="tr_l">
+									<td>2.11</td>
+									<td>5.11</td>
+									<td>31369,19</td>
+									<td>33750,35</td>
+									<td>2381,16</td>
+									<td> </td>
+									<td> </td>
+									<td>7,59</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.11</td>
+									<td>1.11</td>
+									<td>29782,02</td>
+									<td>31369,19</td>
+									<td>1691,13</td>
+									<td>103,96</td>
+									<td> </td>
+									<td>5,68</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="4">10/2018</td>
+									<td>31.10</td>
+									<td>31.10</td>
+									<td>30659,47</td>
+									<td>29782,02</td>
+									<td>-877,45</td>
+									<td> </td>
+									<td> </td>
+									<td>-2,86</td>
+									<td rowspan="4">27,0</td>
+									<td rowspan="4">68,0</td>
+								</tr>
+								<tr class="tr_d">
+									<td>26.10</td>
+									<td>30.10</td>
+									<td>13648,77</td>
+									<td>30659,47</td>
+									<td>0,00</td>
+									<td> </td>
+									<td>17010,70</td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>25.10</td>
+									<td>25.10</td>
+									<td>15343,78</td>
+									<td>13648,77</td>
+									<td>100,69</td>
+									<td>1795,70</td>
+									<td> </td>
+									<td>0,66</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.10</td>
+									<td>24.10</td>
+									<td>11870,59</td>
+									<td>15343,78</td>
+									<td>3473,19</td>
+									<td> </td>
+									<td> </td>
+									<td>29,26</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2018</td>
+									<td>1.9</td>
+									<td>30.09</td>
+									<td>15668,93</td>
+									<td>11870,59</td>
+									<td>-3798,34</td>
+									<td> </td>
+									<td> </td>
+									<td>-24,24</td>
+									<td>-24,2</td>
+									<td>40,9</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2018</td>
+									<td>1.8</td>
+									<td>31.8</td>
+									<td>17591,86</td>
+									<td>15668,93</td>
+									<td>-1922,93</td>
+									<td> </td>
+									<td> </td>
+									<td>-10,93</td>
+									<td>-10,9</td>
+									<td>65,2</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2018</td>
+									<td>1.7</td>
+									<td>31.7</td>
+									<td>17002,28</td>
+									<td>17591,86</td>
+									<td>589,58</td>
+									<td> </td>
+									<td> </td>
+									<td>3,47</td>
+									<td>3,5</td>
+									<td>76,1</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2018</td>
+									<td>1.6</td>
+									<td>30.6</td>
+									<td>15286,15</td>
+									<td>17002,28</td>
+									<td>1716,13</td>
+									<td> </td>
+									<td> </td>
+									<td>11,23</td>
+									<td>11,2</td>
+									<td>72,6</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2018</td>
+									<td>1.5</td>
+									<td>31.5</td>
+									<td>12123,52</td>
+									<td>15286,15</td>
+									<td>3162,63</td>
+									<td> </td>
+									<td> </td>
+									<td>26,09</td>
+									<td>26,1</td>
+									<td>61,4</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2018</td>
+									<td>12.04</td>
+									<td>30.4</td>
+									<td>8958,9</td>
+									<td>12123,52</td>
+									<td>3164,62</td>
+									<td> </td>
+									<td> </td>
+									<td>35,32</td>
+									<td>35,3</td>
+									<td>35,3</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="profit11" role="tabpanel" aria-labelledby="profit11-tab">
+					<div class="wr-for-table">
+						<table class="table table-profit-1">
+							<thead class="fixed">
+								<tr>
+									<th rowspan="2">Month/ Year</th>
+									<th rowspan="2">Monthly Result, %</th>
+									<th rowspan="2">Start of Month, USD</th>
+									<th rowspan="2">End of Month, USD</th>
+									<th rowspan="2">Profit, USD</th>
+									<th>Investor's Profit Share, %</th>
+									<th>Master Trader`s Commission, %</th>
+									<th rowspan="2">Net Investor`s Capital, USD</th>
+								</tr>
+								<tr>
+									<th>56</th>
+									<th>44</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr_l">
+									<td>03/2020</td>
+									<td>18,36</td>
+									<td>5832</td>
+									<td>6903</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>6903</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2020</td>
+									<td>-15,74</td>
+									<td>6922</td>
+									<td>5832</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>5832</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2020</td>
+									<td>-15,11</td>
+									<td>8154</td>
+									<td>6922</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>6922</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12/2019</td>
+									<td>4,77</td>
+									<td>7783</td>
+									<td>8154</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>8154</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11/2019</td>
+									<td>-28,64</td>
+									<td>10906</td>
+									<td>7783</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>7783</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2019</td>
+									<td>-1,45</td>
+									<td>11067</td>
+									<td>10906</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>10906</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2019</td>				
+									<td>32,06</td>
+									<td>8380</td>
+									<td>11067</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>11067</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2019</td>
+									<td>-49,69</td>
+									<td>16657</td>
+									<td>8380</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>8380</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2019</td>				
+									<td>5,53</td>
+									<td>15784</td>
+									<td>16657</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>16657</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2019</td>
+									<td>6,38</td>
+									<td>14837</td>
+									<td>15784</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>15784</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2019</td>				
+									<td>-37,91</td>
+									<td>23897</td>
+									<td>14837</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>14837</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2019</td>
+									<td>25,73</td>
+									<td>19769</td>
+									<td>24855</td>
+									<td>2179</td>
+									<td>1221</td>
+									<td>959</td>
+									<td>23897</td>
+								</tr>
+								<tr class="tr_l">
+									<td>03/2019</td>				
+									<td>-12,82</td>
+									<td>22676</td>
+									<td>19769</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>19769</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2019</td>
+									<td>73,01</td>
+									<td>16095</td>
+									<td>27847</td>
+									<td>11751</td>
+									<td>6581</td>
+									<td>5171</td>
+									<td>22676</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2019</td>				
+									<td>-6,49</td>
+									<td>17212</td>
+									<td>16095</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>16095</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12/2018</td>
+									<td>68,60</td>
+									<td>11298</td>
+									<td>19049</td>
+									<td>4175</td>
+									<td>2338</td>
+									<td>1837</td>
+									<td>17212</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11/2018</td>
+									<td>-11,40</td>
+									<td>12752</td>
+									<td>11298</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>11298</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2918</td>
+									<td>27,05</td>
+									<td>10037</td>
+									<td>12752</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>12752</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2018</td>
+									<td>-24,24</td>
+									<td>13248</td>
+									<td>10037</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>10037</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2018</td>
+									<td>-10,93</td>
+									<td>14874</td>
+									<td>13248</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>13248</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2018</td>
+									<td>3,47</td>
+									<td>14591</td>
+									<td>15097</td>
+									<td>506</td>
+									<td>283</td>
+									<td>223</td>
+									<td>14874</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2018</td>
+									<td>11,23</td>
+									<td>13728</td>
+									<td>15269</td>
+									<td>1541</td>
+									<td>863</td>
+									<td>678</td>
+									<td>14591</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2018</td>
+									<td>26,09</td>
+									<td>11978</td>
+									<td>15103</td>
+									<td>3125</td>
+									<td>1750</td>
+									<td>1375</td>
+									<td>13728</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2018</td>
+									<td>35,32</td>
+									<td>10000</td>
+									<td>13532</td>
+									<td>3532</td>
+									<td>1978</td>
+									<td>1554</td>
+									<td>11978</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="wr-for-graph">
+						<ul class="benefit">
+							<li>Initial Capital<span>10000</span></li>
+							<li>Net Yield<span>-3097</span></li>
+							<li>Curent Capital<span>6903</span></li>
+						</ul>
+						<p>Investor`s Net Capital</p>
+						<div class="chartdiv_bal_profit_1"></div>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="profit22" role="tabpanel" aria-labelledby="profit22-tab">
+					<div class="wr-for-table">
+						<table class="table table-profit-2">
+							<thead class="fixed">
+								<tr>
+									<th rowspan="2">Month/ Year</th>
+									<th rowspan="2">Monthly Result, %</th>
+									<th rowspan="2">Start of Month, USD</th>
+									<th rowspan="2">End of Month, USD</th>
+									<th rowspan="2">Profit, USD</th>
+									<th>Investor's Profit Share, %</th>
+									<th>Master Trader`s Commission, %</th>
+									<th rowspan="2">Withdrawal, USD</th>
+									<th rowspan="2">Trading Capital for next month, USD</th>
+									<th rowspan="2">Total Withdrawal, USD</th>
+									<th rowspan="2">General Capital = Trading + Withdraw, USD</th>
+								</tr>
+								<tr>
+									<th>56</th>
+									<th>44</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr_l">
+									<td>03/2020</td>
+									<td>18,36</td>
+									<td>2441</td>
+									<td>2889</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2889</td>
+									<td>9832</td>
+									<td>12721</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2020</td>
+									<td>-15,74</td>
+									<td>2897</td>
+									<td>2441</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2441</td>
+									<td>9832</td>
+									<td>12272</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2020</td>
+									<td>-15,1</td>
+									<td>3412</td>
+									<td>2897</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2897</td>
+									<td>9832</td>
+									<td>12728</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12/2019</td>
+									<td>4,77</td>
+									<td>3257</td>
+									<td>3412</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>3412</td>
+									<td>9832</td>
+									<td>13244</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11/2019</td>
+									<td>-28,64</td>
+									<td>4564</td>
+									<td>3257</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>3257</td>
+									<td>9832</td>
+									<td>13089</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2019</td>
+									<td>-1,45</td>
+									<td>4631</td>
+									<td>4564</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>4564</td>
+									<td>9832</td>
+									<td>14396</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2019</td>
+									<td>32,06</td>
+									<td>3507</td>
+									<td>4631</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>4631</td>
+									<td>9832</td>
+									<td>14463</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2019</td>
+									<td>-49,69</td>
+									<td>6970</td>
+									<td>3507</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>3507</td>
+									<td>9832</td>
+									<td>13339</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2019</td>			
+									<td>5,53</td>
+									<td>6605</td>
+									<td>6970</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>6970</td>
+									<td>9832</td>
+									<td>16802</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2019</td>
+									<td>6,38</td>
+									<td>6209</td>
+									<td>6605</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>6605</td>
+									<td>9832</td>
+									<td>16437</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2019</td>			
+									<td>-37,91</td>
+									<td>10000</td>
+									<td>6209</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>6209</td>
+									<td>9832</td>
+									<td>16041</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2019</td>
+									<td>25,73</td>
+									<td>8718</td>
+									<td>10961</td>
+									<td>961</td>
+									<td>538</td>
+									<td>423</td>
+									<td>538</td>
+									<td>10000</td>
+									<td>9832</td>
+									<td>19832</td>
+								</tr>
+								<tr class="tr_l">
+									<td>03/2019</td>				
+									<td>-12,82</td>
+									<td>10000</td>
+									<td>8718</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>8718</td>
+									<td>9293</td>
+									<td>18011</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2019</td>
+									<td>73,01</td>
+									<td>9351</td>
+									<td>16178</td>
+									<td>6178</td>
+									<td>3460</td>
+									<td>2718</td>
+									<td>3460</td>
+									<td>10000</td>
+									<td>9293</td>
+									<td>19293</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2019</td>					
+									<td>-6,49</td>
+									<td>10000</td>
+									<td>9351</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>9351</td>
+									<td>5834</td>
+									<td>15185</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12/2018</td>
+									<td>68,60</td>
+									<td>7596</td>
+									<td>12807</td>
+									<td>2807</td>
+									<td>1572</td>
+									<td>1235</td>
+									<td>1572</td>
+									<td>10000</td>
+									<td>5834</td>
+									<td>15834</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11/2018</td>
+									<td>-11,40</td>
+									<td>8573</td>
+									<td>7596</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>7596</td>
+									<td>4262</td>
+									<td>12835</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2018</td>
+									<td>27,05</td>
+									<td>6748</td>
+									<td>8573</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>8573</td>
+									<td>4262</td>
+									<td>12835</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2018</td>
+									<td>-24,24</td>
+									<td>8907</td>
+									<td>6748</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>6748</td>
+									<td>4262</td>
+									<td>11010</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2018</td>
+									<td>-10,93</td>
+									<td>10000</td>
+									<td>8907</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>8907</td>
+									<td>4262</td>
+									<td>13169</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2018</td>
+									<td>3,47</td>
+									<td>10000</td>
+									<td>10347</td>
+									<td>347</td>
+									<td>194</td>
+									<td>153</td>
+									<td>194</td>
+									<td>10000</td>
+									<td>4262</td>
+									<td>14262</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2018</td>
+									<td>11,23</td>
+									<td>10000</td>
+									<td>11123</td>
+									<td>1123</td>
+									<td>629</td>
+									<td>494</td>
+									<td>629</td>
+									<td>10000</td>
+									<td>4068</td>
+									<td>14068</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2018</td>
+									<td>26,09</td>
+									<td>10000</td>
+									<td>12609</td>
+									<td>2609</td>
+									<td>1461</td>
+									<td>1148</td>
+									<td>1461</td>
+									<td>10000</td>
+									<td>3439</td>
+									<td>13439</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2018</td>
+									<td>35,32</td>
+									<td>10000</td>
+									<td>13532</td>
+									<td>3532</td>
+									<td>1978</td>
+									<td>1554</td>
+									<td>1978</td>
+									<td>10000</td>
+									<td>1978</td>
+									<td>11978</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="wr-for-graph">
+						<ul class="benefit">
+							<li>Initial Capital<span>10000</span></li>
+							<li>Withdrawal<span>9832</span></li>
+							<li>Curent Capital<span>2889</span></li>
+						</ul>
+						<p>Investor's:</p>
+						<ul class="graph_legend">
+							<li><span></span>- Withdrawal;</li>
+							<li><span></span>- Trading Capital;</li>
+							<li><span></span>- General Capital;</li>
+						</ul>
+						<div class="chartdiv_bal_profit_2"></div>	
+					</div>					
+				</div>
+
+				<div class="tab-pane fade" id="statement_bal" role="tabpanel" aria-labelledby="statement_bal-tab">
+					<div class="statement_report">
+						<p>CopyTradingForex.com builds an absolutely transparent and honest relationship with its Investors. We have opened access to the Portfolio Statement and Positions Report. Now everyone can be sure we provide "Real Trade. True results"
+						</p>
+						<a href="Balanced_Portfolio_Statement.pdf" class="btn_gold" target="blank">balanced porfolio statement</a>
+						<a href="Balanced_Position_Report.pdf" class="btn_gold" target="blank">balanced positions report</a>
+					</div>
+				</div>
+			</div>		
+		</div>
+		<!-- END of popup for Balanced button --> 		
+
+ 		<!-- JS -->
+ 		<script src="libs/jquery/jquery-1.12.4.min.js"></script>
+ 		<script src="libs/bootstrap/bootstrap.min.js"></script>
+
+ 		<!-- graphics with AMCHARTS.js -->
+ 		<script src="libs/amcharts4/core.js"></script>  <!-- core.js ALWAYS should be THE FIRST -->
+		<script src="libs/amcharts4/charts.js"></script>
+		<script src="libs/amcharts4/themes/animated.js"></script>
+
+		<script src="libs/jquery/jquery.bpopup.min.js"></script>
+		<script src="js/my_graphics.js"></script>
+ 		<script src="js/balanced-statement.js"></script>
+
+ 	</body>
+ </html>
+ 

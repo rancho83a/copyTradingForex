@@ -1,0 +1,29 @@
+@import 'global/_reset.scss';
+@import 'global/_variables.scss';
+@import 'global/_navigation.scss';
+@import 'global/_header.scss';
+
+@import 'blocks/heading_how.scss';
+@import 'blocks/testimonials_carousel.scss';
+@import 'blocks/what_is.scss';
+@import 'blocks/example.scss';
+@import 'blocks/remuneration.scss';
+@import 'blocks/disclaimer.scss';
+
+
+.header {
+	background: #070915 url(../img/bg-how-it-works.jpg) center 0 no-repeat;
+	-webkit-background-size: cover;
+	background-size: cover;
+	@media (min-width: 1660px) {
+		-webkit-background-size: unset;
+		background-size: unset;
+	}
+	@media (max-width: 380px) {
+		background-image: url(../img/bg-how-it-works-xs.jpg);
+		height: 235px;
+	}
+	span {
+		color: $color_dblue;
+	}
+}

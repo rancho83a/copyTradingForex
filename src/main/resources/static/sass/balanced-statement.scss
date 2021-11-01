@@ -1,0 +1,10 @@
+@import 'global/_reset.scss';
+@import 'global/_variables.scss';
+@import 'global/_navigation.scss';
+@import 'blocks/portfolio_popup.scss';
+
+.popup {
+	width: 100%;
+	height: 100%;
+	margin-top: 0;
+}

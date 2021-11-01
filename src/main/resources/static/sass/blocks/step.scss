@@ -1,0 +1,236 @@
+.step_row {
+	margin-bottom: 25px;
+}
+
+.step_block {
+	display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    @media (max-width: 575px) {
+    	flex-direction: column;
+	    align-items: center;
+    }
+}
+
+.step_2_block {
+	@media (max-width: 575px) {
+		flex-direction: column-reverse;
+	}
+}
+
+.step_num_pic {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;	
+	@media (max-width: 991px) {
+		flex-direction: column;
+	}
+}
+
+.step_2_num_pic {	
+	@media (max-width: 991px) {
+		flex-direction: column-reverse;
+		align-items: flex-end;
+	}
+}
+
+.step_number {
+	background-color: $color_gold;
+    padding: 25px 20px;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 16px;
+    line-height: 16px;
+    color: #eaddbd;
+    width: 160px;
+    margin-bottom: 30px;
+    @media (max-width: 767px) {
+    	width: 120px;
+    	margin-bottom: 20px;
+    }
+    @media (max-width: 575px) {
+    	width: 40%;
+    	margin: 20px auto;
+    	padding: 10px;
+    }
+    b {
+    	display: block;
+    	font-size: 55px;
+	    line-height: 50px;
+	    margin-bottom: 5px;
+	    @media (max-width: 575px) {
+	    	font-size: 45px;
+	    	line-height: 45px;
+	    }	    
+    }
+}
+
+.img_wraper {
+	margin: 0 30px 30px;
+	@media (max-width: 991px) {
+		margin: 0 30px 0 0;
+	}
+	@media (max-width: 767px) {
+		margin-right: 20px;
+	}
+	@media (max-width: 575px) {
+		margin-right: 0;
+		margin-bottom: 20px;
+	}
+}
+
+.img_wraper_step_2 {
+	@media (max-width: 991px) {
+		margin: 0 0 30px 30px;
+	}
+	@media (max-width: 575px) {
+		margin: 0 0 30px 0;
+	}
+}
+
+.copy_step {
+	min-width: 350px;
+    max-width: 352px;
+	padding: 20px;
+	margin-bottom: 30px;
+	background: #fff;
+	text-align: justify;
+	@media (max-width: 767px) {
+		min-width: 280px;
+	}
+	.o-sans {
+		font-size: 13px;
+		@media (max-width: 767px) {			
+			font-size: 12.5px;
+			line-height: 19px;
+			
+		}
+	}
+}
+
+.copy_step_title {
+	font-size: 22px;
+	margin-bottom: 15px;
+	text-align: left;
+}
+
+.copy_step_maindesc {
+	color: $color_dblue;
+	margin-bottom: 7px;
+}
+
+.important {
+	font-weight: 700;
+	background: $color_gold;
+	padding: 0 2px;
+
+  -webkit-animation: blink5 1s linear infinite;
+  animation: blink5 1s linear infinite;
+}
+@-webkit-keyframes blink5 {
+  0% { color: rgb(3, 20, 48); }
+  100% { color: rgb(212, 183, 104); }
+}
+@keyframes blink5 {
+  0% { color: rgb(3, 20, 48); }
+  100% { color: rgb(212, 183, 104); }
+}
+
+.copy_step_link {
+	color: #000;
+	font-weight: 700;
+	text-decoration: underline;
+}
+.copy_step_list {
+	list-style: decimal;
+	li {
+		margin-left: 15px;
+	}
+}
+
+.label_table {
+	padding: 10px 15px;
+	font-size: 13px;
+	cursor: pointer;
+	border-radius: 3px;
+	margin: 10px 0;	
+	@media (max-width: 767px) {
+		padding: 8px 12px;
+		font-size: 12px;
+	}
+}
+
+.btn_gold_inline {
+	display: inline-block;
+	padding: 10px 7px;
+	font-size: 12px;
+	@media (max-width: 767px) {
+		padding: 8px 7px;
+	}
+}
+
+.step_table {
+	display: block;
+	opacity: 0;
+	height: 0px;
+	overflow-y: hidden;
+	transition: all .5s linear;
+	text-align: center;
+	width: 100%;
+	@media (max-width: 385px) {
+		width: 250px;
+		margin: 0 auto;
+	}
+	th {
+		color: #fff;
+		background: $color_dblue;
+		padding: 2px 5px;
+		vertical-align: middle;
+		border: 1px solid #676767; 	
+	}
+	td{
+		color: $color_gold;
+		background: #676767;
+		padding: 2px 5px;
+		vertical-align: middle;
+		border: 1px solid $color_dblue;
+		a {
+			color: $color_gold;
+		}
+	}	
+	.td_code {
+		font-size: 12px;
+	}
+	.td_gold {
+		color: $color_dblue;
+		background: $color_gold;
+	}
+}
+
+#che_t1 {
+	display: none;
+	padding: 15px;
+	margin: 15px 0;
+	&:checked ~ .step_table {
+		height: 85px;
+		opacity: 1;
+		transition: all .5s linear;
+		@media (min-width: 576px) and (max-width: 767px) {
+			height: 132px;
+		}
+		@media (max-width: 385px) {
+			height: 132px;
+		}
+	}
+}
+
+#che_t2 {
+	display: none;
+	padding: 15px;
+	margin: 15px 0;
+	&:checked ~ .step_table {
+		opacity: 1;
+		height: 136px;
+		transition: all .5s linear;
+	}
+}

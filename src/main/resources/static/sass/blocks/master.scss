@@ -1,0 +1,65 @@
+/*section our masters*/
+.wr-masters {
+	padding: 50px 0 0;
+}
+.master_name_title {
+	@media (max-width: 380px) {
+		width: 200px;
+	}
+}
+.masters_testimonials {
+	padding: 30px 60px;
+	@media (max-width: 767px) {
+		margin: 20px auto;
+	    padding: 25px 20px;
+	}
+}
+
+.item {
+	@media (max-width: 575px) {
+		font-size: 14px;
+	    line-height: 23px;
+	    padding: 0 10px;
+	}
+    
+}
+
+.master_text {
+	background: #fff;
+	padding: 10px;
+	margin-bottom: 35px;
+	p {
+		margin-bottom: 5px;
+		text-align: justify;
+	}
+}
+.master_table {
+	padding: 15px;	
+	font-size: 14px;
+	line-height: 20px;
+	@media (max-width: 575px) {
+		font-size: 13px;
+		line-height: 18px;
+	}
+	tr {
+		border-bottom: 1px solid #ccc;
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+	th {
+		width: 100px;
+		padding: 3px 7px;
+		text-align: center;
+		border-right: 1px solid #ccc;
+		@media (max-width: 575px) {
+			width: 45px;
+		}
+	}
+	td {
+		padding: 3px 7px;
+		b {
+			font-weight: 700;
+		}
+	}
+}

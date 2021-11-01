@@ -1,0 +1,239 @@
+/*Fonts*/
+/*CrimsonText*/
+@font-face {
+	font-family: CrimsonText-Regular;
+	src: url(../fonts/CrimsonText-Regular.ttf);
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: CrimsonText-Italic;
+	src: url(../fonts/CrimsonText-Italic.ttf);
+	font-style: italic;
+	font-weight: normal;
+}
+@font-face {
+	font-family: CrimsonText-SemiBold;
+	src: url(../fonts/CrimsonText-SemiBold.ttf);
+	font-style: normal;
+	font-weight: 600;
+}
+@font-face {
+	font-family: CrimsonText-SemiBoldItalic;
+	src: url(../fonts/CrimsonText-SemiBoldItalic.ttf);
+	font-style: italic;
+	font-weight: 600;
+}
+@font-face {
+	font-family: CrimsonText-Bold;
+	src: url(../fonts/CrimsonText-Bold.ttf);
+	font-style: normal;
+	font-weight: 700;
+}
+@font-face {
+	font-family: CrimsonText-BoldItalic;
+	src: url(../fonts/CrimsonText-BoldItalic.ttf);
+	font-style: italic;
+	font-weight: 700;
+}
+/*OpenSans*/
+@font-face {
+	font-family: OpenSans-Bold;
+	src: url(../fonts/OpenSans-Bold.ttf);
+	font-style: normal;
+	font-weight: 700;
+}
+@font-face {
+	font-family: OpenSans-Regular;
+	src: url(../fonts/OpenSans-Regular.ttf);
+	font-style: normal;
+	font-weight: normal;
+}
+/*Raleway*/
+@font-face {
+	font-family: Raleway-SemiBold;
+	src: url(../fonts/Raleway-SemiBold.ttf);
+	font-style: normal;
+	font-weight: normal;
+}
+/*FONTS END*/
+
+/*Colors*/
+$color_dblue: #031430;  
+$color_gold_garantee: #f3dc97; /*nav links, bg payback guarantee,*/
+$color_gold: #d4b768;    
+$color_bg_billboard: #cbb055;  /*bg billboard (203,176,85)*/
+
+/*grey color from lighter to darker*/
+$color_bg_grey1: #f5f6f7; 
+$color_bg_grey2: #edeef0;
+$color_bg_grey3: #e8eaec;
+$color_bg_grey4: #dfe1e6;
+$color_bg_grey5: #bcbdbf;
+$color_white: #fff;
+
+
+/*===========MIXINS==================*/
+@mixin bgpic($bgpicname) {
+	background: url(../img/#{$bgpicname}.jpg) 0 0 no-repeat;
+	background-size: cover;
+}
+/*mixin for font*/
+@mixin font($fname: Open Sans, $fsize: 16px, $fweihgt: 400, $lspacing: 0.7px) {
+	font-family: $fname, Arial, Tahoma, sans-serif;
+	font-size: $fsize;
+	font-weight: 400;
+	letter-spacing: $lspacing;
+}
+
+body {
+	background: $color_bg_grey1;
+	/*background: #ccc;*/
+	@include font(Crimson Text,16px,400,0px);
+}
+
+/*title of pages*/
+.page_title {
+	@include font(Crimson Text,50px,400,7px);
+	color: $color_gold_garantee;
+	margin: 45px auto;
+	line-height: 55px;
+	text-align: center;
+	@media (max-width: 767px) {
+		font-size: 36px;
+	}
+	@media (max-width: 575px) {
+		font-size: 33px;
+	}
+	&::after {
+		display: none;
+	}
+}
+
+h1,h2 {
+	@include font(Crimson Text,32px,400,0px);
+    line-height: 32px;
+    color: #031430;
+    margin-bottom: 30px;
+    &::after {
+    	display: block;	
+		content: '';
+		height: 2px;
+		width: 60px;
+		background: $color_gold;
+		margin-top: 10px;	
+    }
+    @media (max-width: 767px) {
+    	font-size: 27px;
+    	line-height: 28px;
+    }
+    @media (max-width: 575px) {
+    	font-size: 25px;
+    	line-height: 28px;
+    }
+}
+button {
+	background: none;
+}
+
+/*For all wraper-blocks margin for right-side menu*/
+.header {
+	margin-top: 60px;
+	@media (max-width: 575px) {
+		margin-top: 50px;
+	}
+}
+@media (min-width: 1200px) {
+	.wr-mr250 {margin-right: 250px;}
+	.header {margin-top: 0;}
+}
+
+/*=============================================*/
+.h100 {height: 100%;}
+
+.ta_c {text-align: center;}
+
+.md_hidden {
+	@media (max-width: 991px) {
+		display: none;
+	}
+}
+
+.icon {
+	display: inline-block;
+	background: url(../img/sprite_copy.png) 0 0 no-repeat;
+}
+
+/*for most of paragraphs on this site */
+.o-sans {
+	@include font(Open Sans,15px,400,0px);
+	line-height: 23px;
+	color: #8f9092;
+	text-indent: 25px;
+	@media (max-width: 500px) {
+		font-size: 13px;
+		line-height: 20px;
+	}
+}
+.non_text_indent {text-indent: 0;}
+.up_case {text-transform: uppercase;}
+.d_blue {color: $color_dblue;}
+.grey {color: $color_bg_grey5;}
+.gold {color: $color_gold;}
+
+.btn_dblue {
+	display: inline-block;
+	padding: 14px 30px;
+	background: $color_dblue;
+	@include font(Raleway,20px,700,2px);
+	line-height: 20px;
+	text-transform: uppercase;
+	color: $color_white;	
+	&:hover {
+		text-decoration: none;
+		color: $color_white;
+	}
+}
+.btn_gold {
+	@include font(Open Sans,14px,400,0px);
+	text-transform: uppercase;
+	line-height: 16px;
+	display: inline-block;
+	padding: 10px 20px;
+	border: 2px solid $color_gold;
+	border-radius: 3px;
+	color: $color_gold;
+	margin-bottom: 19px;
+	transition: all .3s;
+	&:hover {
+		text-decoration: none;
+		background: $color_gold;
+		color: #fff;
+		transition: all .3s;
+	}
+}
+
+/*BIG LINK with bg#031430  on every page*/
+.big_link {
+	display: block;
+	margin-top: 40px;
+	border-radius: 3px;
+	text-align: center;
+	background: $color_dblue;
+	color: #fff;
+	padding: 40px 30px;
+	font-size: 32px;
+	line-height: 32px;
+	transition: all .4s ease-in-out;
+	@media (max-width: 575px) {
+		margin-top: 20px;
+		font-size: 28px;
+		padding: 25px 30px;
+	}
+	&:hover {
+		color: #fff;
+		text-decoration: none;
+		background: $color_gold;
+		transition: all .4s ease-in-out;
+	}
+}

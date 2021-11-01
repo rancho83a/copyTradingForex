@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+ <html lang="en">
+ 	<head>
+ 		<!-- META -->
+ 		<meta charset="utf-8">
+ 		<meta name="viewport" content="width=device-width, inicial-scale=1.0">
+ 		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<![endif]-->
+
+ 		<!-- FAVICON -->
+ 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+
+ 		<!-- SEO -->
+ 		<meta name="Description" content="">
+ 		<meta name="Rating" content="">    
+ 		<meta name="Author" content="">
+ 		<meta name="robots" content="noindex">
+
+ 		<!-- CONFIG -->
+ 		<meta name="format-detection" content="telephone=no">
+ 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+ 		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134605534-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-134605534-1');
+		</script>
+
+ 		<!-- Стили -->
+ 		<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
+ 		<link rel="stylesheet" href="css/dynamic-statement.min.css">
+
+
+ 		<title>Dynamic Portfolio Statement</title>
+
+ 	</head>
+
+ 	<body>
+
+ 		<!-- [if lt IE 10]>
+ 			<p class="browsehappy">You're using <strong>OLD version of Internet Explorer</strong>. Please, <a href="http://browsehappy.com/>update your browser</a> to see more opportunities in browser!</p>
+ 		<![endif]-->
+
+ 		<!-- popup for Dynamic button -->
+ 		<div class="popup jsPopupDynstat">
+ 			<h3>Dynamic Portfolio</h3>
+ 			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active" id="chart-tab" data-toggle="tab" href="#chart" role="tab" aria-controls="chart" aria-selected="true">Chart</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" id="portfolio-tab" data-toggle="tab" href="#portfolio" role="tab" aria-controls="portfolio" aria-selected="true">Portfolio Statement</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profit1-tab" data-toggle="tab" href="#profit1" role="tab" aria-controls="profit1" aria-selected="false">Revenue from reinvesting profits</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="profit2-tab" data-toggle="tab" href="#profit2" role="tab" aria-controls="profit2" aria-selected="false">Revenue profit's withdraw</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="statement_dyn-tab" data-toggle="tab" href="#statement_dyn" role="tab" aria-controls="statement_dyn" aria-selected="false">Statement and Report</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+
+				<div class="tab-pane fade show active" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+					<div class="chartdiv_dyn"></div>
+					<div class="chartdiv_bal" style="display: none;"></div> <!-- If there is not this div, .js will be interrupted by mistake "this div wasn't found" -->
+				</div>
+
+				<div class="tab-pane fade second_tab" id="portfolio" role="tabpanel" aria-labelledby="portfolio-tab">
+					<div class="wr-for-table">
+
+						<!-- new Dynamic Statement -->
+						<table class="table">
+							<thead class="fixed">
+								<tr>
+									<th>Month/ Year</th>
+									<th>Account Currency</th>
+									<th>Start Date</th>
+									<th>Finish Date</th>
+									<th>Start Balance, USD</th>
+									<th>Finish Balance, USD</th>
+									<th>Profit, USD</th>
+									<th>Withdrawal, USD</th>
+									<th>Deposit, USD</th>
+									<th>Profit, %</th>
+									<th>Monthly Result, %</th>
+									<th>General Result, %</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr_d">
+									<td rowspan="5">03/2020</td>
+									<td>EUR account</td>
+									<td>1.3</td>
+									<td> </td>
+									<td>14 102,38</td>
+									<td>14 953,19</td>
+									<td>850,81</td>
+									<td> </td>
+									<td> </td>
+									<td>6,03</td>
+									<td>6,0</td>
+									<td>-26,5</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="4">USD account</td>
+									<td>31.3</td>
+									<td>31.3</td>
+									<td>2 050,89</td>
+									<td>1 799,96</td>
+									<td>-250,93</td>
+									<td> </td>
+									<td> </td>
+									<td>-12,24</td>
+									<td rowspan="4">14,1</td>
+									<td rowspan="4">52,8</td>
+								</tr>
+								<tr class="tr_d">
+									<td>30.3</td>
+									<td>30.3</td>
+									<td>1 749,93</td>
+									<td>2 050,89</td>
+									<td>-97,41</td>
+									<td> </td>
+									<td>398,37</td>
+									<td>-4,53</td>
+								</tr>
+								<tr class="tr_d">
+									<td>3.3</td>
+									<td>29.3</td>
+									<td>1 385,13</td>
+									<td>1 749,93</td>
+									<td>364,80</td>
+									<td> </td>
+									<td> </td>
+									<td>26,34</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.3</td>
+									<td>2.3</td>
+									<td>1 391,40</td>
+									<td>1 385,13</td>
+									<td>62,64</td>
+									<td>68,91</td>
+									<td> </td>
+									<td>4,50</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="4">02/2020</td>
+									<td>EUR account</td>
+									<td>1.2</td>
+									<td>29.2</td>
+									<td>18 815,00</td>
+									<td>14 102,38</td>
+									<td>-4712,62</td>
+									<td> </td>
+									<td> </td>
+									<td>-25,05</td>
+									<td>-25,0</td>
+									<td>-32,5</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="3">USD account</td>
+									<td>6.2</td>
+									<td>28.2</td>
+									<td>1 690,69</td>
+									<td>1 391,40</td>
+									<td>-299,29</td>
+									<td> </td>
+									<td> </td>
+									<td>-17,70</td>
+									<td rowspan="3">-21,6</td>
+									<td rowspan="3">38,8</td>
+								</tr>
+								<tr class="tr_l">
+									<td>5.2</td>
+									<td>5.2</td>
+									<td>1 700,49</td>
+									<td>1 690,69</td>
+									<td>-122,35</td>
+									<td> </td>
+									<td>112,55</td>
+									<td>-6,75</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.2</td>
+									<td>4.2</td>
+									<td>1 652,88</td>
+									<td>1 700,49</td>
+									<td>47,61</td>
+									<td> </td>
+									<td> </td>
+									<td>2,88</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="7">01/2020</td>
+									<td>EUR account</td>
+									<td>1.1</td>
+									<td>31.1</td>
+									<td>23 958,15</td>
+									<td>18 815,00</td>
+									<td>-5143,15</td>
+									<td> </td>
+									<td> </td>
+									<td>-21,47</td>
+									<td>-21,5</td>
+									<td>-7,5</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="6">USD account</td>
+									<td>31.1</td>
+									<td>31.1</td>
+									<td>1 738,73</td>
+									<td>1 652,88</td>
+									<td>0,00</td>
+									<td>85,85</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="6">-17,7</td>
+									<td rowspan="6">60,3</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10.1</td>
+									<td>30.1</td>
+									<td>1 813,41</td>
+									<td>1 738,73</td>
+									<td>-74,68</td>
+									<td> </td>
+									<td> </td>
+									<td>-4,12</td>
+								</tr>
+								<tr class="tr_d">
+									<td>9.1</td>
+									<td>9.1</td>
+									<td>2 295,58</td>
+									<td>1 813,41</td>
+									<td>-79,57</td>
+									<td>402,60</td>
+									<td> </td>
+									<td>-3,47</td>
+								</tr>
+								<tr class="tr_d">
+									<td>4.1</td>
+									<td>8.1</td>
+									<td>2 420,61</td>
+									<td>2 295,58</td>
+									<td>-125,03</td>
+									<td> </td>
+									<td> </td>
+									<td>-5,17</td>
+								</tr>
+								<tr class="tr_d">
+									<td>3.1</td>
+									<td>3.1</td>
+									<td>2 557,89</td>
+									<td>2 420,61</td>
+									<td>0,00</td>
+									<td>137,28</td>
+									<td> </td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.1</td>
+									<td>2.1</td>
+									<td>2 690,01</td>
+									<td>2 557,89</td>
+									<td>-132,12</td>
+									<td> </td>
+									<td> </td>
+									<td>-4,91</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="3">12/2019</td>
+									<td>EUR account</td>
+									<td>1.12</td>
+									<td>31.12</td>
+									<td>24 504,40</td>
+									<td>23 958,15</td>
+									<td>-546,25</td>
+									<td> </td>
+									<td> </td>
+									<td>-2,23</td>
+									<td>-2,2</td>
+									<td>14,0</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="2">USD account</td>
+									<td>3.12</td>
+									<td>31.12</td>
+									<td>3 063,80</td>
+									<td>2 690,01</td>
+									<td>-373,79</td>
+									<td> </td>
+									<td> </td>
+									<td>-12,20</td>
+									<td rowspan="2">4,3</td>
+									<td rowspan="2">78,0</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.12</td>
+									<td>2.12</td>
+									<td>2 682,83</td>
+									<td>3 063,80</td>
+									<td>442,20</td>
+									<td>61,23</td>
+									<td> </td>
+									<td>16,48</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="6">11/2019</td>
+									<td rowspan="3">"EUR account</td>
+									<td>6.11</td>
+									<td>30.11</td>
+									<td>35 236,79</td>
+									<td>24 504,40</td>
+									<td>-10732,39</td>
+									<td> </td>
+									<td> </td>
+									<td>-30,46</td>
+									<td rowspan="3">-32,3</td>
+									<td rowspan="3">16,2</td>
+								</tr>
+								<tr class="tr_d">	
+									<td>5.11</td>
+									<td>5.11</td>
+									<td>33 547,62</td>
+									<td>35 236,79</td>
+									<td>689,17</td>
+									<td> </td>
+									<td>1 000,00</td>
+									<td>1,99</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.11</td>
+									<td>4.11</td>
+									<td>36 037,63</td>
+									<td>33 547,62</td>
+									<td>-1373,27</td>
+									<td>1 116,74</td>
+									<td> </td>
+									<td>-3,81</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="3">USD account</td>
+									<td>19.11</td>
+									<td>30.11</td>
+									<td>3 383,53</td>
+									<td>2 682,83</td>
+									<td>-700,70</td>
+									<td> </td>
+									<td> </td>
+									<td>-20,71</td>
+									<td rowspan="3">-39,0</td>
+									<td rowspan="3">73,7</td>
+								</tr>
+								<tr class="tr_d">
+									<td>18.11</td>
+									<td>18.11</td>
+									<td>1 883,53</td>
+									<td>3 383,53</td>
+									<td>0,00</td>
+									<td> </td>
+									<td>1 500,00</td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.11</td>
+									<td>17.11</td>
+									<td>2 305,07</td>
+									<td>1 883,53</td>
+									<td>-421,54</td>
+									<td> </td>
+									<td> </td>
+									<td>-18,29</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="4">10/2019</td>
+									<td rowspan="2">EUR account</td>
+									<td>2.10</td>
+									<td>31.10</td>
+									<td>33 504,33</td>
+									<td>36 037,63</td>
+									<td>2533,30</td>
+									<td> </td>
+									<td> </td>
+									<td>7,56</td>
+									<td rowspan="2">4,7</td>
+									<td rowspan="2">48,5</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.10</td>
+									<td>1.10</td>
+									<td>34 749,47</td>
+									<td>33 504,33</td>
+									<td>-992,37</td>
+									<td>252,77</td>
+									<td> </td>
+									<td>-2,86</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="2">USD account</td>
+									<td>31.10</td>
+									<td>31.10</td>
+									<td>2 558,93</td>
+									<td>2 305,07</td>
+									<td>-167,37</td>
+									<td>86,49</td>
+									<td> </td>
+									<td>-6,54</td>
+									<td rowspan="2">9,9</td>
+									<td rowspan="2">112,7</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.10</td>
+									<td>30.10</td>
+									<td>2 196,71</td>
+									<td>2 558,93</td>
+									<td>362,22</td>
+									<td> </td>
+									<td> </td>
+									<td>16,49</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="16">09/2019</td>
+									<td rowspan="10">EUR account</td>
+									<td>30.9</td>
+									<td>30.9</td>
+									<td>35 037,66</td>
+									<td>34 749,47</td>
+									<td>0,00</td>
+									<td>288,19</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="10">63,6</td>
+									<td rowspan="10">43,8</td>
+								</tr>
+								<tr class="tr_d">
+									<td>27.9</td>
+									<td>29.9</td>
+									<td>30 037,66</td>
+									<td>35 037,66</td>
+									<td>0,00</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>25.9</td>
+									<td>26.9</td>
+									<td>28 936,61</td>
+									<td>30 037,66</td>
+									<td>1101,05</td>
+									<td> </td>
+									<td> </td>
+									<td>3,81</td>
+								</tr>
+								<tr class="tr_d">
+									<td>24.9</td>
+									<td>24.9</td>
+									<td>26 125,16</td>
+									<td>28 936,61</td>
+									<td>-2188,55</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>-7,03</td>
+								</tr>
+								<tr class="tr_d">
+									<td>18.9</td>
+									<td>23.9</td>
+									<td>26 659,52</td>
+									<td>26 125,16</td>
+									<td>-534,36</td>
+									<td> </td>
+									<td> </td>
+									<td>-2,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>17.9</td>
+									<td>17.9</td>
+									<td>20 294,94</td>
+									<td>26 659,52</td>
+									<td>1364,58</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>5,39</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12.9</td>
+									<td>16.9</td>
+									<td>18 820,16</td>
+									<td>20 294,94</td>
+									<td>1474,78</td>
+									<td> </td>
+									<td> </td>
+									<td>7,84</td>
+								</tr>
+								<tr class="tr_d">
+									<td>11.9</td>
+									<td>11.9</td>
+									<td>8 944,96</td>
+									<td>18 820,16</td>
+									<td>-91,99</td>
+									<td> </td>
+									<td>9 967,19</td>
+									<td>-0,49</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10.9</td>
+									<td>10.9</td>
+									<td>9 973,57</td>
+									<td>8 944,96</td>
+									<td>-1048,61</td>
+									<td> </td>
+									<td>20,00</td>
+									<td>-10,49</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.9</td>
+									<td>09.9</td>
+									<td>5 986,00</td>
+									<td>9 973,57</td>
+									<td>3987,57</td>
+									<td> </td>
+									<td> </td>
+									<td>66,61</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="6">USD account</td>
+									<td>29.9</td>
+									<td>30.9</td>
+									<td>2 298,56</td>
+									<td>2 196,71</td>
+									<td>0,00</td>
+									<td>101,85</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="6">61,6</td>
+									<td rowspan="6">102,8</td>
+								</tr>
+								<tr class="tr_d">
+									<td>19.9</td>
+									<td>29.9</td>
+									<td>2 301,46</td>
+									<td>2 298,56</td>
+									<td>-2,90</td>
+									<td> </td>
+									<td> </td>
+									<td>-0,13</td>
+								</tr>
+								<tr class="tr_d">
+									<td>18.9</td>
+									<td>18.9</td>
+									<td>3 981,00</td>
+									<td>2 301,46</td>
+									<td>-129,54</td>
+									<td>1 550,00</td>
+									<td> </td>
+									<td>-3,25</td>
+								</tr>
+								<tr class="tr_d">
+									<td>4.9</td>
+									<td>17.9</td>
+									<td>2 490,61</td>
+									<td>3 981,00</td>
+									<td>1490,39</td>
+									<td> </td>
+									<td> </td>
+									<td>59,84</td>
+								</tr>
+								<tr class="tr_d">
+									<td>3.9</td>
+									<td>3.9</td>
+									<td>1 377,25</td>
+									<td>2 490,61</td>
+									<td>113,36</td>
+									<td> </td>
+									<td>1 000,00</td>
+									<td>4,77</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.9</td>
+									<td>2.9</td>
+									<td>1 447,75</td>
+									<td>1 377,25</td>
+									<td>5,34</td>
+									<td>75,84</td>
+									<td> </td>
+									<td>0,37</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="4">08/2019</td>
+									<td rowspan="2">EUR account</td>
+									<td>2.8</td>
+									<td>31.8</td>
+									<td>16 183,87</td>
+									<td>5 986,00</td>
+									<td>-10197,87</td>
+									<td> </td>
+									<td> </td>
+									<td>-63,01</td>
+									<td rowspan="2">-63,3</td>
+									<td rowspan="2">-19,8</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.8</td>
+									<td>1.8</td>
+									<td>16 246,89</td>
+									<td>16 183,87</td>
+									<td>-45,72</td>
+									<td>17,30</td>
+									<td> </td>
+									<td>-0,28</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="2">USD account</td>
+									<td>2.8</td>
+									<td>31.8</td>
+									<td>3 783,19</td>
+									<td>1 447,75</td>
+									<td>-2335,44</td>
+									<td> </td>
+									<td> </td>
+									<td>-61,73</td>
+									<td rowspan="2">-62,0</td>
+									<td rowspan="2">41,2</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.8</td>
+									<td>1.8</td>
+									<td>3 908,33</td>
+									<td>3 783,19</td>
+									<td>-10,02</td>
+									<td>115,12</td>
+									<td> </td>
+									<td>-0,26</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="5">07/2019</td>
+									<td rowspan="4">EUR account</td>
+									<td>4.7</td>
+									<td>31.7</td>
+									<td>16 563,10</td>
+									<td>16 246,89</td>
+									<td>-316,21</td>
+									<td> </td>
+									<td> </td>
+									<td>-1,91</td>
+									<td rowspan="4">4,3</td>
+									<td rowspan="4">43,4</td>
+								</tr>
+								<tr class="tr_d">
+									<td>3.7</td>
+									<td>3.7</td>
+									<td>17 763,14</td>
+									<td>16 563,10</td>
+									<td>-1140,04</td>
+									<td>60,00</td>
+									<td> </td>
+									<td>-6,42</td>
+								</tr>
+								<tr class="tr_d">
+									<td>2.7</td>
+									<td>2.7</td>
+									<td>16 009,86</td>
+									<td>17 763,14</td>
+									<td>1753,28</td>
+									<td> </td>
+									<td> </td>
+									<td>10,95</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.7</td>
+									<td>1.7</td>
+									<td>15 784,49</td>
+									<td>16 009,86</td>
+									<td>265,34</td>
+									<td>39,97</td>
+									<td> </td>
+									<td>1,68</td>
+								</tr>
+								<tr class="tr_d">
+									<td>USD account</td>
+									<td>1.7</td>
+									<td>31.7</td>
+									<td>3 655,00</td>
+									<td>3 908,33</td>
+									<td>253,33</td>
+									<td> </td>
+									<td> </td>
+									<td>6,93</td>
+									<td>6,9</td>
+									<td>103,2</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="5">06/2019</td>
+									<td rowspan="3">EUR account</td>
+									<td>11.6</td>
+									<td>30.6</td>
+									<td>14 469,90</td>
+									<td>15 784,49</td>
+									<td>1314,59</td>
+									<td> </td>
+									<td> </td>
+									<td>9,08</td>
+									<td rowspan="3">3,1</td>
+									<td rowspan="3">39,1</td>
+								</tr>
+								<tr class="tr_l">
+									<td>10.6</td>
+									<td>10.6</td>
+									<td>14 517,67</td>
+									<td>14 469,90</td>
+									<td>-1047,77</td>
+									<td> </td>
+									<td>1 000,00</td>
+									<td>-6,75</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.6</td>
+									<td>9.6</td>
+									<td>14 412,88</td>
+									<td>14 517,67</td>
+									<td>104,79</td>
+									<td> </td>
+									<td> </td>
+									<td>0,73</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="2">USD account</td>
+									<td>28.6</td>
+									<td>30.6</td>
+									<td>3 759,90</td>
+									<td>3 655,00</td>
+									<td>0,00</td>
+									<td>104,90</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="2">6,53</td>
+									<td rowspan="2">96,2</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.6</td>
+									<td>27.6</td>
+									<td>3 529,40</td>
+									<td>3 759,90</td>
+									<td>230,50</td>
+									<td> </td>
+									<td> </td>
+									<td>6,53</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="5">05/2019</td>
+									<td rowspan="2">EUR account</td>
+									<td>2.5</td>
+									<td>31.5</td>
+									<td>27 418,59</td>
+									<td>14 412,88</td>
+									<td>-13005,71</td>
+									<td> </td>
+									<td> </td>
+									<td>-47,43</td>
+									<td rowspan="2">-49,3</td>
+									<td rowspan="2">36,1</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.5</td>
+									<td>1.5</td>
+									<td>29 874,26</td>
+									<td>27 418,59</td>
+									<td>-561,67</td>
+									<td>1 894,00</td>
+									<td> </td>
+									<td>-1,88</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="3">USD account</td>
+									<td>31.5</td>
+									<td>31.5</td>
+									<td>3 718,22</td>
+									<td>3 529,40</td>
+									<td>0,00</td>
+									<td>188,82</td>
+									<td> </td>
+									<td>0,00</td>
+									<td rowspan="3">-47,8</td>
+									<td rowspan="3">89,7</td>
+								</tr>
+								<tr class="tr_d">
+									<td>2.5</td>
+									<td>30.5</td>
+									<td>6 934,73</td>
+									<td>3 718,22</td>
+									<td>-3216,51</td>
+									<td> </td>
+									<td> </td>
+									<td>-46,38</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.5</td>
+									<td>1.5</td>
+									<td>7 822,27</td>
+									<td>6 934,73</td>
+									<td>-114,76</td>
+									<td>772,78</td>
+									<td> </td>
+									<td>-1,47</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="5">04/2019</td>
+									<td>EUR account</td>
+									<td>1.4</td>
+									<td>30.4</td>
+									<td>21 634,99</td>
+									<td>29 874,26</td>
+									<td>8239,27</td>
+									<td> </td>
+									<td> </td>
+									<td>38,08</td>
+									<td>38,1</td>
+									<td>85,4</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="4">USD account</td>
+									<td>4.4</td>
+									<td>30.4</td>
+									<td>6 240,38</td>
+									<td>7 822,27</td>
+									<td>1581,89</td>
+									<td> </td>
+									<td> </td>
+									<td>25,35</td>
+									<td rowspan="4">38,7</td>
+									<td rowspan="4">137,5</td>
+								</tr>
+								<tr class="tr_l">
+									<td>3.4</td>
+									<td>3.4</td>
+									<td>6 254,64</td>
+									<td>6 240,38</td>
+									<td>69,80</td>
+									<td>84,06</td>
+									<td> </td>
+									<td>1,12</td>
+								</tr>
+								<tr class="tr_l">
+									<td>2.4</td>
+									<td>2.4</td>
+									<td>5 521,12</td>
+									<td>6 254,64</td>
+									<td>446,52</td>
+									<td> </td>
+									<td>287,00</td>
+									<td>7,69</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.4</td>
+									<td>1.4</td>
+									<td>5 281,85</td>
+									<td>5 521,12</td>
+									<td>239,27</td>
+									<td> </td>
+									<td> </td>
+									<td>4,53</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="8">03/2019</td>
+									<td rowspan="2">EUR account</td>
+									<td>2.3</td>
+									<td>31.3</td>
+									<td>26 060,14</td>
+									<td>21 634,99</td>
+									<td>-4426,14</td>
+									<td> </td>
+									<td> </td>
+									<td>-16,98</td>
+									<td rowspan="2">-15,6</td>
+									<td rowspan="2">47,3</td>
+								</tr>
+								<tr class="tr_d">	
+									<td>1.3</td>
+									<td>1.3</td>
+									<td>35 307,17</td>
+									<td>26 060,14</td>
+									<td>490,42</td>
+									<td>9 737,45</td>
+									<td> </td>
+									<td>1,39</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="6">USD account</td>
+									<td>12.3</td>
+									<td>31.3</td>
+									<td>6 068,35</td>
+									<td>5 281,85</td>
+									<td>-786,50</td>
+									<td> </td>
+									<td> </td>
+									<td>-12,96</td>
+									<td rowspan="6">-12,5</td>
+									<td rowspan="6">98,9</td>
+								</tr>
+								<tr class="tr_d">
+									<td>11.3</td>
+									<td>11.3</td>
+									<td>5 117,88</td>
+									<td>6 068,35</td>
+									<td>0,00</td>
+									<td> </td>
+									<td>950,47</td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_d">
+									<td>7.3</td>
+									<td>10.3</td>
+									<td>5 569,27</td>
+									<td>5 117,88</td>
+									<td>-451,39</td>
+									<td> </td>
+									<td> </td>
+									<td>-8,11</td>
+								</tr>
+								<tr class="tr_d">
+									<td>6.3</td>
+									<td>6.3</td>
+									<td>5 324,44</td>
+									<td>5 569,27</td>
+									<td>344,78</td>
+									<td>99,95</td>
+									<td> </td>
+									<td>6,48</td>
+								</tr>
+								<tr class="tr_d">
+									<td>2.3</td>
+									<td>5.3</td>
+									<td>5 267,92</td>
+									<td>5 324,44</td>
+									<td>56,52</td>
+									<td> </td>
+									<td> </td>
+									<td>1,07</td>
+								</tr>
+								<tr class="tr_d">
+									<td>1.3</td>
+									<td>1.3</td>
+									<td>6 740,06</td>
+									<td>5 267,92</td>
+									<td>70,61</td>
+									<td>1 542,75</td>
+									<td> </td>
+									<td>1,05</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="17">02/2019</td>
+									<td rowspan="9">EUR account</td>
+									<td>22.2</td>
+									<td>28.2</td>
+									<td>32 665,10</td>
+									<td>35 307,17</td>
+									<td>2642,07</td>
+									<td> </td>
+									<td> </td>
+									<td>8,09</td>
+									<td rowspan="9">62,9</td>
+									<td rowspan="9">62,9</td>
+								</tr>
+								<tr class="tr_l">
+									<td>21.2</td>
+									<td>21.2</td>
+									<td>28 075,62</td>
+									<td>32 665,10</td>
+									<td>-410,52</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>-1,24</td>
+								</tr>
+								<tr class="tr_l">
+									<td>15.2</td>
+									<td>20.2</td>
+									<td>22 356,73</td>
+									<td>28 075,62</td>
+									<td>5718,89</td>
+									<td> </td>
+									<td> </td>
+									<td>25,58</td>
+								</tr>
+								<tr class="tr_l">
+									<td>14.2</td>
+									<td>14.2</td>
+									<td>16 333,25</td>
+									<td>22 356,73</td>
+									<td>1023,48</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>4,80</td>
+								</tr>
+								<tr class="tr_l">
+									<td>12.2</td>
+									<td>13.2</td>
+									<td>15 514,42</td>
+									<td>16 333,25</td>
+									<td>818,83</td>
+									<td> </td>
+									<td> </td>
+									<td>5,28</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11.2</td>
+									<td>11.2</td>
+									<td>10 586,48</td>
+									<td>15 514,42</td>
+									<td>-72,06</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>-0,46</td>
+								</tr>
+								<tr class="tr_l">
+									<td>8.2</td>
+									<td>10.2</td>
+									<td>11 340,26</td>
+									<td>10 586,48</td>
+									<td>-753,78</td>
+									<td> </td>
+									<td> </td>
+									<td>-6,65</td>
+								</tr>
+								<tr class="tr_l">
+									<td>7.2</td>
+									<td>7.2</td>
+									<td>6 402,95</td>
+									<td>11 340,26</td>
+									<td>-62,69</td>
+									<td> </td>
+									<td>5 000,00</td>
+									<td>-0,55</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.2</td>
+									<td>6.2</td>
+									<td>5 000,00</td>
+									<td>6 402,95</td>
+									<td>1402,95</td>
+									<td> </td>
+									<td> </td>
+									<td>28,06</td>
+								</tr>
+								<tr class="tr_l">
+									<td rowspan="8">USD account</td>
+									<td>23.2</td>
+									<td>28.2</td>
+									<td>6 329,76</td>
+									<td>6 740,06</td>
+									<td>410,30</td>
+									<td> </td>
+									<td> </td>
+									<td>6,48</td>
+									<td rowspan="8">93,0</td>
+									<td rowspan="8">111,3</td>
+								</tr>
+								<tr class="tr_l">
+									<td>22.2</td>
+									<td>22.2</td>
+									<td>4 502,35</td>
+									<td>6 329,76</td>
+									<td>-129,60</td>
+									<td> </td>
+									<td>1 957,01</td>
+									<td>-2,01</td>
+								</tr>
+								<tr class="tr_l">
+									<td>21.2</td>
+									<td>21.2</td>
+									<td>4 534,31</td>
+									<td>4 502,35</td>
+									<td>-31,96</td>
+									<td> </td>
+									<td> </td>
+									<td>-0,70</td>
+								</tr>
+								<tr class="tr_l">
+									<td>20.2</td>
+									<td>20.2</td>
+									<td>4 345,29</td>
+									<td>4 534,31</td>
+									<td>0,00</td>
+									<td> </td>
+									<td>189,02</td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_l">
+									<td>19.2</td>
+									<td>19.2</td>
+									<td>1 840,07</td>
+									<td>4 345,29</td>
+									<td>494,36</td>
+									<td> </td>
+									<td>2 010,86</td>
+									<td>12,84</td>
+								</tr>
+								<tr class="tr_l">
+									<td>18.2</td>
+									<td>18.2</td>
+									<td>7 615,07</td>
+									<td>1 840,07</td>
+									<td>0,00</td>
+									<td>5 775,00</td>
+									<td> </td>
+									<td>0,00</td>
+								</tr>
+								<tr class="tr_l">
+									<td>2.2</td>
+									<td>17.2</td>
+									<td>4 445,62</td>
+									<td>7 615,07</td>
+									<td>3169,45</td>
+									<td> </td>
+									<td> </td>
+									<td>71,29</td>
+								</tr>
+								<tr class="tr_l">
+									<td>1.2</td>
+									<td>1.2</td>
+									<td>4 524,64</td>
+									<td>4 445,62</td>
+									<td>229,65</td>
+									<td>308,67</td>
+									<td> </td>
+									<td>5,08</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="3">01/2019</td>
+									<td>EUR account</td>
+									<td>30.1</td>
+									<td>31.1</td>
+									<td>0</td>
+									<td>5000</td>
+									<td>0,00</td>
+									<td> </td>
+									<td>5000,00</td>
+									<td>0,00</td>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+								<tr class="tr_d">
+									<td rowspan="2">USD account</td>
+									<td>15.1</td>
+									<td>31.1</td>
+									<td>3823,11</td>
+									<td>4524,64</td>
+									<td>701,53</td>
+									<td> </td>
+									<td> </td>
+									<td>18,35</td>
+									<td rowspan="2">18,3</td>
+									<td rowspan="2">18,3</td>
+								</tr>
+								<tr class="tr_d">
+									<td>14.1</td>
+									<td>14.1</td>
+									<td>0</td>
+									<td>3823,11</td>
+									<td>3823,11</td>
+									<td> </td>
+									<td> </td>
+									<td>0,00</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="profit1" role="tabpanel" aria-labelledby="profit1-tab">
+					<div class="wr-for-table">
+
+						<!-- new statement -->
+						<table class="table table-profit-1">
+							<thead class="fixed">
+								<tr>
+									<th rowspan="2">Month/ Year</th>
+									<th rowspan="2">Monthly Result, %</th>
+									<th rowspan="2">Start of Month, USD</th>
+									<th rowspan="2">End of Month, USD</th>
+									<th rowspan="2">Profit, USD</th>
+									<th>Investor's Profit Share, %</th>
+									<th>Master Trader`s Commission, %</th>
+									<th rowspan="2">Net Investor`s Capital, USD</th>
+								</tr>
+								<tr>
+									<th>56</th>
+									<th>44</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr_l">
+									<td>03/2020</td>
+									<td>14,10</td>
+									<td>3093</td>
+									<td>3529</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>3529</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2020</td>
+									<td>-21,60</td>
+									<td>3945</td>
+									<td>3093</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>3093</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2020</td>
+									<td>-17,70</td>
+									<td>4793</td>
+									<td>3945</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>3945</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12/2019</td>
+									<td>4,30</td>
+									<td>4596</td>
+									<td>4793</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>4793</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11/2019</td>
+									<td>-39,00</td>
+									<td>7534</td>
+									<td>4596</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>4596</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2019</td>
+									<td>9,90</td>
+									<td>6855</td>
+									<td>7534</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>7534</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2019</td>
+									<td>61,60</td>
+									<td>4242</td>
+									<td>6855</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>6855</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2019</td>
+									<td>-62,00</td>
+									<td>11164</td>
+									<td>4242</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>4242</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2019</td>
+									<td>6,90</td>
+									<td>10443</td>
+									<td>11164</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>11164</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2019</td>
+									<td>6,53</td>
+									<td>9803</td>
+									<td>10443</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>10443</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2019</td>
+									<td>-47,80</td>
+									<td>18780</td>
+									<td>9803</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>9803</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2019</td>
+									<td>38,70</td>
+									<td>14678</td>
+									<td>20359</td>
+									<td>3589</td>
+									<td>2010</td>
+									<td>1579</td>
+									<td>18780</td>
+								</tr>
+								<tr class="tr_l">
+									<td>03/2019</td>
+									<td>-12,47</td>
+									<td>16770</td>
+									<td>14678</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>14678</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2019</td>
+									<td>92,98</td>
+									<td>11028</td>
+									<td>21281</td>
+									<td>10253</td>
+									<td>5742</td>
+									<td>4512</td>
+									<td>16770</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2019</td>
+									<td>18,35</td>
+									<td>10000</td>
+									<td>11835</td>
+									<td>1835</td>
+									<td>1028</td>
+									<td>807</td>
+									<td>11028</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="wr-for-graph">
+						<ul class="benefit">
+							<li>Initial Capital<span>10000</span></li>
+							<li>Net Yield<span>-6471</span></li>
+							<li>Curent Capital<span>3529</span></li>
+						</ul>
+						<p>Investor`s Net Capital</p>
+						<div class="chartdiv_dyn_profit_1"></div>
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="profit2" role="tabpanel" aria-labelledby="profit2-tab">
+					<div class="wr-for-table">
+						<table class="table table-profit-2">
+							<thead class="fixed">
+								<tr>
+									<th rowspan="2">Month/ Year</th>
+									<th rowspan="2">Monthly Result, %</th>
+									<th rowspan="2">Start of Month, USD</th>
+									<th rowspan="2">End of Month, USD</th>
+									<th rowspan="2">Profit, USD</th>
+									<th>Investor's Profit Share, %</th>
+									<th>Master Trader`s Commission, %</th>
+									<th rowspan="2">Withdrawal, USD</th>
+									<th rowspan="2">Trading Capital for next month, USD</th>
+									<th rowspan="2">Total Withdrawal, USD</th>
+									<th rowspan="2">General Capital = Trading + Withdrawal, USD</th>
+								</tr>
+								<tr>
+									<th>56</th>
+									<th>44</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="tr_l">
+									<td>03/2020</td>
+									<td>14,10</td>
+									<td>1647</td>
+									<td>1879</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>1879</td>
+									<td>7433</td>
+									<td>9312</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2020</td>
+									<td>-21,60</td>
+									<td>2101</td>
+									<td>1647</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>1647</td>
+									<td>7433</td>
+									<td>9080</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2020</td>
+									<td>-17,70</td>
+									<td>2552</td>
+									<td>2101</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2101</td>
+									<td>7433</td>
+									<td>9534</td>
+								</tr>
+								<tr class="tr_d">
+									<td>12/2019</td>
+									<td>4,30</td>
+									<td>2447</td>
+									<td>2552</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2552</td>
+									<td>7433</td>
+									<td>9986</td>
+								</tr>
+								<tr class="tr_l">
+									<td>11/2019</td>
+									<td>-39,00</td>
+									<td>4012</td>
+									<td>2447</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2447</td>
+									<td>7433</td>
+									<td>9880</td>
+								</tr>
+								<tr class="tr_d">
+									<td>10/2019</td>
+									<td>9,90</td>
+									<td>3650</td>
+									<td>4012</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>4012</td>
+									<td>7433</td>
+									<td>11445</td>
+								</tr>
+								<tr class="tr_l">
+									<td>09/2019</td>
+									<td>61,60</td>
+									<td>2259</td>
+									<td>3650</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>3650</td>
+									<td>7433</td>
+									<td>11084</td>
+								</tr>
+								<tr class="tr_d">
+									<td>08/2019</td>
+									<td>-62,00</td>
+									<td>5945</td>
+									<td>2259</td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td> </td>
+									<td>2259</td>
+									<td>7433</td>
+									<td>9692</td>
+								</tr>
+								<tr class="tr_l">
+									<td>07/2019</td>
+									<td>6,90</td>
+									<td>5561</td>
+									<td>5945</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>5945</td>
+									<td>7433</td>
+									<td>13378</td>
+								</tr>
+								<tr class="tr_d">
+									<td>06/2019</td>
+									<td>6,53</td>
+									<td>5220</td>
+									<td>5561</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>5561</td>
+									<td>7433</td>
+									<td>12994</td>
+								</tr>
+								<tr class="tr_l">
+									<td>05/2019</td>
+									<td>-47,80</td>
+									<td>10000</td>
+									<td>5220</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>5220</td>
+									<td>7433</td>
+									<td>12653</td>
+								</tr>
+								<tr class="tr_d">
+									<td>04/2019</td>
+									<td>38,70</td>
+									<td>8753</td>
+									<td>12140</td>
+									<td>2140</td>
+									<td>1199</td>
+									<td>942</td>
+									<td>1199</td>
+									<td>10000</td>
+									<td>7433</td>
+									<td>17433</td>
+								</tr>
+								<tr class="tr_l">
+									<td>03/2019</td>							
+									<td>-12,47</td>
+									<td>10000</td>
+									<td>8735</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>8753</td>
+									<td>6234</td>
+									<td>14987</td>
+								</tr>
+								<tr class="tr_d">
+									<td>02/2019</td>
+									<td>92,98</td>
+									<td>10000</td>
+									<td>19298</td>
+									<td>9298</td>
+									<td>5207</td>
+									<td>4091</td>
+									<td>5207</td>
+									<td>10000</td>
+									<td>6234</td>
+									<td>16234</td>
+								</tr>
+								<tr class="tr_l">
+									<td>01/2019</td>							
+									<td>18,35</td>
+									<td>10000</td>
+									<td>11835</td>
+									<td>1835</td>
+									<td>1028</td>
+									<td>807</td>
+									<td>1028</td>
+									<td>10000</td>
+									<td>1028</td>
+									<td>11028</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="wr-for-graph">
+						<ul class="benefit">
+							<li>Initial Capital<span>10000</span></li>
+							<li>Withdrawal<span>7433</span></li>
+							<li>Curent Capital<span>1879</span></li>
+						</ul>
+						<p>Investor's:</p>
+						<ul class="graph_legend">
+							<li><span></span>- Withdrawal;</li>
+							<li><span></span>- Trading Capital;</li>
+							<li><span></span>- General Capital;</li>
+						</ul>
+						<div class="chartdiv_dyn_profit_2"></div>	
+					</div>
+				</div>
+
+				<div class="tab-pane fade" id="statement_dyn" role="tabpanel" aria-labelledby="statement_dyn-tab">
+					<div class="statement_report">
+						<p>CopyTradingForex.com builds an absolutely transparent and honest relationship with its Investors. We have opened access to the Portfolio Statement and Positions Report. Now everyone can be sure we provide "Real Trade. True results"
+						</p>
+						<a href="Dynamic_Portfolio_Statement.pdf" class="btn_gold" target="blank">dynamic porfolio statement</a>
+						<a href="Dynamic_Position_Report.pdf" class="btn_gold" target="blank">dynamic positions report</a>
+					</div>
+				</div>
+			</div>
+ 		</div>
+ 		<!-- END of popup for Dynamic button -->
+
+ 		
+ 		<!-- JS -->
+ 		<script src="libs/jquery/jquery-1.12.4.min.js"></script>
+ 		<script src="libs/bootstrap/bootstrap.min.js"></script>
+
+ 		<!-- graphics with AMCHARTS.js -->
+ 		<script src="libs/amcharts4/core.js"></script>  <!-- core.js ALWAYS should be THE FIRST -->
+		<script src="libs/amcharts4/charts.js"></script>
+		<script src="libs/amcharts4/themes/animated.js"></script>
+
+		<script src="libs/jquery/jquery.bpopup.min.js"></script>
+		<script src="js/my_graphics.js"></script>
+ 		<script src="js/dynamic-statement.js"></script>
+
+ 	</body>
+ </html>
+ 

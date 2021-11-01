@@ -1,0 +1,53 @@
+.wr-golden_rules {
+	padding: 30px 0 0;
+	.o-sans {
+		text-align: justify;
+	} 
+	h3 {
+		font-weight: bold;
+		font-size: 22px;
+		line-height: 27px;
+		margin-top: 16px;
+		@media (max-width: 767px) {
+			font-size: 22px;
+			line-height: 26px;
+		}
+		@media (max-width: 575px) {
+			font-size: 18px;
+			line-height: 21px;
+			margin-top: 12px;
+		}
+	}
+}
+
+.golden_rules_pic {
+	margin: 16px 0;
+
+	@media (max-width: 767px) {
+		margin: 15px 0;
+	}
+	@media (max-width: 575px) {
+		margin: 10px auto;
+		width: 40%;
+		display: block;
+	}
+	@media (max-width: 425px) {
+		width: 60%;
+	}
+}
+
+.rules_text {
+	margin-top: 25px;
+	b {
+		font-weight: 700;
+	}
+}
+
+/*.invest_wisely__link {
+	color: $color_dblue;
+	font-style: italic;
+	font-weight: bold;
+	&:hover {
+		text-shadow: 1px -1px $color_gold;
+	}
+}*/

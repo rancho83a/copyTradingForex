@@ -1,0 +1,125 @@
+/*section WHY WE + pics with proposes */
+.wr-why_we {
+	padding: 50px 0;
+
+}
+.why_we {
+	ul {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 30px;
+		li {
+			width: 32%;
+			margin-bottom: 50px;
+			display: inline-block;
+			vertical-align: top;
+			position: relative;
+			text-align: justify;
+			background: #fff;
+			padding: 25px 30px;
+			@media (max-width: 991px) {
+				width: 47%;
+				margin: 0 auto 30px;
+			}
+			@media (max-width: 767px) {
+				width: 75%;
+			}
+			@media (max-width: 500px) {
+				width: 100%;
+			}
+			h3 {
+				padding-left: 60px;
+				height: 50px;
+				font-size: 19px;
+				line-height: 25px;
+				text-align: left;
+				text-transform: uppercase;
+				color: $color_dblue;
+				@media (max-width: 1410px) {
+					font-size: 17px;
+					height: 55px;
+				} 
+				@media (max-width: 767px) {
+					height: 40px;
+				}
+				@media (max-width: 500px) {
+					padding-left: 0;
+					text-align: center;
+					height: auto;
+					margin-top: 10px;
+				}
+
+			}
+			img {
+				float: left;
+				position: absolute;
+				left: 25px;
+				@media (max-width: 500px) {
+					float: unset;
+					position: unset;
+					display: block;
+					margin: 0 auto;
+				}
+			}
+			span.d_blue {
+				text-decoration: underline;
+				cursor: help;
+			}
+		}
+	}
+}
+.wr-pic {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.pics {
+	width: 32%;
+	margin: 20px 0;
+	position: relative;
+	padding-bottom: 55px;
+	@media (max-width: 991px) {
+		width: 47%;
+		margin: 30px auto 0;
+	}
+	@media (max-width: 767px) {
+		width: 70%;
+	}
+	@media (max-width: 500px) {
+		max-width: 355px;
+		width: unset;
+	}
+
+	figure {
+		position: relative;
+		margin-bottom: 20px;
+		figcaption {
+			position: absolute;
+			right: 5px;
+			bottom: 5px;
+			color: $color_bg_grey1;
+			font-size: 20px;
+			text-align: right;
+		}
+	}
+	p {
+		text-align: justify;
+		margin-bottom: 25px;
+		line-height: 21px;
+		color: #444;
+		padding: 0 10px;
+		@media (max-width: 500px) {
+			font-size: 13px;
+			line-height: 18px;
+		}
+	}
+	a {
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 200px;
+		margin-left: -100px;
+		text-align: center;
+	}
+}
