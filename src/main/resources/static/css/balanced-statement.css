@@ -203,7 +203,7 @@ button {
 
 .icon {
   display: inline-block;
-  background: url(../img/sprite_copy.png) 0 0 no-repeat; }
+  background: url(../imgages/sprite_copy.png) 0 0 no-repeat; }
 
 /*for most of paragraphs on this site */
 .o-sans {
@@ -314,7 +314,7 @@ button {
     .nav_aside {
       height: 50px; } }
   .nav_aside .navbar-toggler-icon {
-    background: url(../img/bg-toggler-icon.png) 0 0 no-repeat; }
+    background: url(../images/bg-toggler-icon.png) 0 0 no-repeat; }
   .nav_aside .logo_mob {
     display: block; }
   .nav_aside .logo_desk {
@@ -552,7 +552,7 @@ button {
 
 /*==================== TABLES ==================*/
 .wr-for-table {
-  background: #158 url(../img/logo.png) center no-repeat;
+  background: #158 url(../images/logo.png) center no-repeat;
   height: 100%;
   overflow: auto; }
 
@@ -593,13 +593,13 @@ table.table {
 #profit2 .wr-for-table,
 #profit11 .wr-for-table,
 #profit22 .wr-for-table {
-  background: #fff url(../img/logo.png) center 60% no-repeat;
+  background: #fff url(../images/logo.png) center 60% no-repeat;
   width: 52%;
   display: inline-block; }
 
 #profit11 .wr-for-table,
 #profit22 .wr-for-table {
-  background: #fff url(../img/logo.png) center 33% no-repeat;
+  background: #fff url(../images/logo.png) center 33% no-repeat;
   background-size: 200px; }
 
 .wr-for-graph {

@@ -75,7 +75,7 @@ $color_white: #fff;
 
 /*===========MIXINS==================*/
 @mixin bgpic($bgpicname) {
-	background: url(../img/#{$bgpicname}.jpg) 0 0 no-repeat;
+	background: url(../images/#{$bgpicname}.jpg) 0 0 no-repeat;
 	background-size: cover;
 }
 /*mixin for font*/
@@ -161,7 +161,7 @@ button {
 
 .icon {
 	display: inline-block;
-	background: url(../img/sprite_copy.png) 0 0 no-repeat;
+	background: url(../images/sprite_copy.png) 0 0 no-repeat;
 }
 
 /*for most of paragraphs on this site */

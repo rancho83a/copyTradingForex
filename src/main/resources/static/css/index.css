@@ -203,7 +203,7 @@ button {
 
 .icon {
   display: inline-block;
-  background: url(../img/sprite_copy.png) 0 0 no-repeat; }
+  background: url(../images/sprite_copy.png) 0 0 no-repeat; }
 
 /*for most of paragraphs on this site */
 .o-sans {
@@ -314,7 +314,7 @@ button {
     .nav_aside {
       height: 50px; } }
   .nav_aside .navbar-toggler-icon {
-    background: url(../img/bg-toggler-icon.png) 0 0 no-repeat; }
+    background: url(../images/bg-toggler-icon.png) 0 0 no-repeat; }
   .nav_aside .logo_mob {
     display: block; }
   .nav_aside .logo_desk {
@@ -475,7 +475,7 @@ button {
 
 .billboard_slider {
   /*bg_images for divs in slider: 12 - is the amount of slides*/ }
-  .billboard_slider img {
+  .billboard_slider images {
     height: 950px;
     width: auto !important; }
   .billboard_slider div {
@@ -492,29 +492,17 @@ button {
       .billboard_slider div {
         height: 570px; } }
   .billboard_slider div:nth-child(1) {
-    background-image: url(../img/billboard-slide-1.jpg); }
+    background-image: url(../images/billboard-slide-1.jpg); }
   .billboard_slider div:nth-child(2) {
-    background-image: url(../img/billboard-slide-2.jpg); }
+    background-image: url(../images/billboard-slide-2.jpg); }
   .billboard_slider div:nth-child(3) {
-    background-image: url(../img/billboard-slide-3.jpg); }
+    background-image: url(../images/billboard-slide-3.jpg); }
   .billboard_slider div:nth-child(4) {
-    background-image: url(../img/billboard-slide-4.jpg); }
+    background-image: url(../images/billboard-slide-4.jpg); }
   .billboard_slider div:nth-child(5) {
-    background-image: url(../img/billboard-slide-5.jpg); }
+    background-image: url(../images/billboard-slide-5.jpg); }
   .billboard_slider div:nth-child(6) {
-    background-image: url(../img/billboard-slide-6.jpg); }
-  .billboard_slider div:nth-child(7) {
-    background-image: url(../img/billboard-slide-7.jpg); }
-  .billboard_slider div:nth-child(8) {
-    background-image: url(../img/billboard-slide-8.jpg); }
-  .billboard_slider div:nth-child(9) {
-    background-image: url(../img/billboard-slide-9.jpg); }
-  .billboard_slider div:nth-child(10) {
-    background-image: url(../img/billboard-slide-10.jpg); }
-  .billboard_slider div:nth-child(11) {
-    background-image: url(../img/billboard-slide-11.jpg); }
-  .billboard_slider div:nth-child(12) {
-    background-image: url(../img/billboard-slide-12.jpg); }
+    background-image: url(../images/billboard-slide-6.jpg); }
 
 /*.index_slider {
 	width: 100%;
@@ -561,16 +549,16 @@ button {
   top: 20%;
   left: 5%;
   width: 90%; }
-  .billboard_heading img {
+  .billboard_heading images {
     margin: 0 20px; }
     @media (max-width: 991px) {
-      .billboard_heading img {
+      .billboard_heading images {
         width: 230px; } }
     @media (max-width: 767px) {
-      .billboard_heading img {
+      .billboard_heading images {
         width: 200px; } }
     @media (max-width: 575px) {
-      .billboard_heading img {
+      .billboard_heading images {
         width: 150px; } }
 
 /*for parallax effect*/
@@ -698,12 +686,12 @@ button {
           text-align: center;
           height: auto;
           margin-top: 10px; } }
-    .why_we ul li img {
+    .why_we ul li images {
       float: left;
       position: absolute;
       left: 25px; }
       @media (max-width: 500px) {
-        .why_we ul li img {
+        .why_we ul li images {
           float: unset;
           position: unset;
           display: block;
@@ -769,7 +757,7 @@ button {
 /*section counter*/
 .wr-counter {
   padding: 50px 0;
-  background: #124578 url(../img/bg-counter.jpg) -125px 0 no-repeat;
+  background: #124578 url(../images/bg-counter.jpg) -125px 0 no-repeat;
   background-attachment: fixed;
   background-size: cover;
   color: #fff; }
@@ -779,19 +767,19 @@ button {
 
 .counter-item {
   text-align: center; }
-  .counter-item img {
+  .counter-item images {
     width: 48px;
     height: 48px;
     margin-right: 25px; }
     @media (max-width: 1315px) {
-      .counter-item img {
+      .counter-item images {
         margin-right: 15px; } }
     @media (max-width: 991px) {
-      .counter-item img {
+      .counter-item images {
         display: block;
         margin: 0 auto 12px; } }
     @media (max-width: 767px) {
-      .counter-item img {
+      .counter-item images {
         margin: 20px 20px 0 0;
         display: inline-block; } }
   .counter-item span.counter {
@@ -812,7 +800,7 @@ button {
 
 .disclaimer {
   margin: 50px auto;
-  background: url(../img/disclaimer.png) center no-repeat;
+  background: url(../images/disclaimer.png) center no-repeat;
   padding: 50px;
   font-size: 16.4px;
   line-height: 18px;

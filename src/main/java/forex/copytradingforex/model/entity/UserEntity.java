@@ -30,8 +30,11 @@ public class UserEntity extends BaseEntity{
 
     @Column(nullable = false)
     private BigDecimal capital;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
+
+
 
     public UserEntity() {
     }
