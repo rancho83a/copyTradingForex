@@ -1,388 +1,333 @@
- <!DOCTYPE html>
- <html lang="en">
- 	<head>
- 		<!-- META -->
- 		<meta charset="utf-8">
- 		<meta name="viewport" content="width=device-width, inicial-scale=1.0">
- 		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<![endif]-->
+<!DOCTYPE html>
+<html>
 
- 		<!-- FAVICON -->
- 		<link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
- 		<!-- SEO -->
- 		<meta name="Description" content="Easy scheme how copy trading forex works. Example of co-working with copytradingforex.">
- 		<meta name='keywords' content="fund management">
- 		<meta name="Rating" content="">    
- 		<meta name="Author" content="">
- 		<meta name="Robots" content="index,follow">
+    <title>CopyTradingForex</title>
 
- 		<!-- CONFIG -->
- 		<meta name="format-detection" content="telephone=no">
- 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="/css/pages.css">
 
- 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-134605534-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
 
-		  gtag('config', 'UA-134605534-1');
-		</script>
+</head>
 
- 		<!-- Стили -->
- 		<link rel="stylesheet" href="libs/bootstrap/bootstrap.min.css">
- 		<link rel="stylesheet" href="libs/slick/slick.css">
- 		<link rel="stylesheet" href="libs/jquery_fancybox/jquery.fancybox.min.css">
- 		<link rel="stylesheet" href="css/how-it-works.min.css">
+<body>
 
- 		<title>How CopyTradingForex Works</title>
- 	</head>
 
- 	<body>
- 		<!-- [if lt IE 10]>
- 			<p class="browsehappy">You're using <strong>OLD version of Internet Explorer</strong>. Please, <a href="http://browsehappy.com/>update your browser</a> to see more opportunities in browser!</p>
- 		<![endif]-->
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a href="index.html"> <img src="images/logo_mid.png" alt="logo"></a>
+            </div>
 
- 		<!-- Preloader -->
- 		<div class="preloader"></div>
+            <ul class="list-unstyled components">
 
- 		<div class="app">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">HOW IT WORKS</a>
+                </li>
+                <li>
+                    <a href="#">ABOUT</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">PAGES</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Page 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Page 3</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">PORTFOLIO </a>
+                </li>
+                <li>
+                    <a href="#">CONTACT</a>
+                </li>
+            </ul>
 
- 			<!-- rightside navigation fixed -->
- 			
-			<nav class="navbar navbar-expand-xl nav_aside">
-				<a class="navbar-brand logo_mob" href="index.html"><img class="img-fluid" src="img/logo_small.png" alt="logo"></a>
-				<a class="navbar-brand logo_desk" href="index.html"><img class="img-fluid" src="img/logo_mid.png" alt="logo"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				
-				<div class="collapse navbar-collapse" id="navbarNav">
-					<div class="navbar-nav">
-						<a class="nav-item nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
-						<a class="nav-item nav-link" href="portfolio.html">Portfolio</a>
-						<a class="nav-item nav-link" href="start-now.html">Start now</a>
-						<a class="nav-item active nav-link" href="how-it-works.html">How it works</a>
-						<a class="nav-item nav-link" href="master-traders.html">Master traders</a>
-						<a class="nav-item nav-link" href="contacts.html">Contacts</a>
-					</div>
-				</div>
-			</nav>		
-			
-			<!-- header -->
-			<header class="header wr-mr250">
-				<p class="how_h1_desc page_title">HOW IT <span>WO</span>RKS</p>
-				<p class="how_h1_mob">HOW IT WORKS</p>
-			</header>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download
+                        source</a>
+                </li>
+                <li>
+                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                </li>
+            </ul>
+        </nav>
 
-			<!-- section What is Copy Trading on Forex -->
-			<section id="what_ctf" class="wr-what_is_ctf wr-mr250">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">	
-							<h1>What is Fund Management on Forex?</h1>
-						</div>
-						<div class="col-md-12 col-lg-5">
-							<div class="what_is_text">
-								<p class="o-sans">
-									The Fund Management that we provide is implemented through percent allocation management module which allows Investors to have their accounts managed by a trader appointed by them on the basis of a limited trading power of attorney. This technical solution allows the Master trader on one trading platform to manage simultaneously unlimited quantity of Investor managed accounts.
-								</p> 
-								<p class="o-sans">
-									Depending on the size of the deposit each Investor`s managed account has its own ratio in all pool. Total sum of all ratios under one pool is always equal to 100%. Trader's activity results (trades, Profit & Loss) are allocated between Investor`s managed accounts according to ratio.
-								</p>
-							</div>							
-						</div>
-						<div class="col-md-6 col-lg-7">
-							<img class="img-fluid coins" src="img/what_is_ctf.jpg" alt="ctf">
-						</div>
-						<div class="col-md-6 col-lg-7">
-							<div class="slider_what_is testimonials_carousel jsTestimonials">
-								<div class="item">
-									<p>
-										Choice of base currency of the investment (USD, CHF, EUR, GBP, JPY, AUD, CAD, DKK, ZAR, MXN, NOK, NZD, PLN, RUB, CNH, SEK, SGD, TRY and HKD), to avoid the risk of devaluation
-									</p>
-									<div class="dots_what_is dots"> <!-- spans are for dots -->
-										<span></span><span></span><span></span>
-									</div>
-									<p class="cite">- currencies</p>
-								</div>
-								<div class="item">
-									<p>
-										Immediate Trading Deactivation allows Investors to block trading on their accounts at any time with immediate effect
-									</p>
-									<div class="dots"> <!-- spans are for dots -->
-										<span></span><span></span><span></span>
-									</div>
-									<p class="cite">- block trading</p>
-								</div>
-								<div class="item">
-									<p>
-										The Stop Loss Level functionality provides Investors with control of risk of loss. Investors are given the possibility to block trader's activity beyond a certain drawdown level
-									</p>
-									<div class="dots"> <!-- spans are for dots -->
-										<span></span><span></span><span></span>
-									</div>
-									<p class="cite">- equity protection</p>
-								</div>
-								<div class="item">
-									<p>
-										Instant 24/7 reporting access to the account statements allows investor to monitor the trading activity on the managed account online
-									</p>
-									<div class="dots"> <!-- spans are for dots -->
-										<span></span><span></span><span></span>
-									</div>
-									<p class="cite">- access to reports</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-12 col-lg-5">
-							<div class="what_is_text">
-								<p class="o-sans">
-								The Master Trader does not have direct access to your account.
-								</p>
-								<p class="o-sans">
-								Only the Investor has the right to withdraw or deposit funds, to block a trade, to transfer his account to management.
-								</p>
-								<p class="o-sans">
-									Many of investors are getting involved because they either do not have the knowledge, or the time to trade on their own. The most important thing to note here is that you need to understand the risk. If the Master Trader loses money, so do you. He or she cannot be held responsible because technically, you chose to appoint a trader on the account.her.
-								</p>
-								<p class="o-sans">
-									So to protect your account you can choose Stop Loss level and in this case you won’t lose more than you choose.
-								</p>
-							</div>							
-						</div>
-					</div>
-				</div>
-			</section>
+        <!-- Page Content Holder -->
+        <div id="content">
 
-			<!-- section EXAMPLE OF TRADE ALLOCATION -->
-			<section id="allocation" class="wr-example wr-mr250">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">	
-							<h2>Example of trade allocation</h2>
-							<div class="what_is_text">
-								<p class="o-sans">
-									We want to draw particular attention of Investors to the fact that in our "Fund Management" we primarily manage our own funds on a par with Investors' funds. This once again underlines the seriousness of our intentions towards trade and investors.
-								</p>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<a class="jsFancybox" href="img/example.gif">
-								<img class="img-fluid" src="img/example.gif" alt="example">
-							</a>
-						</div>
-						<div class="col-md-7">
-							<div class="example_text">
-								<p class="o-sans">
-									Let’s assume that there are 4 Investor`s accounts under Master trader:
-								</p>
-								<ol>
-									<li>USD account with deposit of $ 20'000 and ratio 37,3% - Master Trader</li>
-									<li>EUR account with deposit of € 5'000 and ratio 10,7% - Investor 1</li>
-									<li>USD account with deposit of $ 10'000 and ratio 18,7% - Investor 2</li>
-									<li>EUR account with deposit of € 10'000 and ratio 21,4% - Investor 3</li>
-									<li>GBP account with deposit of £ 5'000 and ratio 11,9% - Investor 4  </li>
-								</ol>
-							</div>
-							<div class="post_example_text">
-								<p class="o-sans">
-									Depending on funded amounts different ratios are applied for Investor`s account (for ratio calculation all amounts are converted in USD equivalent based on market rate).
-								</p>
-								<p class="o-sans">
-									In case if, for example, Master Trader decides to BUY 10 lot size EUR/USD. Each Investor`s  account has its own part of position and corresponding Profit & Loss.
-								</p>
-								<p class="o-sans">
-									In current example Master trader will get position BUY 3,73 lot size EUR/USD, <br>
-									first Investor - BUY 1,07 lot size EUR/USD, <br>
-									second - buy 1,87 lot size EUR/USD, <br>
-									third - BUY 2,14 lot size EUR/USD, <br>
-									fourth - buy 1,19 lot size.
-								</p>
-								<p class="o-sans">
-									Resulting profit & loss will be automatically calculated for each account depending on market prices.
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
 
-			<!-- section remuneration -->
-			<section id="remuner" class="wr-remuneration wr-mr250">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">	
-							<h2>Remuneration</h2>
-						</div>
-						<div class="col-md-12 col-lg-6">
-							<div class="block_i">
-								<span>i</span>
-								<p class="o-sans non_text_indent">The Performance Fee is subject to a high watermark and will only be charged when the amount on the account at the end of a Calculation Period exceeds the highest historical account value. The calculation of the Performance Fee will be adjusted if new funds are deposited on the account during a Calculation Period. The Performance Fee is calculated and payable as per specified Calculation Period: monthly. The Calculation Period is applied on a calendar basis.
-								</p>
-								<p class="o-sans non_text_indent">
-									The Management Volume Fee: for each amount of 1 lot size (100 000 USD) traded the Investor will be charged:<br>
-									Dynamic portfolio: 2,5 usd for 1 lot size (100 000 usd)<br>
-									Balanced Portfolio: 2,2 usd for 1 lot size trade (100 000 usd)
-								</p>
-							</div>
-						</div>
-						<div class="col-md-8 offset-md-2 col-lg-6 offset-lg-0">
-							<div class="share_features">
-								<div class="share">
-									<div class="share_head">
-										<div class="wr_investor">
-											<p class="investor">
-												<span>56%</span><br>
-												for Investor
-												<canvas class="canvass" id="duga" width="150" height="150"></canvas>
-											</p>								
-										</div>
-										<p><span>44% </span><br> for Master Trader</p>
-									</div>
-									<div class="share_footer">
-										<ul>
-											<li>Investor</li>
-											<li>control</li>
-											<li>confidence</li>
-											<li>stability</li>
-										</ul>
-										<ul>
-											<li>Master Trader</li>
-											<li>knowledge</li>
-											<li>experience</li>
-											<li>strategies</li>
-											<li>time</li>
-										</ul>
-									</div>
-								</div>
-								<div class="features">
-									<table class="table">
-										<tr>
-											<th><img src="img/list1.png" alt=""></th>
-											<td>
-												<h3>No monthly fee</h3>
-												<p class="o-sans non_text_indent">Fee for GUARANTEED PROFIT ONLY</p>
-											</td>
-										</tr>
-										<tr>
-											<th><img src="img/list2.png" alt=""></th>
-											<td>
-												<h3>Management Volume Fee</h3>
-												<p class="o-sans non_text_indent"> is based on volume traded</p>
-											</td>
-										</tr>
-										<tr>
-											<th><img src="img/list3.png" alt=""></th>
-											<td>
-												<h3>Performance Fee</h3>
-												<p class="o-sans non_text_indent">44% per Calculation Period: monthly</p>
-											</td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							
-						</div>
-						<div class="col-md-12">
-							<a href="start-now.html" class="big_link">What will your financial future look like? Become Investor now!</a>
-							<p class="disclaimer">
-								Risk Warning: The Investor confirms being aware of the speculative nature and the high risks associated with margin trading, mechanisms, characteristics and high degree of volatility of the currency and derivatives market. The Investor understands and agrees that margin trading might result in total loss of funds deposited as a margin and that consequently, only “risk” funds should be used in such trading. Anyone who does not have the extra capital that may be subject to a total loss should not trade on margin. No “safe” trading system has ever been devised, and no one can guarantee profits or freedom from loss. The Investor hereby certifies to have understood any and all risks related to the present managed account service at copytradingforex.com. Without any exceptions Master Traders assume no obligations with regard to any guarantee or promise of future profitable performance.
-							</p>
-							</p>							
-						</div>
-					</div>
-				</div>
-			</section> 			
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
 
- 			<section class="footer_navigation wr-mr250">
- 				<div class="container">
- 					<div class="row">
- 						<div class="col-sm-6 col-md-3">
- 							<nav class="footer_nav">
- 								<h4>About us</h4>
- 								<ul>
- 									<li><a href="index.html#why_ctf">Why copytradingforex.com?</a></li>
- 									<li><a href="index.html#perfomance_results">Our performance results</a></li>
- 									<li><a href="master-traders.html">Master Traders</a></li>
- 								</ul>
- 							</nav>
- 						</div>
- 						<div class="col-sm-6 col-md-3">
- 							<nav class="footer_nav">
- 								<h4>Our Service</h4>
- 								<ul>
- 									<li><a href="portfolio.html#portfolio_description">Dynamic Portfolio</a></li>
- 									<li><a href="portfolio.html#portfolio_description">Balanced Portfolio</a></li>
- 									<li><a href="https://www.dukascopy.com/swiss/english/forex/FX-Interbank-Account/?headerBar&ibref=13893" target="blank">Open Managed Account</a></li>
- 									<li class="md_hidden"><a href="dynamic-portfolio-statement.html" target="blank">Dynamic Portfolio Statement</a></li>
- 									<li class="md_hidden"><a href="balanced-portfolio-statement.html" target="blank">Balanced Portfolio Statement</a></li>
- 								</ul>
- 							</nav>
- 						</div>
- 						<div class="col-sm-6 col-md-3">
- 							<nav class="footer_nav">
- 								<h4>For Investors</h4>
- 								<ul>
- 									<li><a href="how-it-works.html#what_ctf">What is Fund Management?</a></li>
- 									<li><a href="how-it-works.html#allocation">Example of trade allocation</a></li>
- 									<li><a href="start-now.html">How to start?</a></li>
- 									<li><a href="start-now.html#step2">Equity Stop Loss Level function</a></li>
- 									<li><a href="how-it-works.html#remuner">Remuneration</a></li>
- 									<!-- <li><a href="contacts.html#testimons">Testimonials</a></li> -->
- 								</ul>
- 							</nav>
- 						</div>
- 						<div class="col-sm-6 col-md-3">
- 							<nav class="footer_nav">
- 								<h4>Contact us</h4>
- 								<ul>
- 									<li><a class="footer_email__link" href="mailto:contact@copytradingforex.com">contact@copytradingforex.com</a></li>
- 									<li><a href="https://www.facebook.com/CopyTradingForexcom" target="blank">facebook</a></li>
- 									<li><a href="https://www.youtube.com/channel/UCoxLJbMote284Owk_kcHuBQ" target="blank">youtube</a></li>
- 									<li><a href="https://www.instagram.com/unique_copy_trading_forex/" target="blank">instagram</a></li>
- 									<li><a href="https://t.me/CopyTradingForex" target="blank">telegram channel</a></li>
- 								</ul>
- 							</nav>
- 						</div>
- 					</div>
- 				</div>
- 			</section>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Welcome, </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">LOGOUT</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
 
- 			<footer class="footer wr-mr250">
-	 			<small>© 2020 WebKnight-developer. All Rights Reserved.</small>
-	 		</footer>
+            <!--Main content for every page -->
 
- 		</div>
+            <!-- section What is Copy Trading on Forex -->
+            <section id="what_ctf" class="wr-what_is_ctf">
 
- 		<!-- Plagins -->
- 		<div class="popup"></div>
+                <div class="container">
+                    <div class="row my-4 align-items-center justify-content-center ">
+                        <div class="col-md-11 mb-4">
+                            <h1>What is Fund Management on Forex?</h1>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="how-it-works">
+                                The Fund Management that we provide is implemented through percent allocation management
+                                module which allows Investors to have their accounts managed by a trader appointed by
+                                them on the basis of a limited trading power of attorney. This technical solution allows
+                                the Master trader on one trading platform to manage simultaneously unlimited quantity of
+                                Investor managed accounts.
 
- 		<!-- JS -->
- 		<script src="libs/jquery/jquery-1.12.4.min.js"></script>
- 		<script src="libs/bootstrap/bootstrap.min.js"></script>
- 		<script src="libs/slick/slick.min.js"></script>
- 		<script src="libs/jquery_fancybox/jquery.fancybox.min.js"></script>
- 		
-		<!--Start of Tawk.to Script-->
-		<script type="text/javascript">
-		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-		(function(){
-		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-		s1.async=true;
-		s1.src='https://embed.tawk.to/5c2d32e582491369baa03ed3/default';
-		s1.charset='UTF-8';
-		s1.setAttribute('crossorigin','*');
-		s0.parentNode.insertBefore(s1,s0);
-		})();
-		</script>
-		<!--End of Tawk.to Script-->
+                                Depending on the size of the deposit each Investor`s managed account has its own ratio
+                                in all pool. Total sum of all ratios under one pool is always equal to 100%. Trader's
+                                activity results (trades, Profit & Loss) are allocated between Investor`s managed
+                                accounts according to ratio.
+                            </p>
+                        </div>
+                        <div class="col-md-7 align-items-end">
+                            <div><img src="/images/what_is_ctf.jpg" class="coins" alt="Header image"></div>
 
- 		<script src="js/how-it-works.js"></script>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
- 	</body>
- </html>
- 
+            <!-- section What is Copy Trading on Forex -->
+            <section id="what_ctf" class="wr-what_is_ctf">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1>What is Fund Management on Forex?</h1>
+                        </div>
+                        <div class="col-md-12 col-lg-5">
+                            <div class="what_is_text">
+                                <p class="o-sans">
+                                    The Fund Management that we provide is implemented through percent allocation
+                                    management module which allows Investors to have their accounts managed by a trader
+                                    appointed by them on the basis of a limited trading power of attorney. This
+                                    technical solution allows the Master trader on one trading platform to manage
+                                    simultaneously unlimited quantity of Investor managed accounts.
+                                </p>
+                                <p class="o-sans">
+                                    Depending on the size of the deposit each Investor`s managed account has its own
+                                    ratio in all pool. Total sum of all ratios under one pool is always equal to 100%.
+                                    Trader's activity results (trades, Profit & Loss) are allocated between Investor`s
+                                    managed accounts according to ratio.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-lg-7">
+                            <img class="img-fluid coins " src="images/what_is_ctf.jpg" alt="ctf">
+                        </div>
+                        <div class="col-md-6 col-lg-7">
+                            <div class="slider_what_is testimonials_carousel jsTestimonials">
+                                <div class="item">
+                                    <p>
+                                        Choice of base currency of the investment (USD, CHF, EUR, GBP, JPY, AUD, CAD,
+                                        DKK, ZAR, MXN, NOK, NZD, PLN, RUB, CNH, SEK, SGD, TRY and HKD), to avoid the
+                                        risk of devaluation
+                                    </p>
+                                    <div class="dots_what_is dots">
+                                        <!-- spans are for dots -->
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <p class="cite">- currencies</p>
+                                </div>
+                                <div class="item">
+                                    <p>
+                                        Immediate Trading Deactivation allows Investors to block trading on their
+                                        accounts at any time with immediate effect
+                                    </p>
+                                    <div class="dots">
+                                        <!-- spans are for dots -->
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <p class="cite">- block trading</p>
+                                </div>
+                                <div class="item">
+                                    <p>
+                                        The Stop Loss Level functionality provides Investors with control of risk of
+                                        loss. Investors are given the possibility to block trader's activity beyond a
+                                        certain drawdown level
+                                    </p>
+                                    <div class="dots">
+                                        <!-- spans are for dots -->
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <p class="cite">- equity protection</p>
+                                </div>
+                                <div class="item">
+                                    <p>
+                                        Instant 24/7 reporting access to the account statements allows investor to
+                                        monitor the trading activity on the managed account online
+                                    </p>
+                                    <div class="dots">
+                                        <!-- spans are for dots -->
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <p class="cite">- access to reports</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-lg-5">
+                            <div class="what_is_text">
+                                <p class="o-sans">
+                                    The Master Trader does not have direct access to your account.
+                                </p>
+                                <p class="o-sans">
+                                    Only the Investor has the right to withdraw or deposit funds, to block a trade, to
+                                    transfer his account to management.
+                                </p>
+                                <p class="o-sans">
+                                    Many of investors are getting involved because they either do not have the
+                                    knowledge, or the time to trade on their own. The most important thing to note here
+                                    is that you need to understand the risk. If the Master Trader loses money, so do
+                                    you. He or she cannot be held responsible because technically, you chose to appoint
+                                    a trader on the account.her.
+                                </p>
+                                <p class="o-sans">
+                                    So to protect your account you can choose Stop Loss level and in this case you won’t
+                                    lose more than you choose.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="disclaimer">
+                            Risk Warning: The Investor confirms being aware of the speculative nature and the high risks
+                            associated
+                            with margin trading, mechanisms, characteristics and high degree of volatility of the currency
+                            and derivatives market.
+                            The Investor understands and agrees that margin trading might result in total loss of funds
+                            deposited as a margin and
+                            that consequently, only “risk” funds should be used in such trading. Anyone who does not have
+                            the extra capital that may
+                            be subject to a total loss should not trade on margin. No “safe” trading system has ever been
+                            devised, and no one can
+                            guarantee profits or freedom from loss. The Investor hereby certifies to have understood any and
+                            all risks related to
+                            the present managed account service at copytradingforex.com. Without any exceptions Traders
+                            assume no obligations
+                            with regard to any guarantee or promise of future profitable performance.
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+
+
+    <footer>
+       
+        <div class="footer">
+            <small>© 2021 rancho83a-developer. All Rights Reserved.</small>
+        </div>
+
+    </footer>
+
+
+    <!-- <div class="line"></div> -->
+
+
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
