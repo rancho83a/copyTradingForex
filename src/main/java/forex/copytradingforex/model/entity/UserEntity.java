@@ -15,7 +15,8 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private String password;
 
-    private String nickName;
+    @Column(nullable = false)
+    private String email;
 
     @Column(nullable = false)
     private String fullName;
@@ -28,11 +29,15 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private Integer experience;
 
-    @Column(nullable = false)
+    @Column(name="capital", columnDefinition="Decimal(19,4) default '0.00'")
     private BigDecimal capital;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
+
+
+
+
 
 
 
@@ -57,12 +62,12 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getEmail() {
+        return email;
     }
 
-    public UserEntity setNickName(String nickName) {
-        this.nickName = nickName;
+    public UserEntity setEmail(String nickName) {
+        this.email = nickName;
         return this;
     }
 

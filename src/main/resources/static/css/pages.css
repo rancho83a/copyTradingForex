@@ -36,7 +36,6 @@ a:focus {
     font-weight: bold;
     color: #d4b768;
     padding-bottom: 19.8rem;
-    border: solid px #d4b768;
     margin-bottom: 0px;
 }
 
@@ -44,6 +43,9 @@ a:focus {
     box-shadow: none;
     outline: none !important;
     border: none;
+    color: #d4b768;
+}
+
 }
 
 .line {
@@ -54,7 +56,7 @@ a:focus {
 }
 
 #navbarSupportedContent>ul>li>a:hover {
-    color: #d4b768;
+    color: white;
 }
 
 .wr-what_is_ctf {
@@ -87,7 +89,7 @@ a:focus {
 
 h1,
 h2 {
-    margin: 0 0 30 px;
+    margin: 0 0 30px;
     font-size: 32px;
     letter-spacing: 0;
     line-height: 32px;
@@ -101,7 +103,7 @@ h2::after {
     height: 2px;
     width: 60px;
     background: #d4b768;
-    margin-top: 10 px;
+    margin-top: 10px;
 }
 
 .coins {
@@ -354,8 +356,28 @@ a.article:hover {
 }
 
 .footer {
-    padding: 7px;
-    background-color: black;
+    padding: 20px;
+    background-color: #dfe1e6;
     text-align: center;
+    color: #9d9d9d;
+}
+
+/*Login page*/
+.login-form{
+    background: white;
+    padding: 10px 30px 10px 30px;
+    color: #8f9092;
+    border-radius: 5px;
+}
+.btn-login{
+    background: #031430;
+    color: #d4b768;
+}
+.btn-login:hover{
+    background: #d4b768;
     color: #031430;
+}
+#field>span>a{
+    text-underline: #d4b768;
+    color: #d4b768;
 }
