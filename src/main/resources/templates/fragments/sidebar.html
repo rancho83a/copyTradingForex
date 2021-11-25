@@ -27,24 +27,34 @@
                 <li>
                     <a href="/how-it-works">HOW IT WORKS</a>
                 </li>
+                <th:block sec:authorize="!isAuthenticated()">
                 <li>
                     <a href="/users/login">LOGIN</a>
                 </li>
                 <li>
                     <a href="/users/register">REGISTER</a>
                 </li>
-                <li>
+                    </th:block>
+
+                <th:block sec:authorize="isAuthenticated()">
+                    <li>
+                        <a href="/users/profile">PROFILE</a>
+                    </li>
+
+                </th:block>
+
+                <li id="adding-menu">
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-                       class="dropdown-toggle">PAGES</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                       class="dropdown-toggle">INFORMATION</a>
+                    <ul class="collapse list-unstyled " id="pageSubmenu">
                         <li>
-                            <a href="#">Page 1</a>
+                            <a href="/traders/all">Traders</a>
                         </li>
                         <li>
-                            <a href="#">Page 2</a>
+                            <a href="/positions/all">Positions</a>
                         </li>
                         <li>
-                            <a href="#">Page 3</a>
+                            <a href="/economic-indicators/all">Economic Indicators</a>
                         </li>
                     </ul>
                 </li>

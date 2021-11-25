@@ -3,6 +3,7 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
 body {
     font-family: Crimson Text, Arial, Tahoma, sans-serif;
     background: #fafafa;
@@ -46,7 +47,7 @@ a:focus {
     color: #d4b768;
 }
 
-}
+
 
 .line {
     width: 100%;
@@ -55,7 +56,7 @@ a:focus {
     margin: 40px 0;
 }
 
-#navbarSupportedContent>ul>li>a:hover {
+#navbarSupportedContent > ul > li > a:hover {
     color: white;
 }
 
@@ -154,7 +155,7 @@ h2::after {
 }
 
 #sidebar ul li a {
-    padding: 17px;
+    padding: 15px;
     font-size: 1.5em;
     text-align: center;
     display: block;
@@ -166,7 +167,7 @@ h2::after {
     text-decoration-line: underline;
 }
 
-#sidebar ul li.active>a,
+#sidebar ul li.active > a,
 a[aria-expanded="true"] {
     color: #fff;
 }
@@ -184,11 +185,15 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
+    font-size: 1.5rem !important;
+    margin: 1px 1px 1px 1px;
+    background: #031430;
 }
 
+#adding-menu ul li a {
+    padding: 5px;
+
+}
 ul.CTAs {
     padding: 20px;
 }
@@ -271,10 +276,12 @@ a.article:hover {
         margin-left: -250px;
         transform: rotateY(90deg);
     }
+
     #sidebar.active {
         margin-left: 0;
         transform: none;
     }
+
     #sidebarCollapse span:first-of-type,
     #sidebarCollapse span:nth-of-type(2),
     #sidebarCollapse span:last-of-type {
@@ -282,15 +289,19 @@ a.article:hover {
         opacity: 1;
         margin: 5px auto;
     }
+
     #sidebarCollapse.active span {
         margin: 0 auto;
     }
+
     #sidebarCollapse.active span:first-of-type {
         transform: rotate(45deg) translate(2px, 2px);
     }
+
     #sidebarCollapse.active span:nth-of-type(2) {
         opacity: 0;
     }
+
     #sidebarCollapse.active span:last-of-type {
         transform: rotate(-45deg) translate(1px, -1px);
     }
@@ -340,9 +351,6 @@ a.article:hover {
     color: #fff;
 }
 
-.wr-mr250 {
-    margin-right: 250px;
-}
 
 .disclaimer {
     font-family: Crimson Text;
@@ -363,33 +371,45 @@ a.article:hover {
 }
 
 /*Login page*/
-.login-form{
+.login-form {
     background: white;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 30px 5px 30px;
     color: #8f9092;
     border-radius: 5px;
 }
-.btn-login{
+
+.btn-login {
     background: #031430;
     color: #d4b768;
 }
-.btn-login:hover{
+
+.btn-login:hover {
     background: #d4b768;
     color: #031430;
 }
-#field>span>a{
+
+#field {
+    font-size: 12px;
+}
+
+#field > span > a {
     text-underline: #d4b768;
     color: #d4b768;
 }
+
 .btn-logout {
-    color: #031430;
+    color: #d4b768;
     font-weight: bold;
 }
+
 .btn-logout:hover {
     color: whitesmoke;
     font-weight: bold;
 }
-.welcome-block{
-    border: solid 1px #031430;
+
+.welcome-block {
+    border: solid 1px #d4b768;
     border-radius: 11px;
+    margin-left: 15px;
+
 }

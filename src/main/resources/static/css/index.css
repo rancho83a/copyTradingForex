@@ -143,9 +143,13 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
+    font-size: 1.5rem !important;
+    margin: 1px 1px 1px 1px;
+    background: #031430;
+}
+
+#adding-menu ul li a {
+    padding: 5px;
 }
 
 ul.CTAs {
@@ -298,9 +302,6 @@ a.article:hover {
     color: #fff;
 }
 
-.wr-mr250 {
-    margin-right: 250px;
-}
 
 .disclaimer {
     font-family: Crimson Text;
