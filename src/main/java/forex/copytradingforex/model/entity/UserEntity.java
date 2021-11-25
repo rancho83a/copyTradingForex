@@ -3,6 +3,7 @@ package forex.copytradingforex.model.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -35,13 +36,33 @@ public class UserEntity extends BaseEntity{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
+    @ManyToOne
+    private UserEntity trader;
 
-
-
+    @OneToMany(mappedBy = "trader",fetch = FetchType.EAGER)
+    private List<UserEntity> investors;
 
 
 
     public UserEntity() {
+    }
+
+    public UserEntity getTrader() {
+        return trader;
+    }
+
+    public UserEntity setTrader(UserEntity trader) {
+        this.trader = trader;
+        return this;
+    }
+
+    public List<UserEntity> getInvestors() {
+        return investors;
+    }
+
+    public UserEntity setInvestors(List<UserEntity> investors) {
+        this.investors = investors;
+        return this;
     }
 
     public String getUsername() {
@@ -124,4 +145,8 @@ public class UserEntity extends BaseEntity{
         this.roles = roles;
         return this;
     }
+
+
+
+
 }

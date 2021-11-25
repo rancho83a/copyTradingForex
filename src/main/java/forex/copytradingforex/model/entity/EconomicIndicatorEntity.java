@@ -7,6 +7,7 @@ import forex.copytradingforex.model.entity.enums.EconomicIndicatorEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +20,6 @@ public class EconomicIndicatorEntity extends BaseEntity {
     @ManyToOne
     private CurrencyPairEntity currencyPair;
 
-    //May be Entity TradingRule
-    private String rule;
+    @OneToOne
+    private TradingRuleEntity rule;
 }
