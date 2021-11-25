@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <header th:fragment="navigation">
-        <nav  class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
 
                 <button type="button" id="sidebarCollapse" class="navbar-btn">
@@ -19,17 +19,32 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-nav ml-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/user/register">Become Trader/Investor</a>
+                        </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="/users/login">Login </a>
+                            <a class="nav-link" href="/users/login">Statistics </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/user/register">Register</a>
+                            <a class="nav-link" href="/economic-indicator/add">Add Economic indicator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Page</a>
+                            <a class="nav-link" href="/news/add">Add News</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout">LOGOUT</a>
+
+
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+
+                            <div class="form-inline my-2 my-lg-0 welcome-block">
+                                <div class="nav-link"> Welcome, <th:block sec:authentication="name">
+                                </th:block>
+                                </div>
+                                <form  th:action="@{/users/logout}" th:method="post">
+                                    <input class="btn btn-link btn-logout" type="submit" value="Lоogout">
+                                </form>
+                            </div>
+
                         </li>
                     </ul>
                 </div>

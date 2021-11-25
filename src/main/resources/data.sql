@@ -9,19 +9,19 @@ VALUES (3, 'INVESTOR');
 
 -- some test users
 INSERT INTO users (id, username, password, email, full_name, age, experience)
-VALUES (1, 'master', '12345','master@copytradingforex.com','Admin Adminov', 33, 3);
+VALUES (1, 'master', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399','master@copytradingforex.com','Admin Adminov', 33, 3);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience)
-VALUES (2, 'trader1', '12345','trader1@copytradingforex.com','Trade1 Traderov1', 22, 2);
+VALUES (2, 'trader1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399','trader1@copytradingforex.com','Trade1 Traderov1', 22, 2);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience)
-VALUES (3, 'trader2', '12345','trader2@copytradingforex.com','Trade2 Traderov2', 44, 4);
+VALUES (3, 'trader2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399','trader2@copytradingforex.com','Trade2 Traderov2', 44, 4);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience)
-VALUES (4, 'investor1', '12345','investor1@copytradingforex.com','Investor1 Investorov1', 55, 2);
+VALUES (4, 'investor1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399','investor1@copytradingforex.com','Investor1 Investorov1', 55, 2);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience)
-VALUES (5, 'investor2', '12345','investor2@copytradingforex.com','Investor2 Investorov2', 40, 0);
+VALUES (5, 'investor2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399','investor2@copytradingforex.com','Investor2 Investorov2', 40, 0);
 
 -- -- user roles
 -- -- master

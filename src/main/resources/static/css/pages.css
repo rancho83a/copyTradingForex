@@ -381,3 +381,15 @@ a.article:hover {
     text-underline: #d4b768;
     color: #d4b768;
 }
+.btn-logout {
+    color: #031430;
+    font-weight: bold;
+}
+.btn-logout:hover {
+    color: whitesmoke;
+    font-weight: bold;
+}
+.welcome-block{
+    border: solid 1px #031430;
+    border-radius: 11px;
+}
