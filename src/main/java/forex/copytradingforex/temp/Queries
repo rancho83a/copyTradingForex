@@ -1,0 +1,5 @@
+@Query("SELECT  SUM(p.price) FROM ProductEntity p ")
+    BigDecimal TotalProductsSum();
+
+
+

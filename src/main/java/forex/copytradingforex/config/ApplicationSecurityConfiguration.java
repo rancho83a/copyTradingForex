@@ -29,7 +29,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 
                 //allow access to all users
-                .antMatchers("/", "/users/login", "/users/register","/how-it-works").permitAll()
+                .antMatchers("/", "/users/login", "/users/register","/how-it-works","/positions/all").permitAll()
 
 
                 //forbid access for unauthenticated users
