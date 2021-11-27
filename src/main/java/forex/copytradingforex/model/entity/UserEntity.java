@@ -30,7 +30,7 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private Integer experience;
 
-    @Column(name="capital", columnDefinition="Decimal(19,4) default '0.00'")
+    @Column(name="capital", columnDefinition="Decimal(19,2) default '0.00'")
     private BigDecimal capital;
 
     @ManyToMany(fetch = FetchType.EAGER)

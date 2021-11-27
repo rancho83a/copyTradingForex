@@ -411,5 +411,15 @@ a.article:hover {
     border: solid 1px #d4b768;
     border-radius: 11px;
     margin-left: 15px;
+}
 
+.btn-pos-details {
+    background: #d4b768;
+    color: #031430;
+    border-color: #d4b768;
+}
+.btn-pos-details:hover{
+    background: #031430;
+    color:#d4b768;
+    border-color: #d4b768;
 }

@@ -1,4 +1,4 @@
-package forex.copytradingforex.service;
+package forex.copytradingforex.repository;
 
 import forex.copytradingforex.model.entity.UserEntity;
 import org.apache.catalina.User;

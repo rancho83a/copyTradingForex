@@ -2,7 +2,7 @@ package forex.copytradingforex.service.impl;
 
 
 import forex.copytradingforex.model.entity.UserEntity;
-import forex.copytradingforex.service.UserRepository;
+import forex.copytradingforex.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

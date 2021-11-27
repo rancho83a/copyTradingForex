@@ -5,7 +5,8 @@ public enum EconomicIndicatorEnum {
     GDP("Gross domestic product"),
     INTEREST_RATE("Interest Rate Decision"),
     NFP("Non-farm Payrolls"),
-    NBRNS("Norges Bank regional network Survey");
+    NBRNS("Norges Bank regional network Survey"),
+    SPEECH("Press-Conference");
 
     private String indicator;
 
