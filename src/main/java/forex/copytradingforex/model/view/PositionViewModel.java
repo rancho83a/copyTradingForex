@@ -7,7 +7,6 @@ public class PositionViewModel {
     private String economicIndicator;
     private String pictureUrl;
     private String trade;
-    private BigDecimal result;
     private BigDecimal yield;
     private String trader;
 
@@ -45,15 +44,6 @@ public class PositionViewModel {
 
     public PositionViewModel setTrade(String trade) {
         this.trade = trade;
-        return this;
-    }
-
-    public BigDecimal getResult() {
-        return result;
-    }
-
-    public PositionViewModel setResult(BigDecimal result) {
-        this.result = result;
         return this;
     }
 

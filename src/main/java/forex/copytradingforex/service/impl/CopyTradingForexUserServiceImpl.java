@@ -44,7 +44,9 @@ public class CopyTradingForexUserServiceImpl implements UserDetailsService {
                 .map(r->new SimpleGrantedAuthority("ROLE_"+ r.getRole().name()))
                  .collect(Collectors.toList());
 
-        return new User(
+        // if don`t use CopyTradingForexUser
+       // return new User(
+        return new CopyTradingForexUser(
                 userEntity.getUsername(),
                 userEntity.getPassword(),
                 authorities

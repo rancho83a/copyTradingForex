@@ -36,13 +36,14 @@
                          class="my-2 col-xl-3 col-lg-4 col-md-6">
                         <div class="card">
                             <img th:src="*{pictureUrl}" class="card-img-top" alt="images/pic3.jpg">
-                            <div class="card-body">
+                            <div class="card-body card-text">
                                 <span>Economic Indicator:</span>
                                 <h5 th:text="*{economicIndicator}" class="card-title">Card title</h5>
-                                position:<p th:text="*{trade}" class="card-text"> info</p>
-                                yield,%:<p th:text="*{yield}" class="card-text"> info</p>
-                                trader:<p th:text="*{trader}" class="card-text"> info</p>
-                                <a th:href="@{/positions/details/{id}(id = *{id})}" class="btn btn-pos-details">Details</a>
+
+                                <p th:text="|Position: *{trade}|"> info</p>
+                                <p th:text="|Yield: *{yield} %|" > info</p>
+                                <p th:text="|Trader: *{trader}|" > info</p>
+                                <a th:href="@{/positions/{id}/details (id = *{id})}" class="btn btn-pos-details">Details</a>
                             </div>
                         </div>
                         <!--                        <img src="/images/invest_wisely_1.jpg" alt="Gallery imag" class="img-fluid">-->

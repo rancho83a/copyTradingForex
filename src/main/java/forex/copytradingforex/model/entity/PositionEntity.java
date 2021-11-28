@@ -17,7 +17,9 @@ public class PositionEntity extends BaseEntity{
     @Column(nullable = false)
     private TradeEnum trade; //BYU or SELL
 
+    @Column(nullable = false)
     private LocalDateTime openTime;
+    @Column(nullable = false)
     private LocalDateTime closeTime;
 
     @Column(nullable = false, columnDefinition = "DECIMAL(19,5)")

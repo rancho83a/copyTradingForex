@@ -8,13 +8,13 @@ public enum EconomicIndicatorEnum {
     NBRNS("Norges Bank regional network Survey"),
     SPEECH("Press-Conference");
 
-    private String indicator;
+    private String name;
 
-    EconomicIndicatorEnum(String indicator) {
-        this.indicator = indicator;
+    EconomicIndicatorEnum(String name) {
+        this.name = name;
     }
 
-    public String getIndicator() {
-        return indicator;
+    public String getName() {
+        return name;
     }
 }
