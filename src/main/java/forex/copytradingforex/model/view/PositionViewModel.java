@@ -1,5 +1,7 @@
 package forex.copytradingforex.model.view;
 
+import forex.copytradingforex.model.entity.enums.EconomicIndicatorEnum;
+
 import java.math.BigDecimal;
 
 public class PositionViewModel {

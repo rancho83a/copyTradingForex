@@ -1,19 +1,16 @@
 package forex.copytradingforex.model.binding;
 
-import forex.copytradingforex.model.entity.EconomicIndicatorEntity;
 import forex.copytradingforex.model.entity.enums.TradeEnum;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class PositionAddBindingModel {
+public class PositionUpdateBindingModel {
 
 
     private Long id;
@@ -53,7 +50,7 @@ public class PositionAddBindingModel {
         return id;
     }
 
-    public PositionAddBindingModel setId(Long id) {
+    public PositionUpdateBindingModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -62,7 +59,7 @@ public class PositionAddBindingModel {
         return economicIndicatorId;
     }
 
-    public PositionAddBindingModel setEconomicIndicatorId(Long economicIndicatorId) {
+    public PositionUpdateBindingModel setEconomicIndicatorId(Long economicIndicatorId) {
         this.economicIndicatorId = economicIndicatorId;
         return this;
     }
@@ -71,7 +68,7 @@ public class PositionAddBindingModel {
         return trade;
     }
 
-    public PositionAddBindingModel setTrade(TradeEnum trade) {
+    public PositionUpdateBindingModel setTrade(TradeEnum trade) {
         this.trade = trade;
         return this;
     }
@@ -80,7 +77,7 @@ public class PositionAddBindingModel {
         return openTime;
     }
 
-    public PositionAddBindingModel setOpenTime(LocalDateTime openTime) {
+    public PositionUpdateBindingModel setOpenTime(LocalDateTime openTime) {
         this.openTime = openTime;
         return this;
     }
@@ -89,7 +86,7 @@ public class PositionAddBindingModel {
         return closeTime;
     }
 
-    public PositionAddBindingModel setCloseTime(LocalDateTime closeTime) {
+    public PositionUpdateBindingModel setCloseTime(LocalDateTime closeTime) {
         this.closeTime = closeTime;
         return this;
     }
@@ -98,7 +95,7 @@ public class PositionAddBindingModel {
         return openPrice;
     }
 
-    public PositionAddBindingModel setOpenPrice(BigDecimal openPrice) {
+    public PositionUpdateBindingModel setOpenPrice(BigDecimal openPrice) {
         this.openPrice = openPrice;
         return this;
     }
@@ -107,7 +104,7 @@ public class PositionAddBindingModel {
         return closePrice;
     }
 
-    public PositionAddBindingModel setClosePrice(BigDecimal closePrice) {
+    public PositionUpdateBindingModel setClosePrice(BigDecimal closePrice) {
         this.closePrice = closePrice;
         return this;
     }
@@ -116,7 +113,7 @@ public class PositionAddBindingModel {
         return financialResult;
     }
 
-    public PositionAddBindingModel setFinancialResult(BigDecimal financialResult) {
+    public PositionUpdateBindingModel setFinancialResult(BigDecimal financialResult) {
         this.financialResult = financialResult;
         return this;
     }
@@ -125,7 +122,7 @@ public class PositionAddBindingModel {
         return videoUrl;
     }
 
-    public PositionAddBindingModel setVideoUrl(String videoUrl) {
+    public PositionUpdateBindingModel setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
         return this;
     }
