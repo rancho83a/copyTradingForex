@@ -25,12 +25,12 @@ public class PositionAddBindingModel {
 
     @NotNull(message = "can not be empty")
     @Past(message = "Date and Time must be in the past")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime openTime;
 
     @NotNull(message = "can not be empty")
     @Past(message = "Date and Time must be in the past")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime closeTime;
 
     @NotNull(message ="Can not be empty" )

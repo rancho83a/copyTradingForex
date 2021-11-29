@@ -39,7 +39,7 @@
                         <div class="row how-it-works">
 
                             <th:block th:if="*{canDeleteOrUpdate}">
-                                <a class="btn  btn-up-del" th:href="@{/positions/{id}/edit (id=*{id})}">Update</a>
+                                <a class="btn  btn-up-del" th:href="@{/positions/{id}/update (id=*{id})}">Update</a>
 
                                 <form th:action="@{/positions/{id} (id=*{id})}" th:method="delete">
                                     <input type="submit" class="btn  btn-up-del" value="Delete"/>

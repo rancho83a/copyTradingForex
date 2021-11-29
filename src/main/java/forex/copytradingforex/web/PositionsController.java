@@ -1,10 +1,14 @@
 package forex.copytradingforex.web;
 
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
-import forex.copytradingforex.model.entity.service.PositionAddServiceModel;
+import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
+import forex.copytradingforex.model.service.PositionAddServiceModel;
+import forex.copytradingforex.model.service.PositionUpdateServiceModel;
+import forex.copytradingforex.model.view.PositionDetailsView;
 import forex.copytradingforex.service.EconomicIndicatorService;
 import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,10 +25,12 @@ import java.security.Principal;
 public class PositionsController {
     private final PositionService positionService;
     private final EconomicIndicatorService economicIndicatorService;
+    private final ModelMapper modelMapper;
 
-    public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService) {
+    public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, ModelMapper modelMapper) {
         this.positionService = positionService;
         this.economicIndicatorService = economicIndicatorService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/all")
@@ -41,8 +47,7 @@ public class PositionsController {
                                // Principal principal){
                                @AuthenticationPrincipal CopyTradingForexUser currentUser) {
         //   @AuthenticationPrincipal UserDetails principal) {
-        // model.addAttribute("oposition", this.positionService.findById(id, principal.getName()));
-
+        // model.addAttribute("position", this.positionService.findById(id, principal.getName()));
 
         model.addAttribute("position", this.positionService.findById(id, currentUser.getUserIdentifier()));
         return "position-details";
@@ -83,8 +88,46 @@ public class PositionsController {
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }
 
+    //UPDATE
+    @PreAuthorize("isOwner(#id)")
+    @GetMapping("/{id}/update")
+    public String editOffer(@PathVariable Long id, Model model,
+                            @AuthenticationPrincipal CopyTradingForexUser currentUser) {
+
+        PositionDetailsView positionDetailsView = positionService.findById(id, currentUser.getUserIdentifier());
+        PositionUpdateBindingModel updateBindingModel = positionService.mapDetailsViewToUpdateBindingModel(positionDetailsView);
+
+        model.addAttribute("updateBindingModel", updateBindingModel);
+        return "position-update";
+    }
+
+    @PatchMapping("/{id}/update")
+    public String editOffer(@PathVariable Long id,
+                            @Valid PositionUpdateBindingModel updateBindingModel,
+                            BindingResult bindingResult,
+                            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+
+            //flashAttribute -> ocelyavat pri POST-redirect->GET
+            redirectAttributes.addFlashAttribute("updateBindingModel", updateBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.updateBindingModel", bindingResult);
+
+            return "redirect:/positions/" + id + "/update/errors";
+        }
+
+       // updateBindingModel.setId(id);
+
+        positionService.updatePosition(updateBindingModel);
+        return "redirect:/positions/" + id + "/details";
+    }
 
 
+    @GetMapping("/{id}/update/errors")
+    public String updatePositionErrors(@PathVariable Long id) {
 
+
+        return "position-update";
+    }
 
 }

@@ -1,7 +1,9 @@
 package forex.copytradingforex.service;
 
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
-import forex.copytradingforex.model.entity.service.PositionAddServiceModel;
+import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
+import forex.copytradingforex.model.service.PositionAddServiceModel;
+import forex.copytradingforex.model.service.PositionUpdateServiceModel;
 import forex.copytradingforex.model.view.PositionDetailsView;
 import forex.copytradingforex.model.view.PositionViewModel;
 
@@ -17,4 +19,8 @@ public interface PositionService {
     void deletePosition(Long id);
 
     PositionAddServiceModel addPosition(PositionAddBindingModel positionAddBindModel, String ownerId);
+
+    PositionUpdateBindingModel mapDetailsViewToUpdateBindingModel(PositionDetailsView positionDetailsView);
+
+    void updatePosition(PositionUpdateBindingModel updateBindingModel);
 }

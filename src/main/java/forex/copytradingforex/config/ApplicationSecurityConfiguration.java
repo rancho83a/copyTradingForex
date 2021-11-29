@@ -1,5 +1,6 @@
 package forex.copytradingforex.config;
 
+import forex.copytradingforex.model.entity.enums.RoleEnum;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -30,6 +31,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
                 //allow access to all users
                 .antMatchers("/", "/users/login", "/users/register","/how-it-works","/positions/all").permitAll()
+                .antMatchers("/statistics").hasRole(RoleEnum.MASTER.name())
+                .antMatchers("/positions/add").hasRole(RoleEnum.TRADER.name())
+
+
 
 
                 //forbid access for unauthenticated users

@@ -14,20 +14,19 @@ public class PositionUpdateBindingModel {
 
 
     private Long id;
-    @NotNull(message = "can not be empty")
-    private Long economicIndicatorId;
+
 
     @NotNull(message = "can not be empty")
     private TradeEnum trade; //BYU or SELL
 
     @NotNull(message = "can not be empty")
     @Past(message = "Date and Time must be in the past")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime openTime;
 
     @NotNull(message = "can not be empty")
     @Past(message = "Date and Time must be in the past")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime closeTime;
 
     @NotNull(message ="Can not be empty" )
@@ -55,14 +54,6 @@ public class PositionUpdateBindingModel {
         return this;
     }
 
-    public Long getEconomicIndicatorId() {
-        return economicIndicatorId;
-    }
-
-    public PositionUpdateBindingModel setEconomicIndicatorId(Long economicIndicatorId) {
-        this.economicIndicatorId = economicIndicatorId;
-        return this;
-    }
 
     public TradeEnum getTrade() {
         return trade;

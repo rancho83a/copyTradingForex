@@ -1,14 +1,13 @@
-package forex.copytradingforex.model.entity.service;
+package forex.copytradingforex.model.service;
 
 import forex.copytradingforex.model.entity.enums.TradeEnum;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class PositionAddServiceModel {
+public class PositionUpdateServiceModel {
     private Long id;
 
-    private Long economicIndicatorId;
 
     private TradeEnum trade;
 
@@ -33,17 +32,8 @@ public class PositionAddServiceModel {
         return id;
     }
 
-    public PositionAddServiceModel setId(Long id) {
+    public PositionUpdateServiceModel setId(Long id) {
         this.id = id;
-        return this;
-    }
-
-    public Long getEconomicIndicatorId() {
-        return economicIndicatorId;
-    }
-
-    public PositionAddServiceModel setEconomicIndicatorId(Long economicIndicatorId) {
-        this.economicIndicatorId = economicIndicatorId;
         return this;
     }
 
@@ -51,7 +41,7 @@ public class PositionAddServiceModel {
         return trade;
     }
 
-    public PositionAddServiceModel setTrade(TradeEnum trade) {
+    public PositionUpdateServiceModel setTrade(TradeEnum trade) {
         this.trade = trade;
         return this;
     }
@@ -60,7 +50,7 @@ public class PositionAddServiceModel {
         return openTime;
     }
 
-    public PositionAddServiceModel setOpenTime(LocalDateTime openTime) {
+    public PositionUpdateServiceModel setOpenTime(LocalDateTime openTime) {
         this.openTime = openTime;
         return this;
     }
@@ -69,7 +59,7 @@ public class PositionAddServiceModel {
         return closeTime;
     }
 
-    public PositionAddServiceModel setCloseTime(LocalDateTime closeTime) {
+    public PositionUpdateServiceModel setCloseTime(LocalDateTime closeTime) {
         this.closeTime = closeTime;
         return this;
     }
@@ -78,7 +68,7 @@ public class PositionAddServiceModel {
         return openPrice;
     }
 
-    public PositionAddServiceModel setOpenPrice(BigDecimal openPrice) {
+    public PositionUpdateServiceModel setOpenPrice(BigDecimal openPrice) {
         this.openPrice = openPrice;
         return this;
     }
@@ -87,7 +77,7 @@ public class PositionAddServiceModel {
         return closePrice;
     }
 
-    public PositionAddServiceModel setClosePrice(BigDecimal closePrice) {
+    public PositionUpdateServiceModel setClosePrice(BigDecimal closePrice) {
         this.closePrice = closePrice;
         return this;
     }
@@ -96,7 +86,7 @@ public class PositionAddServiceModel {
         return financialResult;
     }
 
-    public PositionAddServiceModel setFinancialResult(BigDecimal financialResult) {
+    public PositionUpdateServiceModel setFinancialResult(BigDecimal financialResult) {
         this.financialResult = financialResult;
         return this;
     }
@@ -105,7 +95,7 @@ public class PositionAddServiceModel {
         return videoUrl;
     }
 
-    public PositionAddServiceModel setVideoUrl(String videoUrl) {
+    public PositionUpdateServiceModel setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
         return this;
     }

@@ -28,47 +28,50 @@
             <div class="container-fluid">
                 <div class="row my-4 align-items-center justify-content-center ">
                     <div class="col-md-11 mb-2 mx-5">
-                        <h1>Upload Position</h1>
+                        <h1>Update Position</h1>
                     </div>
                 </div>
 
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12">
                         <form
-                                th:action="@{/positions/add}" th:method="POST" th:object="${positionAddBindModel}"
+                                th:object="${updateBindingModel}"
+                                th:action="@{/positions/{id}/update (id=*{id})}"
+                                th:method="patch"
                                 class="main-form mx-auto py-4 col-md-8 d-flex flex-column justify-content-center login-form">
                             <div class="row">
-                                <div class="form-group col-md-6 mb-3">
-                                    <label class="text-center font-weight-bold" for="economicIndicatorId">Economic_indicator</label>
-                                    <select
-                                            th:errorclass="'is-invalid bg-danger'"
-                                            id="economicIndicatorId"
-                                            name="economicIndicatorId"
-                                            class="form-control"
-                                            aria-describedby="indicatorError">
+<!--                                <div class="form-group col-md-6 mb-3">-->
+<!--                                    <label class="text-center font-weight-bold" for="economicIndicatorId">Economic_indicator</label>-->
+<!--                                    <select-->
+<!--                                            th:errorclass="'is-invalid bg-danger'"-->
+<!--                                            id="economicIndicatorId"-->
+<!--                                            name="economicIndicatorId"-->
+<!--                                            class="form-control"-->
+<!--                                            aria-describedby="indicatorError">-->
 
-                                    >
-                                        <option value="">- Select an economic indicator -</option>
-                                        <option th:each="indicator : ${economicIndicators}"
-                                                th:text="${indicator.indicator}"
-                                                th:value="${indicator.id}"
-                                                th:selected="${indicator.id} == *{economicIndicatorId}">Indicator
-                                        </option>
+<!--                                    >-->
+<!--                                        <option value="">- Select an economic indicator -</option>-->
+<!--                                        <option th:each="indicator : ${economicIndicators}"-->
+<!--                                                th:text="${indicator.indicator}"-->
+<!--                                                th:value="${indicator.id}"-->
+<!--                                                th:selected="${indicator.id} == *{economicIndicatorId}">Indicator-->
+<!--                                        </option>-->
 
-                                    </select>
-                                    <small th:if="${#fields.hasErrors('economicIndicatorId')}" th:errors="*{economicIndicatorId}"
-                                           id="indicatorError"
-                                           class="rounded">
-                                        Open time is required.
-                                    </small>
-                                </div>
+<!--                                    </select>-->
+<!--                                    <small th:if="${#fields.hasErrors('economicIndicatorId')}" th:errors="*{economicIndicatorId}"-->
+<!--                                           id="indicatorError"-->
+<!--                                           class="rounded">-->
+<!--                                        Open time is required.-->
+<!--                                    </small>-->
+<!--                                </div>-->
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label class="text-center font-weight-bold"
                                            for="trade">Trade</label>
                                     <select
                                             th:errorclass="'is-invalid bg-danger'"
-                                            id="trade" name="trade"
+                                            id="trade"
+                                            th:name="trade"
                                             class="form-control"
                                             aria-describedby="tradeError">
                                         <option value="">- Select trade type -</option>
@@ -92,10 +95,10 @@
                                            for="openTime">Open time</label>
 
                                     <input
-                                            th:field="*{openTime}"
+                                            th:value="*{openTime}"
                                             th:errorclass="'is-invalid bg-danger'"
                                             type="datetime-local"
-                                            class="form-control" id="openTime" name="openTime"
+                                            class="form-control" id="openTime" th:name="openTime"
                                             aria-describedby="openTimeError">
                                     <small th:if="${#fields.hasErrors('openTime')}" th:errors="*{openTime}"
                                            id="openTimeError"
@@ -108,9 +111,9 @@
                                     <label for="closeTime"
                                            class="text-center  font-weight-bold">Close time</label>
                                     <input
-                                            th:field="*{closeTime}"
+                                            th:value="*{closeTime}"
                                             th:errorclass="'is-invalid bg-danger'"
-                                            type="datetime-local" class="form-control" id="closeTime" name="closeTime"
+                                            type="datetime-local" class="form-control" id="closeTime" th:name="closeTime"
                                             aria-describedby="closeTimeError">
                                     <small th:if="${#fields.hasErrors('closeTime')}" th:errors="*{closeTime}"
                                            id="closeTimeError"
@@ -196,7 +199,7 @@
                                 <div class="col col-md-4">
                                     <div class="button-holder d-flex">
                                         <input type="submit" class="btn btn-info btn-lg btn-login"
-                                               value="Post Position"/>
+                                               value="Update Position"/>
                                     </div>
                                 </div>
                             </div>

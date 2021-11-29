@@ -1,9 +1,11 @@
 package forex.copytradingforex.service.impl;
 
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
+import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
 import forex.copytradingforex.model.entity.*;
 import forex.copytradingforex.model.entity.enums.RoleEnum;
-import forex.copytradingforex.model.entity.service.PositionAddServiceModel;
+import forex.copytradingforex.model.service.PositionAddServiceModel;
+import forex.copytradingforex.model.service.PositionUpdateServiceModel;
 import forex.copytradingforex.model.view.PositionDetailsView;
 import forex.copytradingforex.model.view.PositionViewModel;
 import forex.copytradingforex.repository.EconomicIndicatorRepository;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -101,6 +104,35 @@ public class PositionServiceImpl implements PositionService {
 
         return modelMapper.map(savedPosition, PositionAddServiceModel.class);
     }
+
+
+
+
+    @Override
+    public PositionUpdateBindingModel mapDetailsViewToUpdateBindingModel(PositionDetailsView positionDetailsView) {
+
+        PositionUpdateBindingModel updateBindingModel = modelMapper.map(positionDetailsView, PositionUpdateBindingModel.class);
+        updateBindingModel.setOpenTime(LocalDateTime.parse(positionDetailsView.getOpenTime().replace(" ", "T")));
+        updateBindingModel.setCloseTime(LocalDateTime.parse(positionDetailsView.getCloseTime().replace(" ", "T")));
+        return updateBindingModel;
+    }
+
+    @Override
+    public void updatePosition(PositionUpdateBindingModel updateBindingModel) {
+        PositionUpdateServiceModel serviceModel = modelMapper.map(updateBindingModel, PositionUpdateServiceModel.class);
+
+        PositionEntity positionEntity = positionRepository.findById(serviceModel.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Position with id " + serviceModel.getId() + " was not found"));
+        positionEntity.setTrade(serviceModel.getTrade())
+                .setOpenTime(serviceModel.getOpenTime())
+                .setCloseTime(serviceModel.getCloseTime())
+                .setOpenPrice(serviceModel.getOpenPrice())
+                .setClosePrice(serviceModel.getClosePrice())
+                .setFinancialResult(serviceModel.getFinancialResult())
+                .setVideoUrl(serviceModel.getVideoUrl());
+        positionRepository.save(positionEntity);
+    }
+
 
     private boolean isMaster(UserEntity user) {
         return user.getRoles()
