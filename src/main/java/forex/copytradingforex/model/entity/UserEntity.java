@@ -30,8 +30,11 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private Integer experience;
 
-    @Column(name="capital", columnDefinition="Decimal(19,2) default '0.00'")
-    private BigDecimal capital;
+    @Column(name="initial_capital", columnDefinition="Decimal(19,2) default '0.00'")
+    private BigDecimal initialCapital;
+
+    @Column(name="current_capital", columnDefinition="Decimal(19,2) default '0.00'")
+    private BigDecimal currentCapital= initialCapital;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
@@ -128,12 +131,12 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public BigDecimal getCapital() {
-        return capital;
+    public BigDecimal getInitialCapital() {
+        return initialCapital;
     }
 
-    public UserEntity setCapital(BigDecimal capital) {
-        this.capital = capital;
+    public UserEntity setInitialCapital(BigDecimal capital) {
+        this.initialCapital = capital;
         return this;
     }
 
@@ -147,6 +150,12 @@ public class UserEntity extends BaseEntity{
     }
 
 
+    public BigDecimal getCurrentCapital() {
+        return currentCapital;
+    }
 
-
+    public UserEntity setCurrentCapital(BigDecimal currentCapital) {
+        this.currentCapital = currentCapital;
+        return this;
+    }
 }

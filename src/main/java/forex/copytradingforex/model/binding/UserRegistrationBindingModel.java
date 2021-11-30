@@ -1,7 +1,6 @@
 package forex.copytradingforex.model.binding;
 
 
-import forex.copytradingforex.model.entity.enums.RoleEnum;
 import forex.copytradingforex.model.validator.UniqueUserName;
 
 import javax.validation.constraints.*;
@@ -48,7 +47,7 @@ public class UserRegistrationBindingModel {
 
 
     @PositiveOrZero(message = "Experience must be positive number")
-    private BigDecimal capital;
+    private BigDecimal initialCapital;
 
     public String getUsername() {
         return username;
@@ -122,12 +121,12 @@ public class UserRegistrationBindingModel {
         return this;
     }
 
-    public BigDecimal getCapital() {
-        return capital;
+    public BigDecimal getInitialCapital() {
+        return initialCapital;
     }
 
-    public UserRegistrationBindingModel setCapital(BigDecimal capital) {
-        this.capital = capital;
+    public UserRegistrationBindingModel setInitialCapital(BigDecimal initialCapital) {
+        this.initialCapital = initialCapital;
         return this;
     }
 

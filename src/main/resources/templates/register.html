@@ -67,7 +67,7 @@
                                     <label for="password" class=" font-weight-bold">Password</label>
                                     <input th:field="*{password}"
                                            th:errorclass="'is-invalid bg-danger'"
-                                           id="password" type="text"
+                                           id="password" type="password"
                                            class="form-control" placeholder="Password"
                                            aria-describedby="passwordError">
                                     <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
@@ -99,7 +99,7 @@
                                     <label for="confirmPassword" class=" font-weight-bold">Confirm password</label>
                                     <input th:field="*{confirmPassword}"
                                            th:errorclass="'is-invalid bg-danger'"
-                                           id="confirmPassword" type="text"
+                                           id="confirmPassword" type="password"
                                            class="form-control" placeholder="Confirm password"
                                            aria-describedby="confirmPasswordError">
                                     <small th:if="${#fields.hasErrors('confirmPassword')}"
@@ -181,13 +181,13 @@
 
                                 <div class="form-group col-md-6 mb-3">
 
-                                    <label for="capital" class=" font-weight-bold">Capital</label>
-                                    <input th:field="*{capital}"
+                                    <label for="capital" class=" font-weight-bold">Initial Capital</label>
+                                    <input th:field="*{initialCapital}"
                                            th:errorclass="'is-invalid bg-danger'"
                                            id="capital" type="number" min="0" step="0.01"
                                            class="form-control" placeholder="Capital"
                                            aria-describedby="capitalError">
-                                    <small th:if="${#fields.hasErrors('capital')}" th:errors="*{capital}"
+                                    <small th:if="${#fields.hasErrors('initialCapital')}" th:errors="*{initialCapital}"
                                            id="capitalError"
                                            class="rounded">
                                     </small>

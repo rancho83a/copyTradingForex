@@ -1,8 +1,6 @@
 package forex.copytradingforex.model.service;
 
 
-import forex.copytradingforex.model.entity.enums.RoleEnum;
-
 import java.math.BigDecimal;
 
 public class UserRegistrationServiceModel {
@@ -30,7 +28,7 @@ public class UserRegistrationServiceModel {
     private Integer experience;
 
 
-    private BigDecimal capital;
+    private BigDecimal initialCapital;
 
     public Long getId() {
         return id;
@@ -115,12 +113,12 @@ public class UserRegistrationServiceModel {
         return this;
     }
 
-    public BigDecimal getCapital() {
-        return capital;
+    public BigDecimal getInitialCapital() {
+        return initialCapital;
     }
 
-    public UserRegistrationServiceModel setCapital(BigDecimal capital) {
-        this.capital = capital;
+    public UserRegistrationServiceModel setInitialCapital(BigDecimal initialCapital) {
+        this.initialCapital = initialCapital;
         return this;
     }
 }

@@ -7,25 +7,26 @@ INSERT INTO roles (id, role)
 VALUES (3, 'INVESTOR');
 
 -- some test users
-INSERT INTO users (id, username, password, email, full_name, age, experience)
+INSERT INTO users (id, username,  password, image_url, email,full_name, age, experience)
 VALUES (1, 'master', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274465/static/Aleksandar_Peychev_lcgmnh.jpg',
         'master@copytradingforex.com', 'Master Masterov', 33, 3);
 
-INSERT INTO users (id, username, password, email, full_name, age, experience,capital)
+INSERT INTO users (id, username, password, email, full_name, age, experience,initial_capital, current_capital)
 VALUES (2, 'trader1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 50000);
+        'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 50000, 50000);
 
-INSERT INTO users (id, username, password, email, full_name, age, experience, capital)
+INSERT INTO users (id, username, password, email, full_name, age, experience, initial_capital, current_capital)
 VALUES (3, 'trader2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4,20000);
+        'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4,20000,20000);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience)
 VALUES (4, 'investor1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'investor1@copytradingforex.com', 'Investor1 Investorov1', 55, 2);
 
-INSERT INTO users (id, username, password, email, full_name, age, experience,capital)
+INSERT INTO users (id, username, password, email, full_name, age, experience,initial_capital, current_capital)
 VALUES (5, 'investor2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'investor2@copytradingforex.com', 'Investor2 Investorov2', 40, 0, 1000.78);
+        'investor2@copytradingforex.com', 'Investor2 Investorov2', 40, 0, 1000, 1000);
 
 -- -- user roles
 -- -- master

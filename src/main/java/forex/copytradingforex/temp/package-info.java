@@ -5,6 +5,7 @@ package forex.copytradingforex.temp;
 //TODO catch 403 status - forbiden access
 //TODO - ObjectNotFound - make page
 // TODO just investor have acces to traders
-//TODO
+//TODO get Positions ORDERBY DATEOPEN limit 40
 
 
+//MAke join to traders

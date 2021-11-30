@@ -3,3 +3,11 @@
 
 
 
+ @Query("select p from Player p where p.birthDate > :afterDate AND p.birthDate < :beforeDate " +
+            "ORDER BY p.stat.shooting DESC, p.stat.passing DESC, p.stat.endurance DESC, p.lastName" )
+    List<Player> findAllByBirthDateAndOrderThem(
+            @Param("afterDate") LocalDate afterDate,
+            @Param("beforeDate") LocalDate beforeDate
+            );
+
+
