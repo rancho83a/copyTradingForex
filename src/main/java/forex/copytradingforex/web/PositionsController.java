@@ -115,7 +115,6 @@ public class PositionsController {
 
             return "redirect:/positions/" + id + "/update/errors";
         }
-
        // updateBindingModel.setId(id);
 
         positionService.updatePosition(updateBindingModel);
@@ -125,8 +124,6 @@ public class PositionsController {
 
     @GetMapping("/{id}/update/errors")
     public String updatePositionErrors(@PathVariable Long id) {
-
-
         return "position-update";
     }
 

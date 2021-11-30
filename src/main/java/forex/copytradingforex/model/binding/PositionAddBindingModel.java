@@ -129,4 +129,5 @@ public class PositionAddBindingModel {
         this.videoUrl = videoUrl;
         return this;
     }
+
 }

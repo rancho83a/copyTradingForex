@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head::head"></head>
+
+<body>
+
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav th:replace="fragments/sidebar :: sidebar">
+        Sidebar
+    </nav>
+
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <!--        Navbar-->
+        <header th:replace="fragments/navbar::navigation"></header>
+
+        <input type="hidden" name="positionId" id="positionId" th:value="${position.id}">
+
+
+        <!--Main content for every page -->
+
+        <!-- section What is Copy Trading on Forex -->
+        <section id="what_ctf" class="wr-what_is_ctf"
+                 th:object="${position}">
+
+            <div class="container">
+                <div class="row my-4 align-items-center justify-content-center ">
+                    <div class="col-md-11 mb-4">
+                        <h1>Profile</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <main class="p-5 align-content-center bg-blur my-register-div">
+                        <div class="container mt-5">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-7">
+                                    <div class="profile-card p-3 py-4">
+                                        <div class="text-center"><img src="/images/profile.jpg" width="100" class="rounded-circle"></div>
+                                        <div class="text-center mt-3" th:object="${userProfile}">
+                                            <span th:text ="*{level.name()}" class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
+                                            <h5 class="mt-4 mb-0">Full name</h5>
+                                            <span th:text ="*{fullName}">UI/UX Designer</span>
+                                            <h5 class="mt-2 mb-0">Username</h5>
+                                            <span th:text ="*{username}">UI/UX Designer</span>
+                                            <h5 class="mt-2 mb-0">Age</h5>
+                                            <span th:text ="*{age}">33</span>
+                                            <div class="px-4 mt-5">
+                                                <p class="fonts">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim et nostrum
+                                                    optio perferendis quam quod ratione rem sit soluta ut! A dolor laborum, maiores neque
+                                                    nesciunt quis rerum sunt suscipit. </p>
+                                            </div>
+                                            <ul class="social-list">
+                                                <li><i class="fab fa-facebook-square"></i></li>
+                                                <li><i class="fab fa-instagram"></i></li>
+                                                <li><i class="fab fa-linkedin"></i></li>
+                                                <li><i class="fab fa-google"></i></li>
+                                            </ul>
+                                            <div class="buttons">
+                                                <button class="btn btn-outline-primary px-4">Back</button>
+                                                <!--                            <button class="btn btn-primary px-4 ms-3">Contact</button>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+
+                </div>
+
+            </div>
+        </section>
+
+        <!--        Disclaimer-->
+        <div th:replace="fragments/disclaimer :: disclaimer">Disclaimer></div>
+    </div>
+</div>
+<footer th:replace="fragments/footer::footer"></footer>
+<!-- <div class="line"></div> -->
+<div th:replace="fragments/sidebar-scripts :: sidebar-scripts">Disclaimer>
+</div>
+</body>
+</html>

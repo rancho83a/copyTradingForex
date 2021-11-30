@@ -3,8 +3,10 @@ package forex.copytradingforex.web;
 
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,8 +26,17 @@ public class UserLoginController {
         redirectAttributes.addFlashAttribute("bad_credentials", true);
         redirectAttributes.addFlashAttribute("username", username);
 
-
         return "redirect:/users/login";
+    }
+
+    @GetMapping("/profile/{id}")
+    public String profile(@PathVariable Long id, Model model){
+
+        model.addAttribute("userProfile",
+                modelMapper.map(userService.findById(id), UserViewModel.class)
+        );
+
+        return "profile";
     }
 
 
