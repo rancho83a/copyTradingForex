@@ -6,7 +6,7 @@ public class UserProfileServiceModel {
     Long id;
     String username;
     String fullName;
-    BigDecimal initialCapital;
+//    BigDecimal initialCapital;
 
     String imageUrl;
 
@@ -16,6 +16,8 @@ public class UserProfileServiceModel {
     BigDecimal currentCapital;
 
     BigDecimal totalYield;
+    BigDecimal totalDeposit;
+    BigDecimal totalWithdraw;
 
 
     public String getFullName() {
@@ -99,12 +101,29 @@ public class UserProfileServiceModel {
         return this;
     }
 
-    public BigDecimal getInitialCapital() {
-        return initialCapital;
+    public BigDecimal getTotalDeposit() {
+        return totalDeposit;
     }
 
-    public UserProfileServiceModel setInitialCapital(BigDecimal initialCapital) {
-        this.initialCapital = initialCapital;
+    public UserProfileServiceModel setTotalDeposit(BigDecimal totalDeposit) {
+        this.totalDeposit = totalDeposit;
         return this;
     }
+
+    public BigDecimal getTotalWithdraw() {
+        return totalWithdraw;
+    }
+
+    public UserProfileServiceModel setTotalWithdraw(BigDecimal totalWithdraw) {
+        this.totalWithdraw = totalWithdraw;
+        return this;
+    }
+    //    public BigDecimal getInitialCapital() {
+//        return initialCapital;
+//    }
+//
+//    public UserProfileServiceModel setInitialCapital(BigDecimal initialCapital) {
+//        this.initialCapital = initialCapital;
+//        return this;
+//    }
 }

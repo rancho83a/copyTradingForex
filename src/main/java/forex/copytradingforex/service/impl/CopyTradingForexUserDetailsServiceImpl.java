@@ -15,11 +15,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class CopyTradingForexUserServiceImpl implements UserDetailsService {
+public class CopyTradingForexUserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public CopyTradingForexUserServiceImpl(UserRepository userRepository) {
+    public CopyTradingForexUserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

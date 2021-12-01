@@ -56,7 +56,7 @@ public class PositionServiceImpl implements PositionService {
 
         positionDetailsView.setTrader(positionEntity.getTrader().getFullName())
                 .setEconomicIndicator(positionEntity.getEconomicIndicator().getIndicator().getName())
-                .setYield(calculateYield(positionEntity.getTrader().getInitialCapital(), positionEntity.getFinancialResult()))
+                .setYield(calculateYield(positionEntity.getTrader().getCurrentCapital(), positionEntity.getFinancialResult()))
                 .setOpenTime(positionEntity.getOpenTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .setCloseTime(positionEntity.getCloseTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .setCanDeleteOrUpdate(isOwner(currentUser, positionEntity.getId()))
@@ -146,7 +146,7 @@ public class PositionServiceImpl implements PositionService {
         PositionViewModel positionViewModel = modelMapper.map(position, PositionViewModel.class);
         positionViewModel.setTrader(position.getTrader().getFullName())
                 .setEconomicIndicator(position.getEconomicIndicator().getIndicator().getName())
-                .setYield(calculateYield(position.getTrader().getInitialCapital(), position.getFinancialResult()));
+                .setYield(calculateYield(position.getTrader().getCurrentCapital(), position.getFinancialResult()));
 
         positionViewModel.setPictureUrl(position.getPicture() != null ? position.getPicture().getUrl() : PICTURE_URL);
 

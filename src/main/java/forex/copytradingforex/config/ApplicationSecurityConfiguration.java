@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.transaction.Transactional;
 @Configuration
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -21,7 +22,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         this.passwordEncoder = passwordEncoder;
     }
 
+
+
     @Override
+
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
@@ -71,7 +75,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 //delete the cookies that references my session
                 .deleteCookies("JSESSIONID");
     }
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         //this gives to spring 2 impotent components:

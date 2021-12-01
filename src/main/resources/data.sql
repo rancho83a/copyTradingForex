@@ -7,26 +7,33 @@ INSERT INTO roles (id, role)
 VALUES (3, 'INVESTOR');
 
 -- some test users
-INSERT INTO users (id, username,  password, image_url, email,full_name, age, experience)
+INSERT INTO users (id, username, password, image_url, email, full_name, age, experience)
 VALUES (1, 'master', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274465/static/Aleksandar_Peychev_lcgmnh.jpg',
         'master@copytradingforex.com', 'Master Masterov', 33, 3);
 
-INSERT INTO users (id, username, password, email, full_name, age, experience,initial_capital, current_capital)
+INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
+                   total_withdraw, image_url)
 VALUES (2, 'trader1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 50000, 50000);
+        'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 50000, 50000, 0,
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
-INSERT INTO users (id, username, password, email, full_name, age, experience, initial_capital, current_capital)
+INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
+                   total_withdraw, image_url)
 VALUES (3, 'trader2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4,20000,20000);
+        'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4, 20000, 20000, 0,
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
-INSERT INTO users (id, username, password, email, full_name, age, experience)
+INSERT INTO users (id, username, password, email, full_name, age, experience, image_url)
 VALUES (4, 'investor1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'investor1@copytradingforex.com', 'Investor1 Investorov1', 55, 2);
+        'investor1@copytradingforex.com', 'Investor1 Investorov1', 55, 2,
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
-INSERT INTO users (id, username, password, email, full_name, age, experience,initial_capital, current_capital)
+INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
+                   total_withdraw, image_url)
 VALUES (5, 'investor2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'investor2@copytradingforex.com', 'Investor2 Investorov2', 40, 0, 1000, 1000);
+        'investor2@copytradingforex.com', 'Investor2 Investorov2', 40, 0, 1000, 1000, 0,
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
 -- -- user roles
 -- -- master
@@ -67,7 +74,7 @@ VALUES ('5', 'CANADA', 'BOC', 'https://cdn.countryflags.com/thumbs/canada/flag-8
 INSERT INTO countries (id, name, central_bank, flag_url)
 VALUES ('6', 'AUSTRALIA', 'RBA', 'https://cdn.countryflags.com/thumbs/australia/flag-800.png');
 INSERT INTO countries (id, name, central_bank, flag_url)
-VALUES ('7', 'NZ', 'RBNZ',        'https://cdn.countryflags.com/thumbs/new-zealand/flag-800.png');
+VALUES ('7', 'NZ', 'RBNZ', 'https://cdn.countryflags.com/thumbs/new-zealand/flag-800.png');
 INSERT INTO countries (id, name, central_bank, flag_url)
 VALUES ('8', 'NORWAY', 'CBN', 'https://cdn.countryflags.com/thumbs/norway/flag-800.png');
 INSERT INTO countries (id, name, central_bank, flag_url)
@@ -140,49 +147,60 @@ INSERT INTO trading_rules (entry_point, exit_point, take_profit, stop_loss)
 VALUES ('Rule for PressConference', 'ExitRule PressConference', 110, 23);
 
 
-
 -- economic Indicators
-INSERT INTO economic_indicators (indicator, description, periodicity,country_id, currency_pair_id, trading_rule_id)
+INSERT INTO economic_indicators (indicator, description, periodicity, country_id, currency_pair_id, trading_rule_id)
 VALUES ('INTEREST_RATE', 'Federal Open Market Committee (FOMC) members vote on where to set the rate.
 Traders watch interest rate changes closely as short term interest rates are the primary factor in currency valuation.
 A higher than expected rate is positive/bullish for the USD, while a lower than expected rate is negative/bearish for the USD.',
         'MONTHLY', 1, 9, 1);
 
-INSERT INTO economic_indicators (indicator, description, periodicity,country_id, currency_pair_id, trading_rule_id)
+INSERT INTO economic_indicators (indicator, description, periodicity, country_id, currency_pair_id, trading_rule_id)
 VALUES ('NBRNS', 'Norges Bank surveys executives from over 300 enterprises and organisations about recent economic developments and the outlook ahead.
 The Bank’s interviewers normally visit contacts on-site for face-to-face discussions. A total of almost 1500 individuals are interviewed by the Bank approximately once a year.',
         'QUARTERLY', 8, 6, 2);
 
-INSERT INTO economic_indicators (indicator, description, periodicity,country_id, currency_pair_id, trading_rule_id)
+INSERT INTO economic_indicators (indicator, description, periodicity, country_id, currency_pair_id, trading_rule_id)
 VALUES ('SPEECH', 'As head of the central bank, which sets short term interest rates, she has a major influence over the value of the currency.
                             Traders watch her speeches closely as they are often used to drop subtle hints regarding future monetary policy and interest rate shifts.
                             His comments may determine a short-term positive or negative trend.',
         'RANDOM', 4, 1, 3);
 
 -- positions
-INSERT INTO positions (trade,open_time,close_time, open_price, close_price, financial_result, video_url,economic_indicator_id, trader_id)
-    VALUES('BUY','2019-06-19 18:02:58','2019-06-20 12:45:06',0.65504,'0.65812','1577.93','zvDh5ZP2_u4',1,2);
-INSERT INTO positions (trade,open_time,close_time, open_price, close_price, financial_result, video_url,economic_indicator_id, trader_id)
-VALUES('SELL','2019-06-11 08:00:45','2019-06-11 13:50:06',8.65612,8.62913,1863.53,'JLR1k8eHh8w',2,2);
-INSERT INTO positions (trade,open_time,close_time, open_price, close_price, financial_result, video_url,economic_indicator_id, trader_id)
-VALUES('SELL','2019-06-18 08:01:12','2018-06-18 10:25:01',1.12229,1.11929,1654.66,'r-gsEEZHYv8',3,2);
-INSERT INTO positions (trade,open_time,close_time, open_price, close_price, financial_result, video_url,economic_indicator_id, trader_id)
-VALUES('BUY','2019-06-19 18:02:58','2019-06-20 12:45:06',0.65524,0.65812,577.93,'zvDh5ZP2_u4',1,3);
-INSERT INTO positions (trade,open_time,close_time, open_price, close_price, financial_result, video_url,economic_indicator_id, trader_id)
-VALUES('SELL','2019-06-11 08:00:45','2019-06-11 13:50:16',8.65612,8.62913,863.53,'JLR1k8eHh8w',2,3);
-INSERT INTO positions (trade,open_time,close_time, open_price, close_price, financial_result, video_url,economic_indicator_id, trader_id)
-VALUES('SELL','2019-06-18 08:01:12','2018-06-18 10:23:01',1.12239,1.11929,654.66,'r-gsEEZHYv8',3,3);
+INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, video_url,
+                       economic_indicator_id, trader_id)
+VALUES ('BUY', '2019-06-19 18:02:58', '2019-06-20 12:45:06', 0.65504, '0.65812', '1577.93', 'zvDh5ZP2_u4', 1, 2);
+INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, video_url,
+                       economic_indicator_id, trader_id)
+VALUES ('SELL', '2019-06-11 08:00:45', '2019-06-11 13:50:06', 8.65612, 8.62913, 1863.53, 'JLR1k8eHh8w', 2, 2);
+INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, video_url,
+                       economic_indicator_id, trader_id)
+VALUES ('SELL', '2019-06-18 08:01:12', '2018-06-18 10:25:01', 1.12229, 1.11929, 1654.66, 'r-gsEEZHYv8', 3, 2);
+INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, video_url,
+                       economic_indicator_id, trader_id)
+VALUES ('BUY', '2019-06-19 18:02:58', '2019-06-20 12:45:06', 0.65524, 0.65812, 577.93, 'zvDh5ZP2_u4', 1, 3);
+INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, video_url,
+                       economic_indicator_id, trader_id)
+VALUES ('SELL', '2019-06-11 08:00:45', '2019-06-11 13:50:16', 8.65612, 8.62913, 863.53, 'JLR1k8eHh8w', 2, 3);
+INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, video_url,
+                       economic_indicator_id, trader_id)
+VALUES ('SELL', '2019-06-18 08:01:12', '2018-06-18 10:23:01', 1.12239, 1.11929, 654.66, 'r-gsEEZHYv8', 3, 3);
 
 -- pictures
-INSERT INTO pictures(url,position_id,trader_id)
-VALUES('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921162/positions/2019-06-19_-_NZDUSD-_buy_gsns7q.jpg',1,2);
-INSERT INTO pictures(url,position_id,trader_id)
-VALUES('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921315/positions/2019-06-11_-_USDNOK-_sell_x5tvgj.jpg',2,2);
-INSERT INTO pictures(url,position_id,trader_id)
-VALUES('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921630/positions/2019-06-18_-_eurusd_-_sell_ayikbn.jpg',3,2);
-INSERT INTO pictures(url,position_id,trader_id)
-VALUES('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921162/positions/2019-06-19_-_NZDUSD-_buy_gsns7q.jpg',4,3);
-INSERT INTO pictures(url,position_id,trader_id)
-VALUES('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921315/positions/2019-06-11_-_USDNOK-_sell_x5tvgj.jpg',5,3);
-INSERT INTO pictures(url,position_id,trader_id)
-VALUES('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921630/positions/2019-06-18_-_eurusd_-_sell_ayikbn.jpg',6,3);
+INSERT INTO pictures(url, position_id, trader_id)
+VALUES ('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921162/positions/2019-06-19_-_NZDUSD-_buy_gsns7q.jpg',
+        1, 2);
+INSERT INTO pictures(url, position_id, trader_id)
+VALUES ('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921315/positions/2019-06-11_-_USDNOK-_sell_x5tvgj.jpg',
+        2, 2);
+INSERT INTO pictures(url, position_id, trader_id)
+VALUES ('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921630/positions/2019-06-18_-_eurusd_-_sell_ayikbn.jpg',
+        3, 2);
+INSERT INTO pictures(url, position_id, trader_id)
+VALUES ('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921162/positions/2019-06-19_-_NZDUSD-_buy_gsns7q.jpg',
+        4, 3);
+INSERT INTO pictures(url, position_id, trader_id)
+VALUES ('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921315/positions/2019-06-11_-_USDNOK-_sell_x5tvgj.jpg',
+        5, 3);
+INSERT INTO pictures(url, position_id, trader_id)
+VALUES ('https://res.cloudinary.com/drapmo8cx/image/upload/v1637921630/positions/2019-06-18_-_eurusd_-_sell_ayikbn.jpg',
+        6, 3);

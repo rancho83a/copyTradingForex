@@ -28,7 +28,7 @@ public class UserRegistrationServiceModel {
     private Integer experience;
 
 
-    private BigDecimal initialCapital;
+    private BigDecimal currentCapital;
 
     public Long getId() {
         return id;
@@ -36,6 +36,15 @@ public class UserRegistrationServiceModel {
 
     public UserRegistrationServiceModel setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public BigDecimal getCurrentCapital() {
+        return currentCapital;
+    }
+
+    public UserRegistrationServiceModel setCurrentCapital(BigDecimal currentCapital) {
+        this.currentCapital = currentCapital;
         return this;
     }
 
@@ -113,12 +122,5 @@ public class UserRegistrationServiceModel {
         return this;
     }
 
-    public BigDecimal getInitialCapital() {
-        return initialCapital;
-    }
 
-    public UserRegistrationServiceModel setInitialCapital(BigDecimal initialCapital) {
-        this.initialCapital = initialCapital;
-        return this;
-    }
 }

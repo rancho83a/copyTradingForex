@@ -35,10 +35,7 @@
                     </div>
                     <div class="col-12 col-lg-6 how-it-works">
                         <div class="row how-it-works">
-
                             <!--                        <th:block th:if="*{canDeleteOrUpdate}">-->
-
-
                                 <form class="form-inline" th:action="@{/users/deposit}" th:method="post">
 
                                     <div class="form-group mx-sm-3 mb-2">
@@ -65,12 +62,16 @@
                             <!--                        </th:block>-->
                         </div>
                         <section class="how-it-works card-text">
+
+
+
+                            <h5 th:text="|Total deposit: *{totalDeposit}|" class="card-title"> title</h5>
+                            <h5 th:text="|Total withdraw: *{totalWithdraw}|" class="card-title"> title</h5>
                             <h6 th:text="|Full name: *{fullName}|" class="card-title"> title</h6>
 
                             <p th:text="|Email: *{email}|"> info</p>
                             <p th:text="|Age: *{age}|"> info</p>
                             <p th:text="|Expirience, year: *{experience}|"> info</p>
-                            <p th:text="|Initial Capital: *{initialCapital}|"> info</p>
                             <p th:text="|Curent Capital: *{currentCapital}|"> info</p>
                             <p th:text="|Total Yield: *{totalYield} %|"> info</p>
 

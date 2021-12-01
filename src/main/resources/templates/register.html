@@ -182,12 +182,12 @@
                                 <div class="form-group col-md-6 mb-3">
 
                                     <label for="capital" class=" font-weight-bold">Initial Capital</label>
-                                    <input th:field="*{initialCapital}"
+                                    <input th:field="*{currentCapital}"
                                            th:errorclass="'is-invalid bg-danger'"
                                            id="capital" type="number" min="0" step="0.01"
                                            class="form-control" placeholder="Capital"
                                            aria-describedby="capitalError">
-                                    <small th:if="${#fields.hasErrors('initialCapital')}" th:errors="*{initialCapital}"
+                                    <small th:if="${#fields.hasErrors('initialCapital')}" th:errors="*{currentCapital}"
                                            id="capitalError"
                                            class="rounded">
                                     </small>

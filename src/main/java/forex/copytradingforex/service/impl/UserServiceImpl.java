@@ -26,10 +26,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-    private final CopyTradingForexUserServiceImpl copyTradingForexUserService;
+    private final CopyTradingForexUserDetailsServiceImpl copyTradingForexUserService;
     private final ModelMapper modelMapper;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, CopyTradingForexUserServiceImpl copyTradingForexUserService, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository, CopyTradingForexUserDetailsServiceImpl copyTradingForexUserService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
@@ -46,9 +46,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerAndLoginUser(UserRegistrationServiceModel userRegistrationServiceModel) {
 
-        BigDecimal initialCapital=BigDecimal.ZERO;
-        if(userRegistrationServiceModel.getInitialCapital()!=null){
-            initialCapital=userRegistrationServiceModel.getInitialCapital();
+        BigDecimal currentCapital=BigDecimal.ZERO;
+        if(userRegistrationServiceModel.getCurrentCapital()!=null){
+            currentCapital=userRegistrationServiceModel.getCurrentCapital();
         }
 
         UserEntity newUser = new UserEntity()
@@ -58,16 +58,9 @@ public class UserServiceImpl implements UserService {
                 .setEmail(userRegistrationServiceModel.getEmail())
                 .setAge(userRegistrationServiceModel.getAge())
                 .setExperience(userRegistrationServiceModel.getExperience())
-                .setInitialCapital(initialCapital)
-                .setCurrentCapital(initialCapital)
-                .setImageUrl(userRegistrationServiceModel.getImageUrl() != null ? userRegistrationServiceModel.getImageUrl() : IMAGE_URL);
-
-
-
-
-
-
-
+                .setCurrentCapital(currentCapital)
+                .setImageUrl(userRegistrationServiceModel.getImageUrl() != null ? userRegistrationServiceModel.getImageUrl() : IMAGE_URL)
+                .setTotalDeposit(currentCapital);
 
 
         RoleEntity role = roleRepository.getById(userRegistrationServiceModel.getRoleId());
@@ -90,9 +83,26 @@ public class UserServiceImpl implements UserService {
     public UserProfileViewModel findByUsername(String username) {
         UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
-        UserProfileServiceModel userProfileServiceModel = modelMapper.map(userEntity, UserProfileServiceModel.class);
+        UserProfileServiceModel userProfileServiceModel = mapToUserProfileService(userEntity);
+
+
 
         return modelMapper.map(userProfileServiceModel, UserProfileViewModel.class);
+    }
+
+    private UserProfileServiceModel mapToUserProfileService(UserEntity userEntity) {
+        UserProfileServiceModel userProfileServiceModel = modelMapper.map(userEntity, UserProfileServiceModel.class);
+        userProfileServiceModel.setTotalYield(calculateTotalYield(userEntity.getCurrentCapital(),userEntity.getTotalWithdraw(),userEntity.getTotalDeposit()));
+
+        return userProfileServiceModel;
+    }
+
+    private BigDecimal calculateTotalYield(BigDecimal currentCapital, BigDecimal totalWithdraw, BigDecimal totalDeposit) {
+        if(totalDeposit.compareTo(BigDecimal.ZERO)==0){
+            return BigDecimal.ZERO;
+        }
+
+        return (currentCapital.add(totalWithdraw).subtract(totalDeposit)).divide(totalDeposit).multiply(BigDecimal.valueOf(100));
     }
 
     @Override
@@ -100,6 +110,8 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
         userEntity.setCurrentCapital(userEntity.getCurrentCapital().add(amount));
+        userEntity.setTotalDeposit(userEntity.getTotalDeposit().add(amount));
+
         userRepository.save(userEntity);
     }
 
@@ -115,6 +127,8 @@ public class UserServiceImpl implements UserService {
       }
 
         userEntity.setCurrentCapital(currentCapital.subtract(amount));
+        userEntity.setTotalWithdraw(userEntity.getTotalWithdraw().add(amount));
+
         userRepository.save(userEntity);
     }
 }

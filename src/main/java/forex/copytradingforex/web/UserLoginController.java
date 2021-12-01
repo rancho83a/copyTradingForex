@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
+
 
 @Controller
 public class UserLoginController {
@@ -23,6 +25,7 @@ public class UserLoginController {
         this.userService = userService;
     }
 
+    @Transactional //fetch=Lazy => za proxy oject  pri vikaneto na RoleEntity rtqbva context, bez transactional go nqma
     @GetMapping("/users/login")
     public String login(){
         return "login";

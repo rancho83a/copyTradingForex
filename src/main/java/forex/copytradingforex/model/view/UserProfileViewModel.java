@@ -8,7 +8,7 @@ public class UserProfileViewModel {
     String username;
     String fullName;
 
-    BigDecimal initialCapital;
+//    BigDecimal initialCapital;
 
     String imageUrl;
 
@@ -18,6 +18,8 @@ public class UserProfileViewModel {
     BigDecimal currentCapital;
 
     BigDecimal totalYield;
+    BigDecimal totalDeposit;
+    BigDecimal totalWithdraw;
 
     public Long getId() {
         return id;
@@ -25,6 +27,24 @@ public class UserProfileViewModel {
 
     public UserProfileViewModel setId(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public BigDecimal getTotalDeposit() {
+        return totalDeposit;
+    }
+
+    public UserProfileViewModel setTotalDeposit(BigDecimal totalDeposit) {
+        this.totalDeposit = totalDeposit;
+        return this;
+    }
+
+    public BigDecimal getTotalWithdraw() {
+        return totalWithdraw;
+    }
+
+    public UserProfileViewModel setTotalWithdraw(BigDecimal totalWithdraw) {
+        this.totalWithdraw = totalWithdraw;
         return this;
     }
 
@@ -46,14 +66,14 @@ public class UserProfileViewModel {
         return this;
     }
 
-    public BigDecimal getInitialCapital() {
-        return initialCapital;
-    }
-
-    public UserProfileViewModel setInitialCapital(BigDecimal initialCapital) {
-        this.initialCapital = initialCapital;
-        return this;
-    }
+//    public BigDecimal getInitialCapital() {
+//        return initialCapital;
+//    }
+//
+//    public UserProfileViewModel setInitialCapital(BigDecimal initialCapital) {
+//        this.initialCapital = initialCapital;
+//        return this;
+//    }
 
     public String getImageUrl() {
         return imageUrl;

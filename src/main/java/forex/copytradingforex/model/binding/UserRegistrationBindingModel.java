@@ -46,8 +46,8 @@ public class UserRegistrationBindingModel {
     private Integer experience;
 
 
-    @PositiveOrZero(message = "Experience must be positive number")
-    private BigDecimal initialCapital;
+    @PositiveOrZero(message = "Amount must be positive number or 0")
+    private BigDecimal currentCapital;
 
     public String getUsername() {
         return username;
@@ -121,12 +121,12 @@ public class UserRegistrationBindingModel {
         return this;
     }
 
-    public BigDecimal getInitialCapital() {
-        return initialCapital;
+    public BigDecimal getCurrentCapital() {
+        return currentCapital;
     }
 
-    public UserRegistrationBindingModel setInitialCapital(BigDecimal initialCapital) {
-        this.initialCapital = initialCapital;
+    public UserRegistrationBindingModel setCurrentCapital(BigDecimal currentCapital) {
+        this.currentCapital = currentCapital;
         return this;
     }
 
