@@ -21,12 +21,12 @@ public class PositionUpdateBindingModel {
 
     @NotNull(message = "can not be empty")
     @Past(message = "Date and Time must be in the past")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime openTime;
 
     @NotNull(message = "can not be empty")
     @Past(message = "Date and Time must be in the past")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime closeTime;
 
     @NotNull(message ="Can not be empty" )
@@ -36,10 +36,9 @@ public class PositionUpdateBindingModel {
     @NotNull(message ="Can not be empty" )
     @Positive(message = "Price must be a positive number")
     private BigDecimal closePrice;
-
-    @NotNull(message ="Can not be empty" )
-    @Positive(message = "Price must be a positive number")
-    private BigDecimal financialResult;
+//
+//    @NotNull(message ="Can not be empty" )
+//    private BigDecimal financialResult;
 
 
     @Size( max = 11, message = "VideoUrl must contains 11 symbols")
@@ -100,14 +99,14 @@ public class PositionUpdateBindingModel {
         return this;
     }
 
-    public BigDecimal getFinancialResult() {
-        return financialResult;
-    }
-
-    public PositionUpdateBindingModel setFinancialResult(BigDecimal financialResult) {
-        this.financialResult = financialResult;
-        return this;
-    }
+//    public BigDecimal getFinancialResult() {
+//        return financialResult;
+//    }
+//
+//    public PositionUpdateBindingModel setFinancialResult(BigDecimal financialResult) {
+//        this.financialResult = financialResult;
+//        return this;
+//    }
 
     public String getVideoUrl() {
         return videoUrl;

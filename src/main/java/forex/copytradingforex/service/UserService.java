@@ -16,4 +16,6 @@ public interface UserService {
     void depositAmount(BigDecimal amount, String username);
 
     void withdrawAmount(BigDecimal amount, String username);
+
+    boolean canTrade(String username);
 }

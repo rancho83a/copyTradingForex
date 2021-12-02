@@ -161,7 +161,7 @@
                                     <input th:field="*{financialResult}"
                                            th:errorclass="'is-invalid bg-danger'"
                                            name="financialResult"
-                                           id="financialResult" type="number" min="0" step="0.01" class="form-control"
+                                           id="financialResult" type="number"  step="0.01" class="form-control"
                                            placeholder="Financial result, USD"
                                            aria-describedby="financialResultError">
                                     <small th:if="${#fields.hasErrors('financialResult')}" th:errors="*{financialResult}"

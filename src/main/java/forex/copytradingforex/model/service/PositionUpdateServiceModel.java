@@ -24,7 +24,6 @@ public class PositionUpdateServiceModel {
     private BigDecimal closePrice;
 
 
-    private BigDecimal financialResult;
 
     private String videoUrl;
 
@@ -82,14 +81,6 @@ public class PositionUpdateServiceModel {
         return this;
     }
 
-    public BigDecimal getFinancialResult() {
-        return financialResult;
-    }
-
-    public PositionUpdateServiceModel setFinancialResult(BigDecimal financialResult) {
-        this.financialResult = financialResult;
-        return this;
-    }
 
     public String getVideoUrl() {
         return videoUrl;

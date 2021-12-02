@@ -54,11 +54,12 @@ public class PositionServiceImpl implements PositionService {
                 .orElseThrow(() -> new ObjectNotFoundException("Position with id: " + id + " was not found"));
         PositionDetailsView positionDetailsView = modelMapper.map(positionEntity, PositionDetailsView.class);
 
-        positionDetailsView.setTrader(positionEntity.getTrader().getFullName())
+
+        positionDetailsView
+                .setTrader(positionEntity.getTrader().getFullName())
                 .setEconomicIndicator(positionEntity.getEconomicIndicator().getIndicator().getName())
-                .setYield(calculateYield(positionEntity.getTrader().getCurrentCapital(), positionEntity.getFinancialResult()))
-                .setOpenTime(positionEntity.getOpenTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .setCloseTime(positionEntity.getCloseTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .setOpenTime(positionEntity.getOpenTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .setCloseTime(positionEntity.getCloseTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .setCanDeleteOrUpdate(isOwner(currentUser, positionEntity.getId()))
                 .setPictureUrl(positionEntity.getPicture() != null ? positionEntity.getPicture().getUrl() : PICTURE_URL);
 
@@ -87,16 +88,26 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public PositionAddServiceModel addPosition(PositionAddBindingModel positionAddBindModel, String ownerId) {
+    public PositionAddServiceModel addPosition(PositionAddBindingModel positionAddBindModel, String username) {
 
         PositionAddServiceModel positionAddServiceModel = modelMapper.map(positionAddBindModel, PositionAddServiceModel.class);
         PositionEntity newPosition = modelMapper.map(positionAddServiceModel, PositionEntity.class);
-        newPosition.setTrader(userRepository.findByUsername(ownerId)
-                .orElseThrow(() -> new ObjectNotFoundException("Trader with id " + ownerId + " was not found")));
 
         EconomicIndicatorEntity economicIndicator = this.economicIndicatorRepository.getById(positionAddBindModel.getEconomicIndicatorId());
-
         newPosition.setEconomicIndicator(economicIndicator);
+
+        UserEntity trader = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("Trader with id " + username + " was not found"));
+
+        newPosition.setYield(calculateYield(trader.getCurrentCapital(),positionAddServiceModel.getFinancialResult()));
+
+
+        trader.setCurrentCapital(calculateCurrentCapital(trader.getCurrentCapital(),positionAddServiceModel.getFinancialResult()));
+
+        userRepository.save(trader);
+
+        newPosition.setTrader(trader);
+
 
         PositionEntity savedPosition = positionRepository.save(newPosition);
 
@@ -127,7 +138,6 @@ public class PositionServiceImpl implements PositionService {
                 .setCloseTime(serviceModel.getCloseTime())
                 .setOpenPrice(serviceModel.getOpenPrice())
                 .setClosePrice(serviceModel.getClosePrice())
-                .setFinancialResult(serviceModel.getFinancialResult())
                 .setVideoUrl(serviceModel.getVideoUrl());
         positionRepository.save(positionEntity);
     }
@@ -146,7 +156,7 @@ public class PositionServiceImpl implements PositionService {
         PositionViewModel positionViewModel = modelMapper.map(position, PositionViewModel.class);
         positionViewModel.setTrader(position.getTrader().getFullName())
                 .setEconomicIndicator(position.getEconomicIndicator().getIndicator().getName())
-                .setYield(calculateYield(position.getTrader().getCurrentCapital(), position.getFinancialResult()));
+                .setYield(position.getYield());
 
         positionViewModel.setPictureUrl(position.getPicture() != null ? position.getPicture().getUrl() : PICTURE_URL);
 
@@ -154,10 +164,26 @@ public class PositionServiceImpl implements PositionService {
     }
 
     private BigDecimal calculateYield(BigDecimal capital, BigDecimal financialResult) {
-        if (capital.compareTo(BigDecimal.ZERO) == 0) {
+
+        if(capital.compareTo(BigDecimal.ZERO)<1){
             return BigDecimal.ZERO;
         }
-        BigDecimal yield = financialResult.divide(capital).multiply(BigDecimal.valueOf(100));
-        return yield.setScale(2, RoundingMode.FLOOR);
+        BigDecimal delta = capital.add(financialResult);
+
+        if(delta.compareTo(BigDecimal.ZERO)<1){
+            return BigDecimal.valueOf(-100);
+        }
+        BigDecimal yield = financialResult.multiply(BigDecimal.valueOf(100)).divide(capital,6,RoundingMode.FLOOR);
+        return yield;
+    }
+
+
+    private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {
+        BigDecimal delta = currentCapital.add(financialResult);
+
+        if(delta.compareTo(BigDecimal.ZERO)<1){
+            return BigDecimal.ZERO;
+        }
+        return delta;
     }
 }

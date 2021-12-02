@@ -40,30 +40,6 @@
                                 th:method="patch"
                                 class="main-form mx-auto py-4 col-md-8 d-flex flex-column justify-content-center login-form">
                             <div class="row">
-<!--                                <div class="form-group col-md-6 mb-3">-->
-<!--                                    <label class="text-center font-weight-bold" for="economicIndicatorId">Economic_indicator</label>-->
-<!--                                    <select-->
-<!--                                            th:errorclass="'is-invalid bg-danger'"-->
-<!--                                            id="economicIndicatorId"-->
-<!--                                            name="economicIndicatorId"-->
-<!--                                            class="form-control"-->
-<!--                                            aria-describedby="indicatorError">-->
-
-<!--                                    >-->
-<!--                                        <option value="">- Select an economic indicator -</option>-->
-<!--                                        <option th:each="indicator : ${economicIndicators}"-->
-<!--                                                th:text="${indicator.indicator}"-->
-<!--                                                th:value="${indicator.id}"-->
-<!--                                                th:selected="${indicator.id} == *{economicIndicatorId}">Indicator-->
-<!--                                        </option>-->
-
-<!--                                    </select>-->
-<!--                                    <small th:if="${#fields.hasErrors('economicIndicatorId')}" th:errors="*{economicIndicatorId}"-->
-<!--                                           id="indicatorError"-->
-<!--                                           class="rounded">-->
-<!--                                        Open time is required.-->
-<!--                                    </small>-->
-<!--                                </div>-->
 
                                 <div class="form-group col-md-6 mb-3">
                                     <label class="text-center font-weight-bold"
@@ -84,6 +60,21 @@
                                            id="tradeError"
                                            class="rounded">
                                         Open time is required.
+                                    </small>
+                                </div>
+                                <div class="form-group col-md-6 mb-3">
+
+                                    <label for="videoUrl" class=" font-weight-bold">Video Url is not required (otherwise - only last
+                                        11 symbols from Youtube)</label>
+                                    <input th:field="*{videoUrl}"
+                                           th:errorclass="'is-invalid bg-danger'"
+                                           id="videoUrl" type="text"
+                                           class="form-control" placeholder="Video url"
+                                           aria-describedby="videoUrlError">
+                                    <small th:if="${#fields.hasErrors('videoUrl')}" th:errors="*{videoUrl}"
+                                           id="videoUrlError"
+                                           class="rounded">
+                                        videoUrl is not required.
                                     </small>
                                 </div>
 
@@ -158,41 +149,27 @@
 
                             </div>
 
-                            <div class="row">
-                                <div class="form-group col-md-6 mb-3">
-                                    <label for="financialResult" class="text-center  font-weight-bold">Financial
-                                        result</label>
-                                    <input th:field="*{financialResult}"
-                                           th:errorclass="'is-invalid bg-danger'"
-                                           name="financialResult"
-                                           id="financialResult" type="number" min="0" step="0.01" class="form-control"
-                                           placeholder="Financial result, USD"
-                                           aria-describedby="financialResultError">
-                                    <small th:if="${#fields.hasErrors('financialResult')}" th:errors="*{financialResult}"
-                                           id="financialResultError"
-                                           class="rounded">
-                                        financialResult is required.
-                                    </small>
-                                </div>
+<!--                            <div class="row">-->
+<!--&lt;!&ndash;                                <div class="form-group col-md-6 mb-3">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label for="financialResult" class="text-center  font-weight-bold">Financial&ndash;&gt;-->
+<!--&lt;!&ndash;                                        result</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <input th:field="*{financialResult}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           th:errorclass="'is-invalid bg-danger'"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           name="financialResult"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           id="financialResult" type="number" min="0" step="0.01" class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           placeholder="Financial result, USD"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           aria-describedby="financialResultError">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <small th:if="${#fields.hasErrors('financialResult')}" th:errors="*{financialResult}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           id="financialResultError"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           class="rounded">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        financialResult is required.&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </small>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
 
 
-                                <div class="form-group col-md-6 mb-3">
+<!--                             -->
 
-                                    <label for="videoUrl" class=" font-weight-bold">Video Url is not required (otherwise - only last
-                                        11 symbols from Youtube)</label>
-                                    <input th:field="*{videoUrl}"
-                                           th:errorclass="'is-invalid bg-danger'"
-                                           id="videoUrl" type="text"
-                                           class="form-control" placeholder="Video url"
-                                           aria-describedby="videoUrlError">
-                                    <small th:if="${#fields.hasErrors('videoUrl')}" th:errors="*{videoUrl}"
-                                           id="videoUrlError"
-                                           class="rounded">
-                                        videoUrl is not required.
-                                    </small>
-                                </div>
-
-                            </div>
+<!--                            </div>-->
 
 
                             <div class="row">

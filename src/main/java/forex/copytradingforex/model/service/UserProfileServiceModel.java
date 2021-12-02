@@ -1,5 +1,7 @@
 package forex.copytradingforex.model.service;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public class UserProfileServiceModel {
@@ -19,6 +21,17 @@ public class UserProfileServiceModel {
     BigDecimal totalDeposit;
     BigDecimal totalWithdraw;
 
+
+    BigDecimal withdrawAmount;
+
+    public BigDecimal getWithdrawAmount() {
+        return withdrawAmount;
+    }
+
+    public UserProfileServiceModel setWithdrawAmount(BigDecimal withdrawAmount) {
+        this.withdrawAmount = withdrawAmount;
+        return this;
+    }
 
     public String getFullName() {
         return fullName;

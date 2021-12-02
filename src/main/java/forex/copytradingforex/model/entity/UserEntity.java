@@ -51,13 +51,12 @@ public class UserEntity extends BaseEntity{
     @ManyToOne
     private UserEntity trader;
 
-    @OneToMany(mappedBy = "trader",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "trader")
     private List<UserEntity> investors= new ArrayList<>();
 
+    @OneToMany(mappedBy = "trader")
+    private List<PositionEntity> positions;
 
-
-    public UserEntity() {
-    }
 
     public UserEntity getTrader() {
         return trader;

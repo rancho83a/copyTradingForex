@@ -1,5 +1,7 @@
 package forex.copytradingforex.model.view;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public class UserProfileViewModel {
@@ -7,8 +9,6 @@ public class UserProfileViewModel {
     Long id;
     String username;
     String fullName;
-
-//    BigDecimal initialCapital;
 
     String imageUrl;
 
@@ -20,6 +20,20 @@ public class UserProfileViewModel {
     BigDecimal totalYield;
     BigDecimal totalDeposit;
     BigDecimal totalWithdraw;
+
+
+    @NotNull(message = "Please, fill the amount field")
+    @Positive(message = "You can withdraw positive amount only")
+    BigDecimal withdrawAmount;
+
+    public BigDecimal getWithdrawAmount() {
+        return withdrawAmount;
+    }
+
+    public UserProfileViewModel setWithdrawAmount(BigDecimal withdrawAmount) {
+        this.withdrawAmount = withdrawAmount;
+        return this;
+    }
 
     public Long getId() {
         return id;

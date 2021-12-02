@@ -14,12 +14,12 @@ public class UserRegistrationBindingModel {
     private Long roleId;
 
 
-    @NotBlank(message = "Username can not be empty")
+   // @NotBlank(message = "Username can not be empty")
     @Size(min = 2, max = 20, message = "Username must contains from 2 to 20 symbols")
     @UniqueUserName
     private String username;
 
-    @NotBlank
+   // @NotBlank
     @Size(min = 3, message = "Password must contains minimum 3 symbols")
     private String password;
     @NotBlank
@@ -30,7 +30,7 @@ public class UserRegistrationBindingModel {
     @NotBlank(message = "Email can not be empty")
     private String email;
 
-    @NotBlank
+   // @NotBlank
     @Size(min = 2, max = 50, message = "Fullname must contains from 2 to 50 symbols")
     private String fullName;
 

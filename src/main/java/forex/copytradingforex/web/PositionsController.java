@@ -3,12 +3,11 @@ package forex.copytradingforex.web;
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
 import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
 import forex.copytradingforex.model.service.PositionAddServiceModel;
-import forex.copytradingforex.model.service.PositionUpdateServiceModel;
 import forex.copytradingforex.model.view.PositionDetailsView;
 import forex.copytradingforex.service.EconomicIndicatorService;
 import forex.copytradingforex.service.PositionService;
+import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
-import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,12 +24,14 @@ import java.security.Principal;
 public class PositionsController {
     private final PositionService positionService;
     private final EconomicIndicatorService economicIndicatorService;
-    private final ModelMapper modelMapper;
+    private final UserService userService;
 
-    public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, ModelMapper modelMapper) {
+
+    public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, UserService userService) {
         this.positionService = positionService;
         this.economicIndicatorService = economicIndicatorService;
-        this.modelMapper = modelMapper;
+
+        this.userService = userService;
     }
 
     @GetMapping("/all")
@@ -64,12 +65,19 @@ public class PositionsController {
     }
 
     @GetMapping("/add")
-    public String getAddPositionPage(Model model) {
+    public String getAddPositionPage(Model model
+            ,Principal principal
+    ) {
+//TODO check if principal have currentCapital > minimimal_requeired, if not - can not trade=>can not addposition
+       if(!userService.canTrade(principal.getName())){
+           return "warning-no-trade";
+       }
 
         if (!model.containsAttribute("positionAddBindModel")) {
             model
                     .addAttribute("positionAddBindModel", new PositionAddBindingModel())
                     .addAttribute("economicIndicators", economicIndicatorService.getAllEconomicIndicators());
+
         }
         return "position-add";
     }
@@ -102,7 +110,7 @@ public class PositionsController {
     }
 
     @PatchMapping("/{id}/update")
-    public String editOffer(@PathVariable Long id,
+    public String updatePosition(@PathVariable Long id,
                             @Valid PositionUpdateBindingModel updateBindingModel,
                             BindingResult bindingResult,
                             RedirectAttributes redirectAttributes) {

@@ -34,7 +34,10 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 
                 //allow access to all users
-                .antMatchers("/", "/users/login", "/users/register","/how-it-works","/positions/all").permitAll()
+                .antMatchers("/", "/users/login", "/users/register","/how-it-works",
+                        "/positions/all",
+                        "/api/**")
+                .permitAll()
                 .antMatchers("/statistics").hasRole(RoleEnum.MASTER.name())
                 .antMatchers("/positions/add").hasRole(RoleEnum.TRADER.name())
 

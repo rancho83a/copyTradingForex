@@ -22,10 +22,9 @@ public class CommentEntity extends BaseEntity {
     private PositionEntity position;
 
     @ManyToOne
-    private UserEntity trader;
+    private UserEntity author;
 
-    public CommentEntity() {
-    }
+
 
     public Boolean getApproved() {
         return approved;
@@ -60,12 +59,12 @@ public class CommentEntity extends BaseEntity {
         return this;
     }
 
-    public UserEntity getTrader() {
-        return trader;
+    public UserEntity getAuthor() {
+        return author;
     }
 
-    public CommentEntity setTrader(UserEntity trader) {
-        this.trader = trader;
+    public CommentEntity setAuthor(UserEntity trader) {
+        this.author = trader;
         return this;
     }
 }

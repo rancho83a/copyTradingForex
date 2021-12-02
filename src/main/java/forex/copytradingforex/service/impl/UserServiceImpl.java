@@ -22,6 +22,7 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
+    public static final BigDecimal MINIMAL_CAPITAL_FOR_TRADE=BigDecimal.valueOf(1000);
     public static final String IMAGE_URL="https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg";
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -60,7 +61,8 @@ public class UserServiceImpl implements UserService {
                 .setExperience(userRegistrationServiceModel.getExperience())
                 .setCurrentCapital(currentCapital)
                 .setImageUrl(userRegistrationServiceModel.getImageUrl() != null ? userRegistrationServiceModel.getImageUrl() : IMAGE_URL)
-                .setTotalDeposit(currentCapital);
+                .setTotalDeposit(currentCapital)
+                .setTotalWithdraw(BigDecimal.ZERO);
 
 
         RoleEntity role = roleRepository.getById(userRegistrationServiceModel.getRoleId());
@@ -130,5 +132,12 @@ public class UserServiceImpl implements UserService {
         userEntity.setTotalWithdraw(userEntity.getTotalWithdraw().add(amount));
 
         userRepository.save(userEntity);
+    }
+
+    @Override
+    public boolean canTrade(String username) {
+        UserEntity userEntity = this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+        return userEntity.getCurrentCapital().compareTo(MINIMAL_CAPITAL_FOR_TRADE)>-1;
     }
 }

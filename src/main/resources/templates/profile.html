@@ -36,43 +36,62 @@
                     <div class="col-12 col-lg-6 how-it-works">
                         <div class="row how-it-works">
                             <!--                        <th:block th:if="*{canDeleteOrUpdate}">-->
-                                <form class="form-inline" th:action="@{/users/deposit}" th:method="post">
+                            <form class="form-inline" th:action="@{/users/deposit}" th:method="post">
 
-                                    <div class="form-group mx-sm-3 mb-2">
-                                        <label for="deposit" class="sr-only">Deposit</label>
-                                        <input name="amount"
-                                                type="number" class="form-control" id="deposit"
-                                               placeholder="amount" min="0.01" step="0.01">
-                                    </div>
-                                    <button type="submit" class="btn  btn-up-del mb-2">Deposit</button>
-                                </form>
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="deposit" class="sr-only">Deposit</label>
+                                    <input name="depositAmount"
+                                           type="number" class="form-control" id="deposit"
+                                           placeholder="amount" min="0.01" step="0.01">
+                                </div>
+                                <button type="submit" class="btn  btn-up-del mb-2">Deposit</button>
+                            </form>
 
                             <form class="form-inline" th:action="@{/users/withdraw}" th:method="post">
 
                                 <div class="form-group mx-sm-3 mb-2">
                                     <label for="withdraw" class="sr-only">Withdraw</label>
-                                    <input name="amount"
-                                           type="number" class="form-control" id="withdraw"
-                                           placeholder="amount" min="0.01" step="0.01">
+
+                                    <!--                                   -->
+                                    <!--                                    <input name="withdrawAmount"-->
+                                    <!--                                           type="number" class="form-control" id="withdraw"-->
+                                    <!--                                           placeholder="amount" min="0.01" step="0.01"-->
+                                    <!--                                    th:default="0.00"-->
+                                    <!--                                    >-->
+
+                                    <input th:field="*{withdrawAmount}"
+                                           th:errorclass="'is-invalid bg-danger'"
+                                           id="withdraw" type="number" min="0.01" step="0.01"
+                                           class="form-control" placeholder="amount"
+                                           aria-describedby="withdrawAmountError">
+
+
                                 </div>
                                 <button type="submit" class="btn  btn-up-del mb-2">Withdraw</button>
+
+
                             </form>
 
 
                             <!--                        </th:block>-->
                         </div>
+                        <small th:if="${wrongAmount}"
+                               class="rounded bg-danger">
+                            Please fill amount field!
+                        </small>
                         <section class="how-it-works card-text">
 
 
+                            <h4 th:text="|Full name: *{fullName}|" class="card-title"> title</h4>
 
+                            <h5 th:text="|Current capital: *{currentCapital}|" class="card-title"> title</h5>
                             <h5 th:text="|Total deposit: *{totalDeposit}|" class="card-title"> title</h5>
                             <h5 th:text="|Total withdraw: *{totalWithdraw}|" class="card-title"> title</h5>
-                            <h6 th:text="|Full name: *{fullName}|" class="card-title"> title</h6>
 
                             <p th:text="|Email: *{email}|"> info</p>
                             <p th:text="|Age: *{age}|"> info</p>
                             <p th:text="|Expirience, year: *{experience}|"> info</p>
-                            <p th:text="|Curent Capital: *{currentCapital}|"> info</p>
+                            <!--                            <p th:text="|Curent Capital: *{currentCapital}|"> info</p>-->
                             <p th:text="|Total Yield: *{totalYield} %|"> info</p>
 
                         </section>

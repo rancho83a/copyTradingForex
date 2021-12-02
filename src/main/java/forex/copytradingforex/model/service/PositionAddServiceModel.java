@@ -27,6 +27,7 @@ public class PositionAddServiceModel {
 
     private BigDecimal financialResult;
 
+
     private String videoUrl;
 
     public Long getId() {
@@ -37,6 +38,7 @@ public class PositionAddServiceModel {
         this.id = id;
         return this;
     }
+
 
     public Long getEconomicIndicatorId() {
         return economicIndicatorId;

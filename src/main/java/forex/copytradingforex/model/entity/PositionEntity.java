@@ -7,6 +7,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
+@NamedEntityGraph(
+        name = "position-comments-trader",
+        attributeNodes = {
+                @NamedAttributeNode("comments"),
+                @NamedAttributeNode("trader")
+        }
+)
 @Entity
 @Table(name="positions")
 public class PositionEntity extends BaseEntity{
@@ -31,6 +39,9 @@ public class PositionEntity extends BaseEntity{
     @Column(nullable = false, columnDefinition = "DECIMAL(19,2)")
     private BigDecimal financialResult;
 
+    @Column(nullable = false, columnDefinition = "DECIMAL(19,2)")
+    private BigDecimal yield;
+
     private String videoUrl;
 
     @ManyToOne
@@ -40,7 +51,7 @@ public class PositionEntity extends BaseEntity{
     @JoinColumn(name = "picture_id", referencedColumnName = "id")
     private PictureEntity picture;
 
-    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
     private List<CommentEntity> comments;
 
     public EconomicIndicatorEntity getEconomicIndicator() {
@@ -49,6 +60,15 @@ public class PositionEntity extends BaseEntity{
 
     public PositionEntity setEconomicIndicator(EconomicIndicatorEntity economicIndicator) {
         this.economicIndicator = economicIndicator;
+        return this;
+    }
+
+    public BigDecimal getYield() {
+        return yield;
+    }
+
+    public PositionEntity setYield(BigDecimal yield) {
+        this.yield = yield;
         return this;
     }
 
