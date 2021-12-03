@@ -1,21 +1,20 @@
 package forex.copytradingforex.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "comments")
 public class CommentEntity extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column( nullable = false)
     private Boolean approved;
 
-    @Column(columnDefinition = "TEXT")
+    //@Column(columnDefinition = "TEXT")
+    @Lob
     private String textContent;
-    @Column(name = "created", nullable = false)
+
+    @Column( nullable = false)
     private LocalDateTime created;
 
     @ManyToOne
@@ -25,29 +24,31 @@ public class CommentEntity extends BaseEntity {
     private UserEntity author;
 
 
-
     public Boolean getApproved() {
         return approved;
     }
 
-    public void setApproved(Boolean approved) {
+    public CommentEntity setApproved(Boolean approved) {
         this.approved = approved;
+        return this;
     }
 
     public String getTextContent() {
         return textContent;
     }
 
-    public void setTextContent(String textContent) {
+    public CommentEntity setTextContent(String textContent) {
         this.textContent = textContent;
+        return this;
     }
 
     public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public CommentEntity setCreated(LocalDateTime created) {
         this.created = created;
+        return this;
     }
 
     public PositionEntity getPosition() {
@@ -63,8 +64,8 @@ public class CommentEntity extends BaseEntity {
         return author;
     }
 
-    public CommentEntity setAuthor(UserEntity trader) {
-        this.author = trader;
+    public CommentEntity setAuthor(UserEntity author) {
+        this.author = author;
         return this;
     }
 }

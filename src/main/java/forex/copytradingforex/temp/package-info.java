@@ -10,7 +10,9 @@ package forex.copytradingforex.temp;
 //TODO add button "myTrades" in profile
 //TODO add trade if trader have minimal capital
 
-//MAke join to traders
+//TODO MAke join to traders
+
+//TODO when getAllTraders or AllInvestors -> change to EntityGraph
 
 
 /*

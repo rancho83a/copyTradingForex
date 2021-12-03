@@ -21,25 +21,26 @@ public class PositionEntity extends BaseEntity{
 
     @ManyToOne
     private EconomicIndicatorEntity economicIndicator;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TradeEnum trade; //BYU or SELL
 
-    @Column(nullable = false)
+   // @Column(nullable = false)
     private LocalDateTime openTime;
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private LocalDateTime closeTime;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(19,5)")
+    @Column(columnDefinition = "DECIMAL(19,5)")
     private BigDecimal openPrice;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(19,5)")
+    @Column(columnDefinition = "DECIMAL(19,5)")
     private BigDecimal closePrice;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(19,2)")
+    @Column(columnDefinition = "DECIMAL(19,2)")
     private BigDecimal financialResult;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(19,6)")
+    @Column(columnDefinition = "DECIMAL(19,6)")
     private BigDecimal yield;
 
     private String videoUrl;
@@ -51,7 +52,8 @@ public class PositionEntity extends BaseEntity{
     @JoinColumn(name = "picture_id", referencedColumnName = "id")
     private PictureEntity picture;
 
-    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "position", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<CommentEntity> comments;
 
     public EconomicIndicatorEntity getEconomicIndicator() {

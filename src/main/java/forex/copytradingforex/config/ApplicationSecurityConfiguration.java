@@ -35,7 +35,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
                 //allow access to all users
                 .antMatchers("/", "/users/login", "/users/register", "/how-it-works",
-                        "/positions/all", "/api/**")
+                        "/positions/all")
                 .permitAll()
 
 

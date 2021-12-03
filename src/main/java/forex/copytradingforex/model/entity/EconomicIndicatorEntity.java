@@ -19,7 +19,8 @@ public class EconomicIndicatorEntity extends BaseEntity {
     @ManyToOne
     private CountryEntity country;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    //@Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     private String description;
 
     @Enumerated(EnumType.STRING)

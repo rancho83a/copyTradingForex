@@ -1,16 +1,16 @@
 package forex.copytradingforex.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="trading_rules")
 public class TradingRuleEntity extends BaseEntity{
-    @Column(nullable = false, columnDefinition = "TEXT")
+    //@Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     private String entryPoint;
-    @Column(nullable = false, columnDefinition = "TEXT")
+
+    //@Column(nullable = false, columnDefinition = "TEXT")
+    @Lob
     private String exitPoint;
     @Column(nullable = false)
     private Integer takeProfit;

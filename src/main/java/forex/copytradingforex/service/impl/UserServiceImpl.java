@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
                 .setAge(userRegistrationServiceModel.getAge())
                 .setExperience(userRegistrationServiceModel.getExperience())
                 .setCurrentCapital(currentCapital)
-                .setImageUrl(userRegistrationServiceModel.getImageUrl() != null ? userRegistrationServiceModel.getImageUrl() : IMAGE_URL)
+                .setImageUrl(userRegistrationServiceModel.getImageUrl().isBlank() ? IMAGE_URL: userRegistrationServiceModel.getImageUrl())
                 .setTotalDeposit(currentCapital)
                 .setTotalWithdraw(BigDecimal.ZERO);
 
