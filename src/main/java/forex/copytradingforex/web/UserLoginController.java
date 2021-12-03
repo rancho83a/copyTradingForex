@@ -64,31 +64,21 @@ public class UserLoginController {
 
 
     @PostMapping("/users/deposit")
-    public String depositAmount(@RequestParam("depositAmount") BigDecimal amount,
+    public String depositAmount(@RequestParam("depositAmount") String amount,
+                                RedirectAttributes redirectAttributes,
                                 @AuthenticationPrincipal CopyTradingForexUser currentUser
     ) {
-        userService.depositAmount(amount, currentUser.getUserIdentifier());
+
+        if (amount.isBlank()) {
+
+            redirectAttributes.addFlashAttribute("wrongAmount", true);
+            return "redirect:/users/profile";
+        }
+        userService.depositAmount(new BigDecimal(amount), currentUser.getUserIdentifier());
 
         return "redirect:/users/profile";
     }
 
-//    @ModelAttribute("userProfile")
-//    public UserProfileViewModel userProfile() {
-//        return new UserProfileViewModel();
-//    }
-
-    //    @PostMapping("/users/withdraw")
-//    public String withdrawAmount(@RequestParam("withdrawAmount") BigDecimal amount,
-//                                @AuthenticationPrincipal CopyTradingForexUser currentUser
-//    ){
-//
-//        if(amount==null){
-//            return "redirect:/users/profile";
-//        }
-//        userService.withdrawAmount(amount,currentUser.getUserIdentifier() );
-//
-//        return "redirect:/users/profile";
-//    }
     @PostMapping("/users/withdraw")
     public String withdrawAmount(
 

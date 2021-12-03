@@ -63,7 +63,8 @@ public class PositionServiceImpl implements PositionService {
                 .setOpenTime(positionEntity.getOpenTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .setCloseTime(positionEntity.getCloseTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
                 .setCanDeleteOrUpdate(isOwner(currentUser, positionEntity.getId()))
-                .setPictureUrl(positionEntity.getPicture() != null ? positionEntity.getPicture().getUrl() : PICTURE_URL);
+                .setPictureUrl(positionEntity.getPicture() != null ? positionEntity.getPicture().getUrl() : PICTURE_URL)
+                .setYield( positionEntity.getYield().setScale(2,RoundingMode.FLOOR));
 
         return positionDetailsView;
     }
@@ -101,7 +102,7 @@ public class PositionServiceImpl implements PositionService {
         UserEntity trader = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader with id " + username + " was not found"));
 
-        newPosition.setYield(calculateYield(trader.getCurrentCapital(), positionAddServiceModel.getFinancialResult()));
+        newPosition.setYield(calculatePositionYield(trader.getCurrentCapital(), positionAddServiceModel.getFinancialResult()));
 
 
         trader.setCurrentCapital(calculateCurrentCapital(trader.getCurrentCapital(), positionAddServiceModel.getFinancialResult()));
@@ -156,14 +157,14 @@ public class PositionServiceImpl implements PositionService {
         PositionViewModel positionViewModel = modelMapper.map(position, PositionViewModel.class);
         positionViewModel.setTrader(position.getTrader().getFullName())
                 .setEconomicIndicator(position.getEconomicIndicator().getIndicator().getName())
-                .setYield(position.getYield());
+                .setYield(position.getYield().setScale(2,RoundingMode.FLOOR));
 
         positionViewModel.setPictureUrl(position.getPicture() != null ? position.getPicture().getUrl() : PICTURE_URL);
 
         return positionViewModel;
     }
 
-    private BigDecimal calculateYield(BigDecimal capital, BigDecimal financialResult) {
+    private BigDecimal calculatePositionYield(BigDecimal capital, BigDecimal financialResult) {
 
         if (capital.compareTo(BigDecimal.ZERO) < 1) {
             return BigDecimal.ZERO;
@@ -186,4 +187,12 @@ public class PositionServiceImpl implements PositionService {
         }
         return delta;
     }
+
+    //TODO temporaryResult - property in UserEntity -
+    // записать результат от скопираной сделки не только  в current_capital, но и в Междинную сумму - моьно сделать отдельное
+    // Entity - @OneToOne - каждий инвестор будет иметь такую, трейдеру не надо
+
+    //TODO scheduler - fee every 1 or 2 hours - 0.01 USD
+    //TODO scheduler - every week Remuneration or when disconnect
+    //TODO add to profile - for INVESTOR.ROLE only - section your trader (full name, capital, 2 btn: join, revoke) ; for traders: your investors List(fullname-capital)
 }

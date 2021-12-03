@@ -1,6 +1,7 @@
 package forex.copytradingforex.service.impl;
 
 import forex.copytradingforex.model.entity.PositionEntity;
+import forex.copytradingforex.model.service.CommentServiceModel;
 import forex.copytradingforex.model.view.CommentViewModel;
 import forex.copytradingforex.repository.CommentRepository;
 import forex.copytradingforex.repository.PositionRepository;
@@ -52,5 +53,13 @@ public class CommentServiceImpl implements CommentService {
 
 
         return commentsViewModel;
+    }
+
+    @Override
+    public CommentViewModel createNewComment(CommentServiceModel commentServiceModel) {
+
+        //TODO
+
+        return null;
     }
 }

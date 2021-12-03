@@ -15,13 +15,13 @@ VALUES (1, 'master', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344
 INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
                    total_withdraw, image_url)
 VALUES (2, 'trader1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 43923, 43923, 0,
+        'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 43923, 31242, 0,
         'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
 INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
                    total_withdraw, image_url)
 VALUES (3, 'trader2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4, 45282, 45282, 0,
+        'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4, 6600, 6000, 0,
         'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
 INSERT INTO users (id, username, password, email, full_name, age, experience, image_url)
@@ -177,13 +177,13 @@ INSERT INTO positions (trade, open_time, close_time, open_price, close_price, fi
 VALUES ('SELL', '2019-06-18 08:01:12', '2018-06-18 10:25:01', 1.12229, 1.11929, 3297, 7.28103, 'r-gsEEZHYv8', 3, 2);
 INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result,yield, video_url,
                        economic_indicator_id, trader_id)
-VALUES ('BUY', '2019-06-19 18:02:58', '2019-06-20 12:45:06', 0.65524, 0.65812, 577.93, 3.44567, 'zvDh5ZP2_u4', 1, 3);
+VALUES ('BUY', '2019-06-19 18:02:58', '2019-06-20 12:45:06', 0.65524, 0.65812, 100, 3.44567, 'zvDh5ZP2_u4', 1, 3);
 INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, yield, video_url,
                        economic_indicator_id, trader_id)
-VALUES ('SELL', '2019-06-11 08:00:45', '2019-06-11 13:50:16', 8.65612, 8.62913, 863.53, 2.2, 'JLR1k8eHh8w', 2, 3);
+VALUES ('SELL', '2019-06-11 08:00:45', '2019-06-11 13:50:16', 8.65612, 8.62913, 200, 2.2, 'JLR1k8eHh8w', 2, 3);
 INSERT INTO positions (trade, open_time, close_time, open_price, close_price, financial_result, yield, video_url,
                        economic_indicator_id, trader_id)
-VALUES ('SELL', '2019-06-18 08:01:12', '2018-06-18 10:23:01', 1.12239, 1.11929, 654.66, 4.5, 'r-gsEEZHYv8', 3, 3);
+VALUES ('SELL', '2019-06-18 08:01:12', '2018-06-18 10:23:01', 1.12239, 1.11929, 300, 4.5, 'r-gsEEZHYv8', 3, 3);
 
 -- pictures
 INSERT INTO pictures(url, position_id, trader_id)

@@ -41,7 +41,7 @@ public class PositionUpdateBindingModel {
 //    private BigDecimal financialResult;
 
 
-    @Size( max = 11, message = "VideoUrl must contains 11 symbols")
+    @Size( min=11, max = 11, message = "VideoUrl must contains 11 symbols")
     private String videoUrl;
 
     public Long getId() {

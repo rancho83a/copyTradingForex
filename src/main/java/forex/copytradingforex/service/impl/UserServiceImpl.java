@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Set;
 
@@ -95,7 +96,9 @@ public class UserServiceImpl implements UserService {
 
     private UserProfileServiceModel mapToUserProfileService(UserEntity userEntity) {
         UserProfileServiceModel userProfileServiceModel = modelMapper.map(userEntity, UserProfileServiceModel.class);
-        userProfileServiceModel.setTotalYield(calculateTotalYield(userEntity.getCurrentCapital(),userEntity.getTotalWithdraw(),userEntity.getTotalDeposit()));
+        userProfileServiceModel
+                .setTotalYield(calculateTotalYield(userEntity.getCurrentCapital(),userEntity.getTotalWithdraw(),userEntity.getTotalDeposit())
+                        .setScale(1,RoundingMode.FLOOR));
 
         return userProfileServiceModel;
     }
@@ -104,8 +107,10 @@ public class UserServiceImpl implements UserService {
         if(totalDeposit.compareTo(BigDecimal.ZERO)==0){
             return BigDecimal.ZERO;
         }
-
-        return (currentCapital.add(totalWithdraw).subtract(totalDeposit)).divide(totalDeposit).multiply(BigDecimal.valueOf(100));
+        BigDecimal totalYield = (currentCapital.add(totalWithdraw).subtract(totalDeposit))
+                .multiply(BigDecimal.valueOf(100))
+                .divide(totalDeposit,6, RoundingMode.FLOOR);
+        return totalYield;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class PositionEntity extends BaseEntity{
     @Column(nullable = false, columnDefinition = "DECIMAL(19,2)")
     private BigDecimal financialResult;
 
-    @Column(nullable = false, columnDefinition = "DECIMAL(19,2)")
+    @Column(nullable = false, columnDefinition = "DECIMAL(19,6)")
     private BigDecimal yield;
 
     private String videoUrl;

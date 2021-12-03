@@ -68,7 +68,6 @@ public class PositionsController {
     public String getAddPositionPage(Model model
             ,Principal principal
     ) {
-//TODO check if principal have currentCapital > minimimal_requeired, if not - can not trade=>can not addposition
        if(!userService.canTrade(principal.getName())){
            return "warning-no-trade";
        }
