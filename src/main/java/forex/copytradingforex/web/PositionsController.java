@@ -66,11 +66,16 @@ public class PositionsController {
 
     @GetMapping("/add")
     public String getAddPositionPage(Model model
-            ,Principal principal
+            , Principal principal
     ) {
-       if(!userService.canTrade(principal.getName())){
-           return "warning-no-trade";
-       }
+//        if (!model.containsAttribute("notEnoughFunds")) {
+//            model.addAttribute("notEnoughFunds", false);
+//        }
+        if (!userService.canTrade(principal.getName())) {
+          //  model.addAttribute("notEnoughFunds", true);
+         //   return "profile";
+            return "warning-no-trade";
+        }
 
         if (!model.containsAttribute("positionAddBindModel")) {
             model
@@ -110,9 +115,9 @@ public class PositionsController {
 
     @PatchMapping("/{id}/update")
     public String updatePosition(@PathVariable Long id,
-                            @Valid PositionUpdateBindingModel updateBindingModel,
-                            BindingResult bindingResult,
-                            RedirectAttributes redirectAttributes) {
+                                 @Valid PositionUpdateBindingModel updateBindingModel,
+                                 BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
 
@@ -122,7 +127,7 @@ public class PositionsController {
 
             return "redirect:/positions/" + id + "/update/errors";
         }
-       // updateBindingModel.setId(id);
+        // updateBindingModel.setId(id);
 
         positionService.updatePosition(updateBindingModel);
         return "redirect:/positions/" + id + "/details";

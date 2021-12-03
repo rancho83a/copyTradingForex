@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,7 +41,7 @@ class CopyTradingForexUserDetailsServiceImplTest {
         testUser.setUsername("master")
                 .setPassword("12345")
                 .setEmail("master@copytradingforex.com")
-                .setRoles(Set.of(master, trader, investor));
+                .setRoles(List.of(master, trader, investor));
     }
     @Test
     void testUsernameNotFoundException(){
