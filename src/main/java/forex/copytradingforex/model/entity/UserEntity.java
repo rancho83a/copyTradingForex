@@ -44,9 +44,9 @@ public class UserEntity extends BaseEntity{
     @Column(name="total_withdraw", columnDefinition="Decimal(19,2) default '0.00'")
     private BigDecimal totalWithdraw;
 
-    //@ManyToMany(fetch = FetchType.LAZY)
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<RoleEntity> roles = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    //@ManyToMany(fetch = FetchType.EAGER)
+    private List<RoleEntity> roles = new ArrayList<>();
 
     @ManyToOne
     private UserEntity trader;
@@ -148,11 +148,11 @@ public class UserEntity extends BaseEntity{
 //        return this;
 //    }
 
-    public Set<RoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(Set<RoleEntity> roles) {
+    public UserEntity setRoles(List<RoleEntity> roles) {
         this.roles = roles;
         return this;
     }

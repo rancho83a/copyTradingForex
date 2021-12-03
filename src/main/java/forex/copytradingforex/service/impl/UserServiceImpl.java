@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
 
         RoleEntity role = roleRepository.getById(userRegistrationServiceModel.getRoleId());
-        newUser.setRoles(Set.of(role));
+        newUser.setRoles(List.of(role));
 
         newUser = userRepository.save(newUser);
 

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class CopyTradingForexUserDetailsServiceImpl implements UserDetailsServic
     }
 
 
+    @Transactional
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -37,6 +39,7 @@ public class CopyTradingForexUserDetailsServiceImpl implements UserDetailsServic
 
 
 
+    @Transactional
     private static UserDetails mapToUserDetail(UserEntity userEntity) {
         List<GrantedAuthority> authorities = userEntity
                 .getRoles()

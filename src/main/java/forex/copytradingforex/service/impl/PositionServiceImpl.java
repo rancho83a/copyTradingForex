@@ -16,6 +16,7 @@ import forex.copytradingforex.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
@@ -48,6 +49,7 @@ public class PositionServiceImpl implements PositionService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public PositionDetailsView findById(Long id, String currentUser) {
         PositionEntity positionEntity = this.positionRepository.findById(id)
@@ -66,7 +68,7 @@ public class PositionServiceImpl implements PositionService {
         return positionDetailsView;
     }
 
-
+    @Transactional
     @Override
     public boolean isOwner(String username, Long id) {
         Optional<PositionEntity> positionOpt = positionRepository.findById(id);
@@ -99,10 +101,10 @@ public class PositionServiceImpl implements PositionService {
         UserEntity trader = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader with id " + username + " was not found"));
 
-        newPosition.setYield(calculateYield(trader.getCurrentCapital(),positionAddServiceModel.getFinancialResult()));
+        newPosition.setYield(calculateYield(trader.getCurrentCapital(), positionAddServiceModel.getFinancialResult()));
 
 
-        trader.setCurrentCapital(calculateCurrentCapital(trader.getCurrentCapital(),positionAddServiceModel.getFinancialResult()));
+        trader.setCurrentCapital(calculateCurrentCapital(trader.getCurrentCapital(), positionAddServiceModel.getFinancialResult()));
 
         userRepository.save(trader);
 
@@ -114,8 +116,6 @@ public class PositionServiceImpl implements PositionService {
 
         return modelMapper.map(savedPosition, PositionAddServiceModel.class);
     }
-
-
 
 
     @Override
@@ -165,15 +165,15 @@ public class PositionServiceImpl implements PositionService {
 
     private BigDecimal calculateYield(BigDecimal capital, BigDecimal financialResult) {
 
-        if(capital.compareTo(BigDecimal.ZERO)<1){
+        if (capital.compareTo(BigDecimal.ZERO) < 1) {
             return BigDecimal.ZERO;
         }
         BigDecimal delta = capital.add(financialResult);
 
-        if(delta.compareTo(BigDecimal.ZERO)<1){
+        if (delta.compareTo(BigDecimal.ZERO) < 1) {
             return BigDecimal.valueOf(-100);
         }
-        BigDecimal yield = financialResult.multiply(BigDecimal.valueOf(100)).divide(capital,6,RoundingMode.FLOOR);
+        BigDecimal yield = financialResult.multiply(BigDecimal.valueOf(100)).divide(capital, 6, RoundingMode.FLOOR);
         return yield;
     }
 
@@ -181,7 +181,7 @@ public class PositionServiceImpl implements PositionService {
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {
         BigDecimal delta = currentCapital.add(financialResult);
 
-        if(delta.compareTo(BigDecimal.ZERO)<1){
+        if (delta.compareTo(BigDecimal.ZERO) < 1) {
             return BigDecimal.ZERO;
         }
         return delta;
