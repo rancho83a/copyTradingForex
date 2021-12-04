@@ -22,7 +22,7 @@ public class UserRegistrationBindingModel {
    // @NotBlank
     @Size(min = 3, message = "Password must contains minimum 3 symbols")
     private String password;
-    @NotBlank
+    //@NotBlank
     @Size(min = 3, message = "Password must contains minimum 3 symbols")
     private String confirmPassword;
 

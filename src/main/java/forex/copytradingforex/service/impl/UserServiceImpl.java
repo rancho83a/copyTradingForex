@@ -68,6 +68,9 @@ public class UserServiceImpl implements UserService {
 
 
         RoleEntity role = roleRepository.getById(userRegistrationServiceModel.getRoleId());
+
+
+
         newUser.setRoles(List.of(role));
 
         newUser = userRepository.save(newUser);
@@ -107,10 +110,9 @@ public class UserServiceImpl implements UserService {
         if(totalDeposit.compareTo(BigDecimal.ZERO)==0){
             return BigDecimal.ZERO;
         }
-        BigDecimal totalYield = (currentCapital.add(totalWithdraw).subtract(totalDeposit))
+        return (currentCapital.add(totalWithdraw).subtract(totalDeposit))
                 .multiply(BigDecimal.valueOf(100))
                 .divide(totalDeposit,6, RoundingMode.FLOOR);
-        return totalYield;
     }
 
     @Override
