@@ -20,4 +20,5 @@ public class CopyTradingForexUser extends User {
     public String getUserIdentifier(){
         return getUsername();
     }
+  
 }

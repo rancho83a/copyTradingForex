@@ -6,8 +6,8 @@ public class CommentViewModel {
     private Long id;
     private String textContent;
     private String owner;
-    private LocalDateTime created;
-    private boolean canApprove;
+    private String created;
+    private boolean  canApprove;
     private boolean canDelete;
 
     public Long getId() {
@@ -37,11 +37,11 @@ public class CommentViewModel {
         return this;
     }
 
-    public LocalDateTime getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    public CommentViewModel setCreated(LocalDateTime created) {
+    public CommentViewModel setCreated(String created) {
         this.created = created;
         return this;
     }

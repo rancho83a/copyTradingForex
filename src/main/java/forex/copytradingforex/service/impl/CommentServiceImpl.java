@@ -1,28 +1,36 @@
 package forex.copytradingforex.service.impl;
 
+import forex.copytradingforex.model.entity.CommentEntity;
 import forex.copytradingforex.model.entity.PositionEntity;
+import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.service.CommentServiceModel;
 import forex.copytradingforex.model.view.CommentViewModel;
 import forex.copytradingforex.repository.CommentRepository;
 import forex.copytradingforex.repository.PositionRepository;
+import forex.copytradingforex.repository.UserRepository;
 import forex.copytradingforex.service.CommentService;
 import forex.copytradingforex.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final PositionRepository positionRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public CommentServiceImpl(CommentRepository commentRepository, PositionRepository positionRepository, ModelMapper modelMapper) {
+    public CommentServiceImpl(CommentRepository commentRepository, PositionRepository positionRepository, UserRepository userRepository, ModelMapper modelMapper) {
         this.commentRepository = commentRepository;
         this.positionRepository = positionRepository;
+        this.userRepository = userRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -38,28 +46,46 @@ public class CommentServiceImpl implements CommentService {
 
                 //Alternative for previous above method
                         findByIdByEntityGraph(positionId)
-
                 .orElseThrow(
-                        () -> new ObjectNotFoundException("Position with id" + positionId + " was not found")
+                        () -> new ObjectNotFoundException("Position with id " + positionId + " was not found")
                 );
-        List<CommentViewModel> commentsViewModel = positionEntity.getComments()
-                .stream().map(c -> {
-                    CommentViewModel commentViewModel = modelMapper.map(c, CommentViewModel.class);
 
-                    commentViewModel.setOwner(c.getAuthor().getFullName());
-                    return commentViewModel;
-                })
+        return positionEntity.getComments()
+                .stream().map(this::mapToCommentViewModel)
                 .collect(Collectors.toList());
+    }
 
+    private CommentViewModel mapToCommentViewModel(CommentEntity commentEntity) {
+        return modelMapper.map(commentEntity, CommentViewModel.class)
+                .setCreated(commentEntity.getCreated().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")))
+                .setCanApprove(true)
+                .setOwner(commentEntity.getAuthor().getFullName())
+                .setCanDelete(true);
 
-        return commentsViewModel;
     }
 
     @Override
     public CommentViewModel createNewComment(CommentServiceModel commentServiceModel) {
 
-        //TODO
+        //- если в тесте про PostComment поставить @WithMockUser("testUser2") - t.e. users которого нет в репо, то тест
+        //должен провалиться, если же он не проваливается - то поставить ето ограничение (у меня проваливается)
+                //Objects.requireNonNull(commentServiceModel.getOwner());
 
-        return null;
+        PositionEntity position = positionRepository.findById(commentServiceModel.getPositionId()).orElseThrow(
+                () -> new ObjectNotFoundException("Position with id " + commentServiceModel.getPositionId() + " was not found"));
+
+        UserEntity author = userRepository.findByUsername(commentServiceModel.getOwner()).orElseThrow(
+                () -> new ObjectNotFoundException("User with username " + commentServiceModel.getOwner() + " was not found"));
+
+        CommentEntity newComment = modelMapper.map(commentServiceModel, CommentEntity.class)
+                .setApproved(false)
+                .setTextContent(commentServiceModel.getTextContent())
+                .setCreated(LocalDateTime.now())
+                .setPosition(position)
+                .setAuthor(author);
+
+        CommentEntity savedComment = commentRepository.save(newComment);
+
+        return mapToCommentViewModel(savedComment);
     }
 }

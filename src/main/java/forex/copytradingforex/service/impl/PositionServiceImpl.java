@@ -174,8 +174,7 @@ public class PositionServiceImpl implements PositionService {
         if (delta.compareTo(BigDecimal.ZERO) < 1) {
             return BigDecimal.valueOf(-100);
         }
-        BigDecimal yield = financialResult.multiply(BigDecimal.valueOf(100)).divide(capital, 6, RoundingMode.FLOOR);
-        return yield;
+        return financialResult.multiply(BigDecimal.valueOf(100)).divide(capital, 6, RoundingMode.FLOOR);
     }
 
 

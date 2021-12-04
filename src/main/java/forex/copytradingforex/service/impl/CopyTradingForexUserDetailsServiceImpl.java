@@ -39,7 +39,7 @@ public class CopyTradingForexUserDetailsServiceImpl implements UserDetailsServic
 
 
 
-    @Transactional
+
     private static UserDetails mapToUserDetail(UserEntity userEntity) {
         List<GrantedAuthority> authorities = userEntity
                 .getRoles()

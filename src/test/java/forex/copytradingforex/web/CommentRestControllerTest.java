@@ -1,17 +1,22 @@
 package forex.copytradingforex.web;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import forex.copytradingforex.model.binding.NewCommentBindingModel;
 import forex.copytradingforex.model.entity.CommentEntity;
 import forex.copytradingforex.model.entity.PositionEntity;
 import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.entity.enums.TradeEnum;
 import forex.copytradingforex.repository.PositionRepository;
 import forex.copytradingforex.repository.UserRepository;
+import org.hamcrest.text.MatchesPattern;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -31,6 +36,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @WithMockUser("testUser")
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -45,6 +51,9 @@ class CommentRestControllerTest {
     private PositionRepository positionRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private UserEntity testUser;
 
@@ -71,17 +80,39 @@ class CommentRestControllerTest {
 
     @Test
     void getCommentsTest() throws Exception {
-        long positionId = initPosition();
+        var position = initComments(initPosition());
 
-        mockMvc.perform(get("/api/" + positionId + "/comments"))
+        mockMvc.perform(get("/api/" + position.getId() + "/comments"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2))).
                 andExpect(jsonPath("$.[0].textContent", is(COMMENT_1))).
                 andExpect(jsonPath("$.[1].textContent", is(COMMENT_2)));
+    }
+
+    @Test
+    void testCreateComment() throws Exception {
+        NewCommentBindingModel testComment = new NewCommentBindingModel()
+                .setTextContent(COMMENT_1);
+
+        PositionEntity emptyPosition = initPosition();
+
+        mockMvc.perform(
+                        post("/api/" + emptyPosition.getId() + "/comments")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(testComment))
+                                .accept(MediaType.APPLICATION_JSON)
+                                .with(csrf())
+                )
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+
+                .andExpect(header().string("Location", MatchesPattern.matchesPattern("/api/" + emptyPosition.getId() + "/comments/\\d")))
+                .andExpect(jsonPath("$.textContent").value(is(COMMENT_1)));
+
 
     }
 
-    private Long initPosition() {
+    private PositionEntity initPosition() {
         PositionEntity positionTest = new PositionEntity();
 
         positionTest.setTrade(TradeEnum.BUY);
@@ -92,27 +123,29 @@ class CommentRestControllerTest {
 //               .setFinancialResult(BigDecimal.TEN);
 //                .setYield(BigDecimal.ONE);
 
-        positionTest = positionRepository.save(positionTest);
+        return positionRepository.save(positionTest);
+    }
 
+    private PositionEntity initComments(PositionEntity position) {
 
         CommentEntity comment1 = new CommentEntity();
         comment1.setCreated(LocalDateTime.now())
                 .setAuthor(testUser)
                 .setTextContent(COMMENT_1)
                 .setApproved(true)
-                .setPosition(positionTest);
+                .setPosition(position);
 
         CommentEntity comment2 = new CommentEntity();
         comment2.setCreated(LocalDateTime.now())
                 .setAuthor(testUser)
                 .setTextContent(COMMENT_2)
                 .setApproved(true)
-                .setPosition(positionTest);
+                .setPosition(position);
 
 
-        positionTest.setComments(List.of(comment1, comment2));
+        position.setComments(List.of(comment1, comment2));
 
-        return positionRepository.save(positionTest).getId();
+        return positionRepository.save(position);
     }
 
 

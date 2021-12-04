@@ -20,9 +20,9 @@ public class Temp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        PositionEntity positionTest = new PositionEntity();
-
-        positionTest.setTrade(TradeEnum.BUY);
+//        PositionEntity positionTest = new PositionEntity();
+//
+//        positionTest.setTrade(TradeEnum.BUY);
 //                .setTrader(testUser)
 //                .setOpenTime(LocalDateTime.now())
 //                .setCloseTime(LocalDateTime.now())
@@ -31,7 +31,7 @@ public class Temp implements CommandLineRunner {
 //                .setFinancialResult(BigDecimal.TEN)
 //                .setYield(BigDecimal.ONE);
 
-        positionTest = positionRepository.save(positionTest);
+    //    positionTest = positionRepository.save(positionTest);
 
 
 //        BigDecimal a = BigDecimal.valueOf(-1000);

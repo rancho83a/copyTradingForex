@@ -43,12 +43,13 @@ public class CommentRestController {
             @PathVariable Long positionId,
             @RequestBody @Valid NewCommentBindingModel newCommentBindingModel
     ) {
-        CommentServiceModel commentServiceModel = modelMapper.map(newCommentBindingModel, CommentServiceModel.class);
-        commentServiceModel.setPositionId(positionId);
+        CommentServiceModel commentServiceModel = modelMapper.map(newCommentBindingModel, CommentServiceModel.class)
+                .setPositionId(positionId)
+                .setOwner(principal.getUsername());
         CommentViewModel newCommentViewModel = commentService.createNewComment(commentServiceModel);
 
         URI locationOfNewComment =
-                URI.create(String.format("/api/%s/comments/%s", positionId,newCommentViewModel.getId()));
+                URI.create(String.format("/api/%s/comments/%s", positionId, newCommentViewModel.getId()));
 
         return ResponseEntity.created(locationOfNewComment).body(newCommentViewModel);
     }
@@ -56,7 +57,7 @@ public class CommentRestController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> onValidationFailure(MethodArgumentNotValidException e) {
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
-        e.getFieldErrors().forEach(fe-> apiError.addFieldWithError(fe.getField()));
+        e.getFieldErrors().forEach(fe -> apiError.addFieldWithError(fe.getField()));
 
         return ResponseEntity.badRequest().body(apiError);
     }
