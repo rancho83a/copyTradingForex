@@ -29,6 +29,16 @@ public class PositionAddServiceModel {
 
 
     private String videoUrl;
+    private BigDecimal yield;
+
+    public BigDecimal getYield() {
+        return yield;
+    }
+
+    public PositionAddServiceModel setYield(BigDecimal yield) {
+        this.yield = yield;
+        return this;
+    }
 
     public Long getId() {
         return id;

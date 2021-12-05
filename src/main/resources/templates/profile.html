@@ -94,6 +94,15 @@
                             <!--                            <p th:text="|Curent Capital: *{currentCapital}|"> info</p>-->
                             <p th:text="|Total Yield: *{totalYield} %|"> info</p>
 
+                            <th:block th:if="${isJoinedToCopy}">
+                            <p th:text="|My trader: *{myTrader} |"> info</p>
+
+                                <a th:href="@{/traders/{traderId}/revoke (traderId = *{myTraderId})}"
+                                   class="btn btn-pos-details">Revoke</a>
+
+
+                            </th:block>
+
                         </section>
 
                     </div>

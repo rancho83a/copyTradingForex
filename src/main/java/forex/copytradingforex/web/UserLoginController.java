@@ -58,6 +58,9 @@ public class UserLoginController {
         if (!model.containsAttribute("wrongAmount")) {
             model.addAttribute("wrongAmount", false);
         }
+        if(userService.isJoinedToCopy(currentUser.getUserIdentifier())){
+            model.addAttribute("isJoinedToCopy", true);
+        }
 
         return "profile";
     }
@@ -70,7 +73,6 @@ public class UserLoginController {
     ) {
 
         if (amount.isBlank()) {
-
             redirectAttributes.addFlashAttribute("wrongAmount", true);
             return "redirect:/users/profile";
         }

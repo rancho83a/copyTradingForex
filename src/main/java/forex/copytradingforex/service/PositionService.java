@@ -7,6 +7,7 @@ import forex.copytradingforex.model.service.PositionUpdateServiceModel;
 import forex.copytradingforex.model.view.PositionDetailsView;
 import forex.copytradingforex.model.view.PositionViewModel;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface PositionService {
@@ -23,4 +24,6 @@ public interface PositionService {
     PositionUpdateBindingModel mapDetailsViewToUpdateBindingModel(PositionDetailsView positionDetailsView);
 
     void updatePosition(PositionUpdateBindingModel updateBindingModel);
+
+    void copyPositionToInvestors(String username, BigDecimal yield);
 }

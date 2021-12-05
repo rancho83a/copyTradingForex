@@ -20,7 +20,26 @@ public class UserProfileViewModel {
     BigDecimal totalYield;
     BigDecimal totalDeposit;
     BigDecimal totalWithdraw;
+    String myTrader;
+    Long myTraderId;
 
+    public Long getMyTraderId() {
+        return myTraderId;
+    }
+
+    public UserProfileViewModel setMyTraderId(Long myTraderId) {
+        this.myTraderId = myTraderId;
+        return this;
+    }
+
+    public String getMyTrader() {
+        return myTrader;
+    }
+
+    public UserProfileViewModel setMyTrader(String myTrader) {
+        this.myTrader = myTrader;
+        return this;
+    }
 
     @NotNull(message = "Please, fill the amount field")
     @Positive(message = "You can withdraw positive amount only")

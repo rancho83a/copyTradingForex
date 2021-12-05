@@ -8,21 +8,35 @@ public class UserProfileServiceModel {
     Long id;
     String username;
     String fullName;
-//    BigDecimal initialCapital;
-
     String imageUrl;
-
     String email;
     Integer age;
     Integer experience;
     BigDecimal currentCapital;
-
     BigDecimal totalYield;
     BigDecimal totalDeposit;
     BigDecimal totalWithdraw;
-
-
     BigDecimal withdrawAmount;
+    String myTrader;
+    Long myTraderId;
+
+    public Long getMyTraderId() {
+        return myTraderId;
+    }
+
+    public UserProfileServiceModel setMyTraderId(Long myTraderId) {
+        this.myTraderId = myTraderId;
+        return this;
+    }
+
+    public String getMyTrader() {
+        return myTrader;
+    }
+
+    public UserProfileServiceModel setMyTrader(String myTrader) {
+        this.myTrader = myTrader;
+        return this;
+    }
 
     public BigDecimal getWithdrawAmount() {
         return withdrawAmount;

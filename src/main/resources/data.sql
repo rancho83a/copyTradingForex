@@ -34,6 +34,11 @@ INSERT INTO users (id, username, password, email, full_name, age, experience, cu
 VALUES (5, 'investor2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'investor2@copytradingforex.com', 'Investor2 Investorov2', 40, 0, 1000, 1000, 0,
         'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
+INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
+                   total_withdraw, image_url)
+VALUES (6, 'trader3', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
+        'trader3@copytradingforex.com', 'Trader3 Traderov3', 44, 4, 1600, 6000, 0,
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
 
 -- -- user roles
 -- -- master
@@ -56,6 +61,9 @@ VALUES (4, 3);
 -- investor2
 INSERT INTO users_roles (`user_entity_id`, `roles_id`)
 VALUES (5, 3);
+-- trader3
+INSERT INTO users_roles (`user_entity_id`, `roles_id`)
+VALUES (6, 2);
 
 
 -- countries

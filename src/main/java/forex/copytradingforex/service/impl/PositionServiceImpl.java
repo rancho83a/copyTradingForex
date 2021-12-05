@@ -143,13 +143,11 @@ public class PositionServiceImpl implements PositionService {
         positionRepository.save(positionEntity);
     }
 
-
     private boolean isMaster(UserEntity user) {
         return user.getRoles()
                 .stream()
                 .map(RoleEntity::getRole)
                 .anyMatch(r -> r == RoleEnum.MASTER);
-
 
     }
 

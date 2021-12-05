@@ -30,13 +30,11 @@ public class PositionsController {
     public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, UserService userService) {
         this.positionService = positionService;
         this.economicIndicatorService = economicIndicatorService;
-
         this.userService = userService;
     }
 
     @GetMapping("/all")
     public String allPositions(Model model) {
-
         model.addAttribute("positions", this.positionService.getAllPositions());
         return "positions";
     }
@@ -89,14 +87,18 @@ public class PositionsController {
     @PostMapping("/add")
     public String addOffer(@Valid PositionAddBindingModel positionAddBindModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                           @AuthenticationPrincipal CopyTradingForexUser user) {
+                           @AuthenticationPrincipal CopyTradingForexUser trader) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("positionAddBindModel", positionAddBindModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.positionAddBindModel", bindingResult)
                     .addFlashAttribute("economicIndicators", economicIndicatorService.getAllEconomicIndicators());
             return "redirect:/positions/add";
         }
-        PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel, user.getUsername());
+        PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel, trader.getUsername());
+
+
+        positionService.copyPositionToInvestors(trader.getUserIdentifier(),savedPositionAddServiceModel.getYield());
+
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }
 
@@ -127,12 +129,10 @@ public class PositionsController {
 
             return "redirect:/positions/" + id + "/update/errors";
         }
-        // updateBindingModel.setId(id);
 
         positionService.updatePosition(updateBindingModel);
         return "redirect:/positions/" + id + "/details";
     }
-
 
     @GetMapping("/{id}/update/errors")
     public String updatePositionErrors(@PathVariable Long id) {

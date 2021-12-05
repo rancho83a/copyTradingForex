@@ -3,10 +3,14 @@ package forex.copytradingforex.model.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+@NamedEntityGraph(
+        name = "trader-investors",
+        attributeNodes = {
+                @NamedAttributeNode("investors")
+        }
+)
 @Entity
 @Table(name="users")
 public class UserEntity extends BaseEntity{
@@ -43,6 +47,8 @@ public class UserEntity extends BaseEntity{
 
     @Column(name="total_withdraw", columnDefinition="Decimal(19,2) default '0.00'")
     private BigDecimal totalWithdraw;
+
+    private BigDecimal bufferedAmount;
 
     @ManyToMany(fetch = FetchType.LAZY)
     //@ManyToMany(fetch = FetchType.EAGER)
@@ -183,5 +189,13 @@ public class UserEntity extends BaseEntity{
     public UserEntity setTotalWithdraw(BigDecimal totalWithdraw) {
         this.totalWithdraw = totalWithdraw;
         return this;
+    }
+
+    public void addIvestor(UserEntity investor) {
+        this.investors.add(investor);
+    }
+
+    public void removeInvestor(Long investorId) {
+        this.investors.removeIf(i-> i.getId().equals(investorId));
     }
 }

@@ -28,7 +28,10 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/positions/all">Trades</a>
+                            <a class="nav-link" href="/positions/all">Positions</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="hasRole('INVESTOR')">
+                            <a class="nav-link" href="/traders/all">Traders</a>
                         </li>
                         <th:block sec:authorize="!isAuthenticated()">
 
