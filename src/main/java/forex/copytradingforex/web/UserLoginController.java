@@ -61,6 +61,10 @@ public class UserLoginController {
         if(userService.isJoinedToCopy(currentUser.getUserIdentifier())){
             model.addAttribute("isJoinedToCopy", true);
         }
+        if(!userService.getInvestors(currentUser.getUserIdentifier()).isEmpty()){
+            model.addAttribute("haveInvestors", true);
+            model.addAttribute("investors",userService.getInvestors(currentUser.getUserIdentifier()));
+        }
 
         return "profile";
     }

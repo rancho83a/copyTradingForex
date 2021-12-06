@@ -90,11 +90,16 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
         UserProfileServiceModel userProfileServiceModel = mapToUserProfileService(userEntity);
+        return mapToUserProfileView(userProfileServiceModel);
+    }
+
+    private UserProfileViewModel mapToUserProfileView(UserProfileServiceModel userProfileServiceModel) {
         UserProfileViewModel userProfileViewModel = modelMapper.map(userProfileServiceModel, UserProfileViewModel.class);
 
         userProfileViewModel
-                .setCommission(userProfileViewModel.getBufferedAmount().multiply(TradingSettings.traderRemuneration).setScale(2,RoundingMode.FLOOR));
-        return  userProfileViewModel;
+                .setCommission(userProfileViewModel.getBufferedAmount()
+                        .multiply(TradingSettings.traderRemuneration).setScale(2,RoundingMode.FLOOR));
+        return userProfileViewModel;
     }
 
     private UserProfileServiceModel mapToUserProfileService(UserEntity userEntity) {
@@ -260,6 +265,19 @@ public class UserServiceImpl implements UserService {
         data[2] = traderCapital.add(remuneration);
 
         return data;
+    }
+
+    @Transactional
+    @Override
+    public List<UserProfileViewModel> getInvestors(String username) {
+        UserEntity trader = this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("Trader with username" + username + " was not found"));
+
+         return trader.getInvestors()
+                .stream()
+                .map(this::mapToUserProfileService)
+                .map(this::mapToUserProfileView)
+                .collect(Collectors.toList());
     }
 
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {

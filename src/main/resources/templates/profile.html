@@ -84,9 +84,10 @@
 
                             <h4 th:text="|Full name: *{fullName}|" class="card-title"> title</h4>
 
-                            <h5 th:text="|Current capital: *{currentCapital} Buffered Amount: *{bu}|" class="card-title"> title</h5>
-                            <h5 th:text="|Total deposit: *{totalDeposit}|" class="card-title"> title</h5>
-                            <h5 th:text="|Total withdraw: *{totalWithdraw}|" class="card-title"> title</h5>
+                            <h5 th:text="|Current capital, USD: *{currentCapital}|" class="card-title"> title</h5>
+                            <!--                            <h5 th:text="|Buffered Amount, USD: *{bufferedAmount}|" class="card-title"> title</h5>-->
+                            <h5 th:text="|Total deposit, USD: *{totalDeposit}|" class="card-title"> title</h5>
+                            <h5 th:text="|Total withdraw, USD: *{totalWithdraw}|" class="card-title"> title</h5>
 
                             <p th:text="|Email: *{email}|"> info</p>
                             <p th:text="|Age: *{age}|"> info</p>
@@ -95,12 +96,19 @@
                             <p th:text="|Total Yield: *{totalYield} %|"> info</p>
 
                             <th:block th:if="${isJoinedToCopy}">
-                            <p th:text="|My trader: *{myTrader} |"> info</p>
+                                <h4 th:text="|My trader: *{myTrader} |"> info</h4>
+                                <h4 th:text="|Commisiion to pay: *{commission} USD|"> info</h4>
+
 
                                 <a th:href="@{/traders/{traderId}/revoke (traderId = *{myTraderId})}"
                                    class="btn btn-pos-details">Revoke</a>
+                            </th:block>
+                            <th:block th:if="${haveInvestors}">
 
-
+                                <h5 th:text="|My Investors:|"> info</h5>
+                                <div th:each="i : ${investors}">
+                                    <p th:text="${i.fullName} + '   |  Waiting for commission:  ' +${i.commission} +'USD'"> info</p>
+                                </div>
                             </th:block>
 
                         </section>

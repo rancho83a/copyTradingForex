@@ -32,4 +32,7 @@ public interface UserService {
     void copyPositionToInvestors(String username, BigDecimal yield);
 
     BigDecimal[] remuneration(BigDecimal[] data);
+
+
+    List<UserProfileViewModel> getInvestors(String username);
 }
