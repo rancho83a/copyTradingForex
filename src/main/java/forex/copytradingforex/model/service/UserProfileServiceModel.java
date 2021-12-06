@@ -19,6 +19,16 @@ public class UserProfileServiceModel {
     BigDecimal withdrawAmount;
     String myTrader;
     Long myTraderId;
+    private BigDecimal bufferedAmount;
+
+    public BigDecimal getBufferedAmount() {
+        return bufferedAmount;
+    }
+
+    public UserProfileServiceModel setBufferedAmount(BigDecimal bufferedAmount) {
+        this.bufferedAmount = bufferedAmount;
+        return this;
+    }
 
     public Long getMyTraderId() {
         return myTraderId;

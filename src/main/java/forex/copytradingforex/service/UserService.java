@@ -31,5 +31,5 @@ public interface UserService {
 
     void copyPositionToInvestors(String username, BigDecimal yield);
 
-    boolean remuneration(UserEntity investor, UserEntity trader);
+    BigDecimal[] remuneration(BigDecimal[] data);
 }

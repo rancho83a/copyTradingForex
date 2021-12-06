@@ -22,6 +22,27 @@ public class UserProfileViewModel {
     BigDecimal totalWithdraw;
     String myTrader;
     Long myTraderId;
+    private BigDecimal bufferedAmount;
+
+    private BigDecimal commission;
+
+    public BigDecimal getBufferedAmount() {
+        return bufferedAmount;
+    }
+
+    public UserProfileViewModel setBufferedAmount(BigDecimal bufferedAmount) {
+        this.bufferedAmount = bufferedAmount;
+        return this;
+    }
+
+    public BigDecimal getCommission() {
+        return commission;
+    }
+
+    public UserProfileViewModel setCommission(BigDecimal commission) {
+        this.commission = commission;
+        return this;
+    }
 
     public Long getMyTraderId() {
         return myTraderId;

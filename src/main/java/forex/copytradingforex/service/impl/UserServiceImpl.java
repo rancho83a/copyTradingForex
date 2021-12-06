@@ -90,8 +90,11 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
         UserProfileServiceModel userProfileServiceModel = mapToUserProfileService(userEntity);
+        UserProfileViewModel userProfileViewModel = modelMapper.map(userProfileServiceModel, UserProfileViewModel.class);
 
-        return modelMapper.map(userProfileServiceModel, UserProfileViewModel.class);
+        userProfileViewModel
+                .setCommission(userProfileViewModel.getBufferedAmount().multiply(TradingSettings.traderRemuneration).setScale(2,RoundingMode.FLOOR));
+        return  userProfileViewModel;
     }
 
     private UserProfileServiceModel mapToUserProfileService(UserEntity userEntity) {
@@ -126,16 +129,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
     }
 
+    @Transactional
     @Override
     public boolean withdrawAmount(BigDecimal amount, String username) {
         UserEntity currentUser = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
 
-        if(currentUser.getTrader()!=null){
-            this.revokeTrader(currentUser.getUsername(),currentUser.getTrader().getId());
+        if (currentUser.getTrader() != null) {// if have trader
+            this.revokeTrader(currentUser.getUsername(), currentUser.getTrader().getId());
         }
 
-
+        currentUser = this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
         BigDecimal currentCapital = currentUser.getCurrentCapital();
 
         if (currentCapital.compareTo(amount) < 0) {
@@ -198,19 +203,25 @@ public class UserServiceImpl implements UserService {
         UserEntity trader = this.userRepository.findByIdByEntityGraph(traderId)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
 
+        BigDecimal[] data = {investor.getBufferedAmount(), investor.getCurrentCapital(), trader.getCurrentCapital()};
+
 
         //check if BufferedAmout is >0 - then remuneration, else - just set it to 0
-        boolean isRemuneration = this.remuneration(investor, trader);
-        if(!isRemuneration){
+        if (investor.getBufferedAmount().compareTo(BigDecimal.ZERO) > 0) {
+            data = this.remuneration(data);
+            investor.setBufferedAmount(data[0]);
+            investor.setCurrentCapital(data[1]);
+            trader.setCurrentCapital(data[2]);
+        } else {
             investor.setBufferedAmount(BigDecimal.ZERO);
         }
+
+        trader.removeInvestor(investor.getId());
+        userRepository.save(trader);
 
 
         investor.setTrader(null);
         userRepository.save(investor);
-
-        trader.removeInvestor(investor.getId());
-        userRepository.save(trader);
     }
 
     @Transactional
@@ -234,17 +245,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean remuneration(UserEntity investor, UserEntity trader) {
-        if(investor.getBufferedAmount().compareTo(BigDecimal.ZERO)<1){
-            return false;
+    public BigDecimal[] remuneration(BigDecimal[] data) {
+        BigDecimal bufferedAmount = data[0];
+        BigDecimal investorCapital = data[1];
+        BigDecimal traderCapital = data[2];
+
+        if (bufferedAmount.compareTo(BigDecimal.ZERO) < 1) {
+            return data;
         }
 
-        BigDecimal remuneration =  investor.getBufferedAmount().multiply(TradingSettings.traderRemuneration);
-        investor.setCurrentCapital(investor.getCurrentCapital().subtract(remuneration));
-        userRepository.save(investor);
-        trader.setCurrentCapital(trader.getCurrentCapital().add(remuneration));
-        userRepository.save(trader);
-        return true;
+        BigDecimal remuneration = bufferedAmount.multiply(TradingSettings.traderRemuneration);
+        data[1] = investorCapital.subtract(remuneration);
+        data[0] = (BigDecimal.ZERO);
+        data[2] = traderCapital.add(remuneration);
+
+        return data;
     }
 
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {
