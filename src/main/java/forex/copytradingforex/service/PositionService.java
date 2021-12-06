@@ -25,5 +25,4 @@ public interface PositionService {
 
     void updatePosition(PositionUpdateBindingModel updateBindingModel);
 
-    void copyPositionToInvestors(String username, BigDecimal yield);
 }

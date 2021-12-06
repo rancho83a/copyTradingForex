@@ -66,8 +66,8 @@ public class UserServiceImpl implements UserService {
                 .setCurrentCapital(currentCapital)
                 .setImageUrl(userRegistrationServiceModel.getImageUrl().isBlank() ? IMAGE_URL : userRegistrationServiceModel.getImageUrl())
                 .setTotalDeposit(currentCapital)
-                .setTotalWithdraw(BigDecimal.ZERO);
-
+                .setTotalWithdraw(BigDecimal.ZERO)
+                .setBufferedAmount(BigDecimal.ZERO);
 
         RoleEntity role = roleRepository.getById(userRegistrationServiceModel.getRoleId());
 
@@ -127,20 +127,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void withdrawAmount(BigDecimal amount, String username) {
-        UserEntity userEntity = this.userRepository.findByUsername(username)
+    public boolean withdrawAmount(BigDecimal amount, String username) {
+        UserEntity currentUser = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
-        BigDecimal currentCapital = userEntity.getCurrentCapital();
 
-        if (currentCapital.compareTo(amount) < 0) {
-            //TODO push message - not enought funds
-            return;
+        if(currentUser.getTrader()!=null){
+            this.revokeTrader(currentUser.getUsername(),currentUser.getTrader().getId());
         }
 
-        userEntity.setCurrentCapital(currentCapital.subtract(amount));
-        userEntity.setTotalWithdraw(userEntity.getTotalWithdraw().add(amount));
 
-        userRepository.save(userEntity);
+        BigDecimal currentCapital = currentUser.getCurrentCapital();
+
+        if (currentCapital.compareTo(amount) < 0) {
+            return false;
+        }
+
+        currentUser.setCurrentCapital(currentCapital.subtract(amount));
+        currentUser.setTotalWithdraw(currentUser.getTotalWithdraw().add(amount));
+
+        userRepository.save(currentUser);
+        return true;
     }
 
     @Override
@@ -172,7 +178,7 @@ public class UserServiceImpl implements UserService {
         investor.setTrader(trader);
         userRepository.save(investor);
 
-        trader.addIvestor(investor);
+        trader.addInvestor(investor);
         userRepository.save(trader);
     }
 
@@ -192,6 +198,14 @@ public class UserServiceImpl implements UserService {
         UserEntity trader = this.userRepository.findByIdByEntityGraph(traderId)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
 
+
+        //check if BufferedAmout is >0 - then remuneration, else - just set it to 0
+        boolean isRemuneration = this.remuneration(investor, trader);
+        if(!isRemuneration){
+            investor.setBufferedAmount(BigDecimal.ZERO);
+        }
+
+
         investor.setTrader(null);
         userRepository.save(investor);
 
@@ -199,24 +213,46 @@ public class UserServiceImpl implements UserService {
         userRepository.save(trader);
     }
 
-
+    @Transactional
     @Override
     public void copyPositionToInvestors(String username, BigDecimal yield) {
-        yield.add(BigDecimal.ZERO)
         UserEntity trader = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader with username" + username + " was not found"));
 
         List<UserEntity> investors = trader.getInvestors();
         if (!investors.isEmpty()) {
-            investors.stream()
-                    .map(investor -> {
-
-
-                        return investor;
-
-
+            investors
+                    .forEach(investor -> {
+                        if (investor.getCurrentCapital().compareTo(TradingSettings.requiredCopyCapital) > -1) {
+                            BigDecimal resultInvestor = yield.multiply(investor.getCurrentCapital()).divide(BigDecimal.valueOf(100), 6, RoundingMode.FLOOR);
+                            investor.setBufferedAmount(investor.getBufferedAmount().add(resultInvestor));
+                            investor.setCurrentCapital(calculateCurrentCapital(investor.getCurrentCapital(), resultInvestor));
+                        }
+                        userRepository.save(investor);
                     });
         }
     }
 
+    @Override
+    public boolean remuneration(UserEntity investor, UserEntity trader) {
+        if(investor.getBufferedAmount().compareTo(BigDecimal.ZERO)<1){
+            return false;
+        }
+
+        BigDecimal remuneration =  investor.getBufferedAmount().multiply(TradingSettings.traderRemuneration);
+        investor.setCurrentCapital(investor.getCurrentCapital().subtract(remuneration));
+        userRepository.save(investor);
+        trader.setCurrentCapital(trader.getCurrentCapital().add(remuneration));
+        userRepository.save(trader);
+        return true;
+    }
+
+    private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {
+        BigDecimal delta = currentCapital.add(financialResult);
+
+        if (delta.compareTo(BigDecimal.ZERO) < 1) {
+            return BigDecimal.ZERO;
+        }
+        return delta;
+    }
 }

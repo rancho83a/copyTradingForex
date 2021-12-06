@@ -185,11 +185,8 @@ public class PositionServiceImpl implements PositionService {
         return delta;
     }
 
-    //TODO temporaryResult - property in UserEntity -
-    // записать результат от скопираной сделки не только  в current_capital, но и в Междинную сумму - моьно сделать отдельное
-    // Entity - @OneToOne - каждий инвестор будет иметь такую, трейдеру не надо
 
     //TODO scheduler - fee every 1 or 2 hours - 0.01 USD
     //TODO scheduler - every week Remuneration or when disconnect
-    //TODO add to profile - for INVESTOR.ROLE only - section your trader (full name, capital, 2 btn: join, revoke) ; for traders: your investors List(fullname-capital)
+    //TODO  for traders: your investors List(fullname-capital-buffered)
 }

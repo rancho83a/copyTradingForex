@@ -1,5 +1,6 @@
 package forex.copytradingforex.service;
 
+import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.service.UserRegistrationServiceModel;
 import forex.copytradingforex.model.view.UserProfileViewModel;
 
@@ -16,7 +17,7 @@ public interface UserService {
 
     void depositAmount(BigDecimal amount, String username);
 
-    void withdrawAmount(BigDecimal amount, String username);
+    boolean withdrawAmount(BigDecimal amount, String username);
 
     boolean canTrade(String username);
 
@@ -29,4 +30,6 @@ public interface UserService {
     void revokeTrader(String investorUsername, Long traderId);
 
     void copyPositionToInvestors(String username, BigDecimal yield);
+
+    boolean remuneration(UserEntity investor, UserEntity trader);
 }

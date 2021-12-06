@@ -94,8 +94,11 @@ public class UserLoginController {
             return "redirect:/users/profile";
         }
 
-        userService.withdrawAmount(userProfile.getWithdrawAmount(), user.getUserIdentifier());
+        boolean isWithdraw = userService.withdrawAmount(userProfile.getWithdrawAmount(), user.getUserIdentifier());
 
+        if(!isWithdraw){
+            return "warning-no-enough-amount";
+        }
         return "redirect:/users/profile";
     }
 

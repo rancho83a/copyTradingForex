@@ -97,7 +97,7 @@ public class PositionsController {
         PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel, trader.getUsername());
 
 
-        positionService.copyPositionToInvestors(trader.getUserIdentifier(),savedPositionAddServiceModel.getYield());
+        userService.copyPositionToInvestors(trader.getUserIdentifier(),savedPositionAddServiceModel.getYield());
 
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }

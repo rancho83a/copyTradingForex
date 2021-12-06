@@ -94,8 +94,8 @@ class UserRegistrationControllerTest {
 
                         contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 ).
-                 andExpect(status().is3xxRedirection());
-                //        andExpect(status().isCreated());
+                andExpect(status().is3xxRedirection());
+        //        andExpect(status().isCreated());
 
         Assertions.assertEquals(1, userRepository.count());
 
@@ -112,12 +112,5 @@ class UserRegistrationControllerTest {
         Assertions.assertEquals(TEST_EXPERIENCE, newUser.getExperience());
         Assertions.assertEquals(TEST_IMAGE_URL, newUser.getImageUrl());
         Assertions.assertEquals(CURRENT_CAPITAL.setScale(2), newUser.getCurrentCapital());
-
-
-
-        // todo - check the remaining properties
-
-
-
     }
 }

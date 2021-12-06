@@ -12,8 +12,8 @@ import java.util.List;
         }
 )
 @Entity
-@Table(name="users")
-public class UserEntity extends BaseEntity{
+@Table(name = "users")
+public class UserEntity extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -35,20 +35,17 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false)
     private Integer experience;
 
-//    @Column(name="initial_capital", columnDefinition="Decimal(19,2) default '0.00'")
-//    private BigDecimal initialCapital;
-
-    @Column(name="current_capital", columnDefinition="Decimal(19,2) default '0.00'")
-    //private BigDecimal currentCapital= initialCapital;
+    @Column(columnDefinition = "Decimal(19,2) default '0.00'")
     private BigDecimal currentCapital;
 
-    @Column(name="total_deposit", columnDefinition="Decimal(19,2) default '0.00'")
+    @Column(columnDefinition = "Decimal(19,2) default '0.00'")
     private BigDecimal totalDeposit;
 
-    @Column(name="total_withdraw", columnDefinition="Decimal(19,2) default '0.00'")
+    @Column(columnDefinition = "Decimal(19,2) default '0.00'")
     private BigDecimal totalWithdraw;
-
+    @Column(columnDefinition = "Decimal(19,2) default '0.00'")
     private BigDecimal bufferedAmount;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     //@ManyToMany(fetch = FetchType.EAGER)
@@ -58,7 +55,7 @@ public class UserEntity extends BaseEntity{
     private UserEntity trader;
 
     @OneToMany(mappedBy = "trader")
-    private List<UserEntity> investors= new ArrayList<>();
+    private List<UserEntity> investors = new ArrayList<>();
 
     @OneToMany(mappedBy = "trader")
     private List<PositionEntity> positions;
@@ -145,15 +142,6 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-//    public BigDecimal getInitialCapital() {
-//        return initialCapital;
-//    }
-//
-//    public UserEntity setInitialCapital(BigDecimal capital) {
-//        this.initialCapital = capital;
-//        return this;
-//    }
-
     public List<RoleEntity> getRoles() {
         return roles;
     }
@@ -191,11 +179,29 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-    public void addIvestor(UserEntity investor) {
+    public BigDecimal getBufferedAmount() {
+        return bufferedAmount;
+    }
+
+    public UserEntity setBufferedAmount(BigDecimal bufferedAmount) {
+        this.bufferedAmount = bufferedAmount;
+        return this;
+    }
+
+    public List<PositionEntity> getPositions() {
+        return positions;
+    }
+
+    public UserEntity setPositions(List<PositionEntity> positions) {
+        this.positions = positions;
+        return this;
+    }
+
+    public void addInvestor(UserEntity investor) {
         this.investors.add(investor);
     }
 
     public void removeInvestor(Long investorId) {
-        this.investors.removeIf(i-> i.getId().equals(investorId));
+        this.investors.removeIf(i -> i.getId().equals(investorId));
     }
 }

@@ -7,38 +7,38 @@ INSERT INTO roles (id, role)
 VALUES (3, 'INVESTOR');
 
 -- some test users
-INSERT INTO users (id, username, password, image_url, email, full_name, age, experience)
+INSERT INTO users (id, username, password, image_url, email, full_name, age, experience, buffered_amount)
 VALUES (1, 'master', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274465/static/Aleksandar_Peychev_lcgmnh.jpg',
-        'master@copytradingforex.com', 'Master Masterov', 33, 3);
+        'master@copytradingforex.com', 'Master Masterov', 33, 3,0);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
-                   total_withdraw, image_url)
+                   total_withdraw, image_url, buffered_amount)
 VALUES (2, 'trader1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'trader1@copytradingforex.com', 'Trader1 Traderov1', 22, 2, 43923, 31242, 0,
-        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg',0);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
-                   total_withdraw, image_url)
+                   total_withdraw, image_url, buffered_amount)
 VALUES (3, 'trader2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'trader2@copytradingforex.com', 'Trader2 Traderov2', 44, 4, 6600, 6000, 0,
-        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg',0);
 
-INSERT INTO users (id, username, password, email, full_name, age, experience, image_url)
+INSERT INTO users (id, username, password, email, full_name, age, experience,current_capital, total_deposit, image_url, buffered_amount)
 VALUES (4, 'investor1', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
-        'investor1@copytradingforex.com', 'Investor1 Investorov1', 55, 2,
-        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
+        'investor1@copytradingforex.com', 'Investor1 Investorov1', 55, 2, 10000,10000,
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg',0);
 
 INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
-                   total_withdraw, image_url)
+                   total_withdraw, image_url, buffered_amount)
 VALUES (5, 'investor2', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'investor2@copytradingforex.com', 'Investor2 Investorov2', 40, 0, 1000, 1000, 0,
-        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg',0);
 INSERT INTO users (id, username, password, email, full_name, age, experience, current_capital, total_deposit,
-                   total_withdraw, image_url)
+                   total_withdraw, image_url, buffered_amount)
 VALUES (6, 'trader3', 'fae1489b450b4ed36cc5b6258b32e9c567a34e32f18e2c74e15834a344393b14cdf752347ddd0399',
         'trader3@copytradingforex.com', 'Trader3 Traderov3', 44, 4, 1600, 6000, 0,
-        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg');
+        'https://res.cloudinary.com/drapmo8cx/image/upload/v1638274500/static/experience1_epfhyi.svg',0);
 
 -- -- user roles
 -- -- master
