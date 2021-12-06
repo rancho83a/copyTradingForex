@@ -63,8 +63,6 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <section id="video">
-                            <!--                            <iframe id="frame" th:src="'https://www.youtube.com/watch?v=' + *{videoUrl}">-->
-                            <!--                            </iframe>-->
                             <iframe
                                     th:src="'https://www.youtube.com/embed/'+ *{videoUrl}"
                                     title="YouTube video player" frameborder="0" allow="accelerometer; autoplay;
@@ -113,18 +111,19 @@
 
                 <div class="row my-5 comments">
                     <div class="col-12" content="center">
-                        <section >
+                        <section>
                             <h1>Comments</h1>
 
                             <div>
                                 <!-- Comments submission -->
                                 <form id="commentForm" method="POST"
-                                      action="/">
+                                      th:action="@{/api/{positionId}/comments (positionId=${position.id})}">
+
                                     <div class="form-group">
                                         <h4>Leave a comment</h4>
-                                        <label for="message">Message</label>
-                                        <textarea name="message"
-                                                  id="message"
+                                        <label for="textContent">Message</label>
+                                        <textarea name="textContent"
+                                                  id="textContent"
                                                   cols="30"
                                                   rows="5"
                                                   class="form-control"
@@ -156,7 +155,7 @@
                 </div>
             </div>
         </section>
-        <script th:src="@{/js/comments.js}"></script>
+        <script th:src="@{/js/commentsmy.js}"></script>
 
         <!--        Disclaimer-->
         <div th:replace="fragments/disclaimer :: disclaimer">Disclaimer></div>
