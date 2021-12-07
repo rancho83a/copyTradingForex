@@ -143,6 +143,12 @@ public class PositionServiceImpl implements PositionService {
         positionRepository.save(positionEntity);
     }
 
+    @Override
+    public PositionEntity getPictureById(Long id) {
+        return this.positionRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Position with id: " + id + " was not found"));
+    }
+
     private boolean isMaster(UserEntity user) {
         return user.getRoles()
                 .stream()

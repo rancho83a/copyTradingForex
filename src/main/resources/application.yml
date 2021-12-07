@@ -32,9 +32,8 @@ spring:
 
 
 
-
 #Cloudinary Properties
-#cloudinary:
-  #api-key: 
-  #api-secret: 
-  #cloud-name: 
+cloudinary:
+  api-key: 446412117829948
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: drapmo8cx

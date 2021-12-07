@@ -1,1 +1,0 @@
-alert("Not enough money to trade. The minimum required deposit is 1000 USD")

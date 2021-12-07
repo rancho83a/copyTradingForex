@@ -2,6 +2,7 @@ package forex.copytradingforex.service;
 
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
 import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
+import forex.copytradingforex.model.entity.PositionEntity;
 import forex.copytradingforex.model.service.PositionAddServiceModel;
 import forex.copytradingforex.model.service.PositionUpdateServiceModel;
 import forex.copytradingforex.model.view.PositionDetailsView;
@@ -25,4 +26,5 @@ public interface PositionService {
 
     void updatePosition(PositionUpdateBindingModel updateBindingModel);
 
+    PositionEntity getPictureById(Long id);
 }

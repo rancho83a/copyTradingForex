@@ -7,18 +7,30 @@ import javax.persistence.*;
 @Table(name = "pictures")
 public class PictureEntity extends BaseEntity {
 
-
     private String title;
 
     //@Column(columnDefinition = "TEXT", nullable = false)
     @Lob
     private String url;
 
+    @Lob
+    private String publicId;
+
     @ManyToOne
     private UserEntity trader;
 
     @OneToOne
     private PositionEntity position;
+
+
+    public String getPublicId() {
+        return publicId;
+    }
+
+    public PictureEntity setPublicId(String publicId) {
+        this.publicId = publicId;
+        return this;
+    }
 
     public String getTitle() {
         return title;

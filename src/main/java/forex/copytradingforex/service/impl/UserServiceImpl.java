@@ -185,6 +185,8 @@ public class UserServiceImpl implements UserService {
         UserEntity trader = this.userRepository.findByIdByEntityGraph(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
 
+//TODO add check currentCapital
+
         investor.setTrader(trader);
         userRepository.save(investor);
 
@@ -278,6 +280,12 @@ public class UserServiceImpl implements UserService {
                 .map(this::mapToUserProfileService)
                 .map(this::mapToUserProfileView)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserEntity findUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
     }
 
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {

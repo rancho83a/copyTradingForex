@@ -35,4 +35,6 @@ public interface UserService {
 
 
     List<UserProfileViewModel> getInvestors(String username);
+
+    UserEntity findUserByUsername(String username);
 }
