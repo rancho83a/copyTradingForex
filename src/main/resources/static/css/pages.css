@@ -110,6 +110,7 @@ h2::after {
 .coins {
     width: 100%;
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 
@@ -462,3 +463,4 @@ a.article:hover {
     color: #031430;
     border-radius: 8px;
 }
+

@@ -69,7 +69,7 @@
                             <!--                        </th:block>-->
                         </div>
                         <small th:if="${wrongAmount}"
-                               class="rounded bg-danger">
+                               class="rounded bg-danger text-white">
                             Please fill amount field!
                         </small>
                         <section class="how-it-works card-text">
@@ -78,6 +78,13 @@
                             <h4 th:text="|Full name: *{fullName}|" class="card-title"> title</h4>
 
                             <h5 th:text="|Current capital, USD: *{currentCapital}|" class="card-title"> title</h5>
+
+                            <small th:if="${joinedInvestorCanNotCopy}"
+                                   class="rounded bg-danger text-white">
+                                Your capital is too small. You can not copy trader`s position!
+                            </small>
+
+
                             <!--                            <h5 th:text="|Buffered Amount, USD: *{bufferedAmount}|" class="card-title"> title</h5>-->
                             <h5 th:text="|Total deposit, USD: *{totalDeposit}|" class="card-title"> title</h5>
                             <h5 th:text="|Total withdraw, USD: *{totalWithdraw}|" class="card-title"> title</h5>

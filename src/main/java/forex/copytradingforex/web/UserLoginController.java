@@ -1,8 +1,5 @@
 package forex.copytradingforex.web;
 
-
-import forex.copytradingforex.model.binding.PositionAddBindingModel;
-import forex.copytradingforex.model.binding.UserRegistrationBindingModel;
 import forex.copytradingforex.model.view.UserProfileViewModel;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
@@ -66,6 +63,11 @@ public class UserLoginController {
             model.addAttribute("investors",userService.getInvestors(currentUser.getUserIdentifier()));
         }
 
+        if(userService.isJoinedToCopy(currentUser.getUserIdentifier())) {
+            if (!userService.isJoinedInvestorCanCopy(currentUser.getUserIdentifier())) {
+                model.addAttribute("joinedInvestorCanNotCopy", true);
+            }
+        }
         return "profile";
     }
 

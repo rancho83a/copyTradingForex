@@ -26,133 +26,86 @@
 
             <div class="container">
                 <div class="row my-4 align-items-center justify-content-center ">
-                    <div class="col-md-11 mb-4">
-                        <h1>What is Fund Management on Forex?</h1>
+                    <div class="col-md-7 mb-4">
+                        <h1 th:text="#{how-it-work}"></h1>
                     </div>
-                    <div class="col-md-4">
-                        <p class="how-it-works">
-                            The Fund Management that we provide is implemented through percent allocation management
-                            module which allows Investors to have their accounts managed by a trader appointed by
-                            them on the basis of a limited trading power of attorney. This technical solution allows
-                            the Master trader on one trading platform to manage simultaneously unlimited quantity of
-                            Investor managed accounts.
+                    <div class="col-md-4 mb-4">
+                        <!--                        take message resource with '#'-->
+                        <h2 th:text="#{language}">Language</h2>
 
-                            Depending on the size of the deposit each Investor`s managed account has its own ratio
-                            in all pool. Total sum of all ratios under one pool is always equal to 100%. Trader's
-                            activity results (trades, Profit & Loss) are allocated between Investor`s managed
-                            accounts according to ratio.
+                        <form th:method="get">
+                            <select
+                                    onchange="this.form.submit()"
+                                    id="lang"
+                                    name="lang">
+                                <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                                <!--                                <option value="ru_RU" th:selected="${#locale.toString()} == 'ru-RU'">Русский</option>-->
+                                <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="col-lg-12">
+                        <p th:text="#{how-it-work-text1}" class="how-it-works">
+
+                        </p>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <p th:text="#{how-it-work-text2}" class="how-it-works">
+                        <p th:text="#{how-it-work-text3}" class="how-it-works">
+
                         </p>
                     </div>
-                    <div class="col-md-7 align-items-end">
+                    <div class="col-lg-6 align-items-end pic">
                         <div><img src="/images/what_is_ctf.jpg" class="coins" alt="Header image"></div>
 
                     </div>
                 </div>
+                <div class="row my-4 align-items-center justify-content-center ">
+                    <div class="col-md-7 mb-4">
+                        <h1 th:text="#{remuneration}"></h1>
+                    </div>
+                    <div class="col-md-4 mb-4">
+
+                    </div>
+
+                    <div class="col-lg-6 align-items-end pic">
+                        <div><img src="/images/step_3.jpg" class="coins" alt="Header image"></div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <p th:text="#{remuneration-text1}" class="how-it-works"></p>
+                        <p th:text="#{remuneration-text2}" class="how-it-works"></p>
+                        <p th:text="#{remuneration-text3}" class="how-it-works"></p>
+                        <p th:text="#{remuneration-text4}" class="how-it-works"></p>
+                    </div>
+
+                </div>
+                <div class="row my-4 align-items-center justify-content-center ">
+                    <div class="col-md-7 mb-4">
+                        <h1 th:text="#{capital-requirements}"></h1>
+                    </div>
+                    <div class="col-md-4 mb-4">
+
+                    </div>
+                    <div class="col-lg-6">
+                        <p th:text="#{capital-requirements-text1}" class="how-it-works"></p>
+                        <p th:text="#{capital-requirements-text2}" class="how-it-works"></p>
+                        <p th:text="#{capital-requirements-text3}" class="how-it-works"></p>
+                        <p th:text="#{capital-requirements-text4}" class="how-it-works"></p>
+                    </div>
+                    <div class="col-lg-6 align-items-end pic">
+                        <div><img src="/images/step_2.jpg" class="coins" alt="Header image"></div>
+
+                    </div>
+
+
+                </div>
+
+
             </div>
         </section>
 
-        <!-- section What is Copy Trading on Forex -->
-        <section id="what_ctf2" class="wr-what_is_ctf">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>What is Fund Management on Forex?</h1>
-                    </div>
-                    <div class="col-md-12 col-lg-5">
-                        <div class="what_is_text">
-                            <p class="o-sans">
-                                The Fund Management that we provide is implemented through percent allocation
-                                management module which allows Investors to have their accounts managed by a trader
-                                appointed by them on the basis of a limited trading power of attorney. This
-                                technical solution allows the Master trader on one trading platform to manage
-                                simultaneously unlimited quantity of Investor managed accounts.
-                            </p>
-                            <p class="o-sans">
-                                Depending on the size of the deposit each Investor`s managed account has its own
-                                ratio in all pool. Total sum of all ratios under one pool is always equal to 100%.
-                                Trader's activity results (trades, Profit & Loss) are allocated between Investor`s
-                                managed accounts according to ratio.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-lg-7">
-                        <img class="img-fluid coins " src="images/what_is_ctf.jpg" alt="ctf">
-                    </div>
-                    <div class="col-md-6 col-lg-7">
-                        <div class="slider_what_is testimonials_carousel jsTestimonials">
-                            <div class="item">
-                                <p>
-                                    Choice of base currency of the investment (USD, CHF, EUR, GBP, JPY, AUD, CAD,
-                                    DKK, ZAR, MXN, NOK, NZD, PLN, RUB, CNH, SEK, SGD, TRY and HKD), to avoid the
-                                    risk of devaluation
-                                </p>
-                                <div class="dots_what_is dots">
-                                    <!-- spans are for dots -->
-                                    <span></span><span></span><span></span>
-                                </div>
-                                <p class="cite">- currencies</p>
-                            </div>
-                            <div class="item">
-                                <p>
-                                    Immediate Trading Deactivation allows Investors to block trading on their
-                                    accounts at any time with immediate effect
-                                </p>
-                                <div class="dots">
-                                    <!-- spans are for dots -->
-                                    <span></span><span></span><span></span>
-                                </div>
-                                <p class="cite">- block trading</p>
-                            </div>
-                            <div class="item">
-                                <p>
-                                    The Stop Loss Level functionality provides Investors with control of risk of
-                                    loss. Investors are given the possibility to block trader's activity beyond a
-                                    certain drawdown level
-                                </p>
-                                <div class="dots">
-                                    <!-- spans are for dots -->
-                                    <span></span><span></span><span></span>
-                                </div>
-                                <p class="cite">- equity protection</p>
-                            </div>
-                            <div class="item">
-                                <p>
-                                    Instant 24/7 reporting access to the account statements allows investor to
-                                    monitor the trading activity on the managed account online
-                                </p>
-                                <div class="dots">
-                                    <!-- spans are for dots -->
-                                    <span></span><span></span><span></span>
-                                </div>
-                                <p class="cite">- access to reports</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 col-lg-5">
-                        <div class="what_is_text">
-                            <p class="o-sans">
-                                The Master Trader does not have direct access to your account.
-                            </p>
-                            <p class="o-sans">
-                                Only the Investor has the right to withdraw or deposit funds, to block a trade, to
-                                transfer his account to management.
-                            </p>
-                            <p class="o-sans">
-                                Many of investors are getting involved because they either do not have the
-                                knowledge, or the time to trade on their own. The most important thing to note here
-                                is that you need to understand the risk. If the Master Trader loses money, so do
-                                you. He or she cannot be held responsible because technically, you chose to appoint
-                                a trader on the account.her.
-                            </p>
-                            <p class="o-sans">
-                                So to protect your account you can choose Stop Loss level and in this case you won’t
-                                lose more than you choose.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!--        Disclaimer-->
         <div th:replace="fragments/disclaimer :: disclaimer">Disclaimer></div>

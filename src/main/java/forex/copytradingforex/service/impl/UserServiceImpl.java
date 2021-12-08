@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
 
         userProfileViewModel
                 .setCommission(userProfileViewModel.getBufferedAmount()
-                        .multiply(TradingSettings.traderRemuneration).setScale(2,RoundingMode.FLOOR));
+                        .multiply(TradingSettings.traderRemuneration).setScale(2, RoundingMode.FLOOR));
         return userProfileViewModel;
     }
 
@@ -137,15 +137,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public boolean withdrawAmount(BigDecimal amount, String username) {
-        UserEntity currentUser = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+        UserEntity currentUser = this.findUserByUsername(username);
 
-        if (currentUser.getTrader() != null) {// if have trader
+        // if have trader and bufferedAmount>0 - have to pay commisiion to trader
+        if (currentUser.getTrader() != null && currentUser.getBufferedAmount().compareTo(BigDecimal.ZERO)>0) {
             this.revokeTrader(currentUser.getUsername(), currentUser.getTrader().getId());
         }
 
-        currentUser = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+        currentUser = this.findUserByUsername(username);
         BigDecimal currentCapital = currentUser.getCurrentCapital();
 
         if (currentCapital.compareTo(amount) < 0) {
@@ -160,10 +159,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean canTrade(String username) {
-        UserEntity userEntity = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
-        return userEntity.getCurrentCapital().compareTo(TradingSettings.requiredTradingCapital) > -1;
+    public boolean isTraderCanTrade(String username) {
+        UserEntity trader = this.findUserByUsername(username);
+        return trader.getCurrentCapital().compareTo(TradingSettings.requiredTradingCapital) > -1;
     }
 
     @Override
@@ -184,8 +182,6 @@ public class UserServiceImpl implements UserService {
 
         UserEntity trader = this.userRepository.findByIdByEntityGraph(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
-
-//TODO add check currentCapital
 
         investor.setTrader(trader);
         userRepository.save(investor);
@@ -275,7 +271,7 @@ public class UserServiceImpl implements UserService {
         UserEntity trader = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader with username" + username + " was not found"));
 
-         return trader.getInvestors()
+        return trader.getInvestors()
                 .stream()
                 .map(this::mapToUserProfileService)
                 .map(this::mapToUserProfileView)
@@ -286,6 +282,19 @@ public class UserServiceImpl implements UserService {
     public UserEntity findUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+    }
+
+    @Override
+    public boolean canJoin(String investorUsername) {
+        UserEntity investor = this.findUserByUsername(investorUsername);
+        return investor.getCurrentCapital().compareTo(TradingSettings.requiredInvestorCapitalToJoin) > -1;
+    }
+
+    @Override
+    public boolean isJoinedInvestorCanCopy(String investorUsername) {
+        UserEntity investor = this.findUserByUsername(investorUsername);
+
+        return investor.getCurrentCapital().compareTo(TradingSettings.requiredCopyCapital)>-1;
     }
 
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {

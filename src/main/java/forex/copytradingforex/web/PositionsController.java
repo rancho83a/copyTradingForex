@@ -69,7 +69,7 @@ public class PositionsController {
 //        if (!model.containsAttribute("notEnoughFunds")) {
 //            model.addAttribute("notEnoughFunds", false);
 //        }
-        if (!userService.canTrade(principal.getName())) {
+        if (!userService.isTraderCanTrade(principal.getName())) {
           //  model.addAttribute("notEnoughFunds", true);
          //   return "profile";
             return "warning-no-trade";

@@ -27,6 +27,11 @@ public class TradersController {
     @GetMapping("/all")
     public String allTraders(Model model,
                              @AuthenticationPrincipal CopyTradingForexUser currentInvestor) {
+
+        if(!model.containsAttribute("canNotJoin")) {
+            model.addAttribute("canNotJoin", false);
+        }
+
         if(userService.isJoinedToCopy(currentInvestor.getUserIdentifier())){
             model.addAttribute("isJoinedToCopy", true);
         }
@@ -39,6 +44,11 @@ public class TradersController {
             Model model,
             @PathVariable Long id,
             @AuthenticationPrincipal CopyTradingForexUser currentInvestor) {
+
+        if(!userService.canJoin(currentInvestor.getUserIdentifier())){
+
+            return "warning-no-join";
+        }
 
         userService.joinToCopy(currentInvestor.getUserIdentifier(), id);
 

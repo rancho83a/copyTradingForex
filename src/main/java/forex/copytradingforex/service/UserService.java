@@ -19,7 +19,7 @@ public interface UserService {
 
     boolean withdrawAmount(BigDecimal amount, String username);
 
-    boolean canTrade(String username);
+    boolean isTraderCanTrade(String username);
 
     List<UserProfileViewModel> getAllTraders();
 
@@ -37,4 +37,8 @@ public interface UserService {
     List<UserProfileViewModel> getInvestors(String username);
 
     UserEntity findUserByUsername(String username);
+
+    boolean canJoin(String investorUsername);
+
+    boolean isJoinedInvestorCanCopy(String investorUsername);
 }
