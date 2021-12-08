@@ -6,3 +6,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+
+cloudinary:
+  api-key: 446412117829948
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: drapmo8cx
