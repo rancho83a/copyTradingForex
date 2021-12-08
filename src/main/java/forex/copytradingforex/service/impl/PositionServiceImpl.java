@@ -194,5 +194,4 @@ public class PositionServiceImpl implements PositionService {
 
     //TODO scheduler - fee every 1 or 2 hours - 0.01 USD
     //TODO scheduler - every week Remuneration or when disconnect
-    //TODO  for traders: your investors List(fullname-capital-buffered)
 }

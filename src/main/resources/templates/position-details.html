@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="row my-5 ">
-                    <div class="col-8" >
+                    <div class="col-8">
 
                         <h1>Comments</h1>
 
@@ -123,29 +123,28 @@
                         <!-- EO: All comments section -->
 
                     </div>
-                    <div class="col-xl-4">
+                    <th:block th:if="*{canDeleteOrUpdate}">
+                        <div class="col-xl-4">
 
                             <h1>Choose picture</h1>
 
+                            <form th:action="@{/{id}/pictures/add  (id=*{id})}"
+                                  method="POST" enctype="multipart/form-data"
+                                  class="how-it-works align-items-center justify-content-center">
+                                <!--                            <input type="hidden" id="id" name="positionId">-->
 
+                                <div class="form-group">
+                                    <label>
+                                        <input type="text" name="title" placeholder="picture title">
+                                    </label>
+                                </div>
 
-                        <form th:action="@{/{id}/pictures/add  (id=*{id})}"
-                              method="POST" enctype="multipart/form-data"
-                              class="how-it-works align-items-center justify-content-center">
-                            <!--                            <input type="hidden" id="id" name="positionId">-->
+                                <input class="btn" name="picture" type="file"/><br>
+                                <input class="btn btn-up-del" type="submit" value="Submit"/>
 
-                            <div class="form-group">
-                                <label>
-                                    <input type="text" name="title" placeholder="picture title">
-                                </label>
-                            </div>
-
-                            <input class="btn" name="picture" type="file"/><br>
-                            <input class="btn btn-up-del" type="submit" value="Submit"/>
-
-                        </form>
-                    </div>
-
+                            </form>
+                        </div>
+                    </th:block>
                 </div>
             </div>
         </section>

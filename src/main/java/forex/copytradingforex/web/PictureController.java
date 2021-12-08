@@ -6,6 +6,7 @@ import forex.copytradingforex.model.service.CloudinaryImage;
 import forex.copytradingforex.model.service.PictureAddServiceModel;
 import forex.copytradingforex.service.CloudinaryService;
 import forex.copytradingforex.service.PictureService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,15 +28,15 @@ public class PictureController {
         this.pictureService = pictureService;
     }
 
-//    @GetMapping("/pictures/add")
+    //    @GetMapping("/pictures/add")
 //    public String addPicture(){
 //        return "addPicture";
 //    }
-
+    @PreAuthorize("isOwner(#id)")
     @PostMapping("/{id}/pictures/add")
-        public String addPicture(PictureAddBindingModel pictureAddBindingModel,
-                                 @PathVariable Long id,
-                                 Principal principal
+    public String addPicture(PictureAddBindingModel pictureAddBindingModel,
+                             @PathVariable Long id,
+                             Principal principal
     ) throws IOException {
 
 //todo если просто нажать кнопку - ошибка
@@ -46,7 +47,7 @@ public class PictureController {
         pictureService.savePicture(pictureAddServiceModel);
 
 
-        return "redirect:/positions/"+id+"/details";
+        return "redirect:/positions/" + id + "/details";
     }
 
 
