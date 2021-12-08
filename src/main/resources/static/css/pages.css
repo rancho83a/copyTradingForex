@@ -456,3 +456,9 @@ a.article:hover {
     border-radius: 10px;
     padding: 1rem;
 }
+
+.dropdown-menu{
+    background: #d4b768;
+    color: #031430;
+    border-radius: 8px;
+}

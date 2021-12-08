@@ -40,6 +40,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
 
                 .antMatchers("/statistics").hasRole(RoleEnum.MASTER.name())
+                //todo errorhandling 403
                 .antMatchers("/positions/add").hasRole(RoleEnum.TRADER.name())
 
 

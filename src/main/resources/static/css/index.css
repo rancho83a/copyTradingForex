@@ -335,3 +335,9 @@ a.article:hover {
     margin-left: 15px;
     text-align: center;
 }
+
+.dropdown-menu{
+    background: #d4b768;
+    color: #031430;
+    border-radius: 8px;
+}
