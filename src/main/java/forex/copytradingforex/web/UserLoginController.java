@@ -55,6 +55,11 @@ public class UserLoginController {
         if (!model.containsAttribute("wrongAmount")) {
             model.addAttribute("wrongAmount", false);
         }
+       if(!model.containsAttribute("traderCanNotTrade")){
+           model.addAttribute("traderCanNotTrade",false);
+       }
+
+
         if(userService.isJoinedToCopy(currentUser.getUserIdentifier())){
             model.addAttribute("isJoinedToCopy", true);
         }
@@ -67,6 +72,10 @@ public class UserLoginController {
             if (!userService.isJoinedInvestorCanCopy(currentUser.getUserIdentifier())) {
                 model.addAttribute("joinedInvestorCanNotCopy", true);
             }
+        }
+
+        if(!userService.isTraderCanTrade(currentUser.getUserIdentifier())){
+            model.addAttribute("traderCanNotTrade", true);
         }
         return "profile";
     }

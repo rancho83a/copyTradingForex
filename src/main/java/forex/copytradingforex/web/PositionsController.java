@@ -1,5 +1,6 @@
 package forex.copytradingforex.web;
 
+import forex.copytradingforex.events.PositionCreatedEvent;
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
 import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
 import forex.copytradingforex.model.service.PositionAddServiceModel;
@@ -8,6 +9,7 @@ import forex.copytradingforex.service.EconomicIndicatorService;
 import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,12 +27,15 @@ public class PositionsController {
     private final PositionService positionService;
     private final EconomicIndicatorService economicIndicatorService;
     private final UserService userService;
+    private final ApplicationEventPublisher eventPublisher;
 
 
-    public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, UserService userService) {
+
+    public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, UserService userService, ApplicationEventPublisher eventPublisher) {
         this.positionService = positionService;
         this.economicIndicatorService = economicIndicatorService;
         this.userService = userService;
+        this.eventPublisher = eventPublisher;
     }
 
     @GetMapping("/all")
@@ -66,12 +71,8 @@ public class PositionsController {
     public String getAddPositionPage(Model model
             , Principal principal
     ) {
-//        if (!model.containsAttribute("notEnoughFunds")) {
-//            model.addAttribute("notEnoughFunds", false);
-//        }
+
         if (!userService.isTraderCanTrade(principal.getName())) {
-          //  model.addAttribute("notEnoughFunds", true);
-         //   return "profile";
             return "warning-no-trade";
         }
 
@@ -97,7 +98,11 @@ public class PositionsController {
         PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel, trader.getUsername());
 
 
-        userService.copyPositionToInvestors(trader.getUserIdentifier(),savedPositionAddServiceModel.getYield());
+        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUserIdentifier(), savedPositionAddServiceModel.getYield());
+        eventPublisher.publishEvent(event);
+
+
+       // userService.copyPositionToInvestors(trader.getUserIdentifier(),savedPositionAddServiceModel.getYield());
 
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }

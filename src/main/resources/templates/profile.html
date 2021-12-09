@@ -81,9 +81,13 @@
 
                             <small th:if="${joinedInvestorCanNotCopy}"
                                    class="rounded bg-danger text-white">
-                                Your capital is too small. You can not copy trader`s position!
+                                Your capital is less than 100 USD You can not copy trader`s position!
                             </small>
 
+                            <small th:if="${traderCanNotTrade}"
+                                   class="rounded bg-danger text-white">
+                                Your capital is less than 1000 USD. You can not trade! Please, fund deposit.
+                            </small>
 
                             <!--                            <h5 th:text="|Buffered Amount, USD: *{bufferedAmount}|" class="card-title"> title</h5>-->
                             <h5 th:text="|Total deposit, USD: *{totalDeposit}|" class="card-title"> title</h5>

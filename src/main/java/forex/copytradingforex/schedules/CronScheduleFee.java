@@ -24,8 +24,8 @@ public class CronScheduleFee {
     }
 
 
-    //@Scheduled(cron = "${schedulers.subscriptionFeeCron}")
-    @Scheduled(cron = "${schedulers.subscriptionFeeCronDefense}")
+    @Scheduled(cron = "${schedulers.subscriptionFeeCron}")
+    //@Scheduled(cron = "${schedulers.subscriptionFeeCronDefense}")
     public void paySubscriptionFee() {
         List<UserEntity> tradersWithInvestors = userService.getTradersWithInvestors();
         LOGGER.info("Size of Traders with investors: " + tradersWithInvestors.size());
@@ -49,8 +49,8 @@ public class CronScheduleFee {
                 });
     }
 
-    //@Scheduled(cron = "${schedulers.remunerationFeeCron}")
-    @Scheduled(cron = "${schedulers.subscriptionFeeCronDefense1min}")
+    @Scheduled(cron = "${schedulers.remunerationFeeCron}")
+    //@Scheduled(cron = "${schedulers.subscriptionFeeCronDefense1min}")
     public void payRemunerationFee() {
         List<UserEntity> investors = userService.getInvestorDueRemunerationFee();
         LOGGER.info("Size of Investors Due Remuneration Fee: " + investors.size());

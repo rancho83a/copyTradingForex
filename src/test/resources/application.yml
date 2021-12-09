@@ -14,4 +14,12 @@ cloudinary:
 
 #Cron
 schedulers:
-  cron: "*/10 * * * * *"
+  #every 10 sec
+  subscriptionFeeCronDefense: "*/10 * * * * *"
+  subscriptionFeeCronDefense1min: "0 * * * * *"
+
+  #At 00:00:00 on every day-of-week from Monday through Friday.
+  subscriptionFeeCron: "0 0 0 * * 1-5"
+
+  #“At 00:00 on Sunday.”
+  remunerationFeeCron: "0 0 0 * * 7"

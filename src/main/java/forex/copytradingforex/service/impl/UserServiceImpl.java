@@ -3,6 +3,7 @@ package forex.copytradingforex.service.impl;
 import forex.copytradingforex.config.TradingSettings;
 import forex.copytradingforex.model.entity.RoleEntity;
 import forex.copytradingforex.model.entity.UserEntity;
+import forex.copytradingforex.model.entity.enums.RoleEnum;
 import forex.copytradingforex.model.service.UserRegistrationServiceModel;
 import forex.copytradingforex.model.service.UserProfileServiceModel;
 import forex.copytradingforex.model.view.UserProfileViewModel;
@@ -140,7 +141,7 @@ public class UserServiceImpl implements UserService {
         UserEntity currentUser = this.findUserByUsername(username);
 
         // if have trader and bufferedAmount>0 - have to pay commisiion to trader
-        if (currentUser.getTrader() != null && currentUser.getBufferedAmount().compareTo(BigDecimal.ZERO)>0) {
+        if (currentUser.getTrader() != null && currentUser.getBufferedAmount().compareTo(BigDecimal.ZERO) > 0) {
             this.revokeTrader(currentUser.getUsername(), currentUser.getTrader().getId());
         }
 
@@ -158,10 +159,16 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Transactional
     @Override
     public boolean isTraderCanTrade(String username) {
         UserEntity trader = this.findUserByUsername(username);
-        return trader.getCurrentCapital().compareTo(TradingSettings.requiredTradingCapital) > -1;
+        RoleEnum role = trader.getRoles().get(0).getRole();
+
+        if (role.equals(RoleEnum.TRADER)) {
+            return trader.getCurrentCapital().compareTo(TradingSettings.requiredTradingCapital) > -1;
+        }
+        return true;
     }
 
     @Override
@@ -294,7 +301,7 @@ public class UserServiceImpl implements UserService {
     public boolean isJoinedInvestorCanCopy(String investorUsername) {
         UserEntity investor = this.findUserByUsername(investorUsername);
 
-        return investor.getCurrentCapital().compareTo(TradingSettings.requiredCopyCapital)>-1;
+        return investor.getCurrentCapital().compareTo(TradingSettings.requiredCopyCapital) > -1;
     }
 
     @Override
