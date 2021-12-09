@@ -19,7 +19,17 @@ public class UserProfileServiceModel {
     BigDecimal withdrawAmount;
     String myTrader;
     Long myTraderId;
-    private BigDecimal bufferedAmount;
+    BigDecimal bufferedAmount;
+    StringBuilder fundHistory;
+
+    public StringBuilder getFundHistory() {
+        return fundHistory;
+    }
+
+    public UserProfileServiceModel setFundHistory(StringBuilder fundHistory) {
+        this.fundHistory = fundHistory;
+        return this;
+    }
 
     public BigDecimal getBufferedAmount() {
         return bufferedAmount;

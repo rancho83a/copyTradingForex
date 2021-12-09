@@ -1,16 +1,14 @@
-package forex.copytradingforex.schedules;
+package forex.copytradingforex.service.schedules;
 
 import forex.copytradingforex.config.TradingSettings;
 import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.service.UserService;
-import forex.copytradingforex.web.exception.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
@@ -58,7 +56,6 @@ public class CronScheduleFee {
 
         investors.forEach(investor -> {
             UserEntity trader = investor.getTrader();
-
 
             LOGGER.info("Trader`s Capital BEFORE remuneration Fee payment: " + trader.getCurrentCapital() + " USD");
             LOGGER.info("Investor`s Capital BEFORE remuneration Fee payment: " + investor.getCurrentCapital() + " USD");

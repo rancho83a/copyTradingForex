@@ -9,22 +9,28 @@ public class UserProfileViewModel {
     Long id;
     String username;
     String fullName;
-
     String imageUrl;
-
     String email;
     Integer age;
     Integer experience;
     BigDecimal currentCapital;
-
     BigDecimal totalYield;
     BigDecimal totalDeposit;
     BigDecimal totalWithdraw;
     String myTrader;
     Long myTraderId;
-    private BigDecimal bufferedAmount;
+    BigDecimal bufferedAmount;
+    BigDecimal commission;
+    StringBuilder fundHistory;
 
-    private BigDecimal commission;
+    public StringBuilder getFundHistory() {
+        return fundHistory;
+    }
+
+    public UserProfileViewModel setFundHistory(StringBuilder fundHistory) {
+        this.fundHistory = fundHistory;
+        return this;
+    }
 
     public BigDecimal getBufferedAmount() {
         return bufferedAmount;

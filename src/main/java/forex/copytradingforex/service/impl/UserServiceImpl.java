@@ -88,8 +88,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfileViewModel findByUsername(String username) {
-        UserEntity userEntity = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+        UserEntity userEntity = this.findUserByUsername(username);
         UserProfileServiceModel userProfileServiceModel = mapToUserProfileService(userEntity);
         return mapToUserProfileView(userProfileServiceModel);
     }
@@ -127,8 +126,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void depositAmount(BigDecimal amount, String username) {
-        UserEntity userEntity = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+        UserEntity userEntity = this.findUserByUsername(username);
+
         userEntity.setCurrentCapital(userEntity.getCurrentCapital().add(amount));
         userEntity.setTotalDeposit(userEntity.getTotalDeposit().add(amount));
 
@@ -184,8 +183,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void joinToCopy(String investorUsername, Long id) {
-        UserEntity investor = this.userRepository.findByUsername(investorUsername)
-                .orElseThrow(() -> new ObjectNotFoundException("Investor with " + investorUsername + " was not found"));
+        UserEntity investor = this.findUserByUsername(investorUsername);
 
         UserEntity trader = this.userRepository.findByIdByEntityGraph(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
@@ -199,16 +197,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isJoinedToCopy(String username) {
-        UserEntity investor = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+        UserEntity investor = this.findUserByUsername(username);
         return investor.getTrader() != null;
     }
 
     @Transactional
     @Override
     public void revokeTrader(String investorUsername, Long traderId) {
-        UserEntity investor = this.userRepository.findByUsername(investorUsername)
-                .orElseThrow(() -> new ObjectNotFoundException("Investor with " + investorUsername + " was not found"));
+        UserEntity investor = this.findUserByUsername(investorUsername);
 
         UserEntity trader = this.userRepository.findByIdByEntityGraph(traderId)
                 .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
@@ -237,8 +233,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void copyPositionToInvestors(String username, BigDecimal yield) {
-        UserEntity trader = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("Trader with username" + username + " was not found"));
+        UserEntity trader = this.findUserByUsername(username);
 
         List<UserEntity> investors = trader.getInvestors();
         if (!investors.isEmpty()) {
@@ -275,9 +270,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public List<UserProfileViewModel> getInvestors(String username) {
-        UserEntity trader = this.userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("Trader with username" + username + " was not found"));
-
+        UserEntity trader = this.findUserByUsername(username);
         return trader.getInvestors()
                 .stream()
                 .map(this::mapToUserProfileService)

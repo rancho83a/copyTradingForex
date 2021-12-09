@@ -49,7 +49,7 @@ public class UserLoginController {
     @GetMapping("/users/profile")
     public String profile(Model model,
                           @AuthenticationPrincipal CopyTradingForexUser currentUser) {
-
+        UserProfileViewModel byUsername = userService.findByUsername(currentUser.getUserIdentifier());
         model.addAttribute("userProfile",
                 userService.findByUsername(currentUser.getUserIdentifier()));
         if (!model.containsAttribute("wrongAmount")) {

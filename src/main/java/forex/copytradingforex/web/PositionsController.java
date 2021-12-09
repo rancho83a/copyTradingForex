@@ -97,12 +97,8 @@ public class PositionsController {
         }
         PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel, trader.getUsername());
 
-
         PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUserIdentifier(), savedPositionAddServiceModel.getYield());
         eventPublisher.publishEvent(event);
-
-
-       // userService.copyPositionToInvestors(trader.getUserIdentifier(),savedPositionAddServiceModel.getYield());
 
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }
