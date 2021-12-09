@@ -11,3 +11,7 @@ cloudinary:
   api-key: 446412117829948
   api-secret: ${CLOUDINARY_API_SECRET}
   cloud-name: drapmo8cx
+
+#Cron
+schedulers:
+  cron: "*/10 * * * * *"

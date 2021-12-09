@@ -32,6 +32,10 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
             " WHERE r.role= 'TRADER' AND users.current_capital >= ?1 ", nativeQuery = true)
     List<UserEntity> findAllTradersWithCapitalGreaterThanEqual(BigDecimal capital);
 
+    @Query("SELECT u FROM UserEntity  u WHERE size(u.investors)>0 ")
+    List<UserEntity> getTradersWithInvestors();
+
+    List<UserEntity> findAllByBufferedAmountGreaterThan(BigDecimal bufferedAmount);
 
 }
 

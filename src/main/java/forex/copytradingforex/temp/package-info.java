@@ -8,9 +8,7 @@ package forex.copytradingforex.temp;
 //TODO get Positions ORDERBY DATEOPEN limit 40
 //TODO edit profile
 //TODO add button "myTrades" in profile
-//TODO add trade if trader have minimal capital
 
-//TODO MAke join to traders
 
 //TODO when getAllTraders or AllInvestors -> change to EntityGraph
 

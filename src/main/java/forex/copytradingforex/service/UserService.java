@@ -41,4 +41,11 @@ public interface UserService {
     boolean canJoin(String investorUsername);
 
     boolean isJoinedInvestorCanCopy(String investorUsername);
+
+    List<UserEntity> getTradersWithInvestors();
+
+    UserEntity save(UserEntity trader);
+
+    List<UserEntity> getInvestorDueRemunerationFee();
 }
+

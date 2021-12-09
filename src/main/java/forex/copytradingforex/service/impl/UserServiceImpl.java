@@ -297,6 +297,21 @@ public class UserServiceImpl implements UserService {
         return investor.getCurrentCapital().compareTo(TradingSettings.requiredCopyCapital)>-1;
     }
 
+    @Override
+    public List<UserEntity> getTradersWithInvestors() {
+        return this.userRepository.getTradersWithInvestors();
+    }
+
+    @Override
+    public UserEntity save(UserEntity trader) {
+        return this.userRepository.save(trader);
+    }
+
+    @Override
+    public List<UserEntity> getInvestorDueRemunerationFee() {
+        return this.userRepository.findAllByBufferedAmountGreaterThan(BigDecimal.ZERO);
+    }
+
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {
         BigDecimal delta = currentCapital.add(financialResult);
 
