@@ -1,8 +1,13 @@
 package forex.copytradingforex.web;
 
+import forex.copytradingforex.config.TradingSettings;
 import forex.copytradingforex.model.view.UserProfileViewModel;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
+import forex.copytradingforex.web.exception.NotEnoughCapitalException;
+import forex.copytradingforex.web.exception.ObjectNotFoundException;
+import forex.copytradingforex.web.exception.PositionNotFoundException;
+import forex.copytradingforex.web.exception.UsernameNotFoundException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
@@ -49,32 +54,33 @@ public class UserLoginController {
     @GetMapping("/users/profile")
     public String profile(Model model,
                           @AuthenticationPrincipal CopyTradingForexUser currentUser) {
+
         UserProfileViewModel byUsername = userService.findByUsername(currentUser.getUserIdentifier());
         model.addAttribute("userProfile",
                 userService.findByUsername(currentUser.getUserIdentifier()));
         if (!model.containsAttribute("wrongAmount")) {
             model.addAttribute("wrongAmount", false);
         }
-       if(!model.containsAttribute("traderCanNotTrade")){
-           model.addAttribute("traderCanNotTrade",false);
-       }
+        if (!model.containsAttribute("traderCanNotTrade")) {
+            model.addAttribute("traderCanNotTrade", false);
+        }
 
 
-        if(userService.isJoinedToCopy(currentUser.getUserIdentifier())){
+        if (userService.isJoinedToCopy(currentUser.getUserIdentifier())) {
             model.addAttribute("isJoinedToCopy", true);
         }
-        if(!userService.getInvestors(currentUser.getUserIdentifier()).isEmpty()){
+        if (!userService.getInvestors(currentUser.getUserIdentifier()).isEmpty()) {
             model.addAttribute("haveInvestors", true);
-            model.addAttribute("investors",userService.getInvestors(currentUser.getUserIdentifier()));
+            model.addAttribute("investors", userService.getInvestors(currentUser.getUserIdentifier()));
         }
 
-        if(userService.isJoinedToCopy(currentUser.getUserIdentifier())) {
+        if (userService.isJoinedToCopy(currentUser.getUserIdentifier())) {
             if (!userService.isJoinedInvestorCanCopy(currentUser.getUserIdentifier())) {
                 model.addAttribute("joinedInvestorCanNotCopy", true);
             }
         }
 
-        if(!userService.isTraderCanTrade(currentUser.getUserIdentifier())){
+        if (!userService.isTraderCanTrade(currentUser.getUserIdentifier())) {
             model.addAttribute("traderCanNotTrade", true);
         }
         return "profile";
@@ -111,13 +117,11 @@ public class UserLoginController {
 
         boolean isWithdraw = userService.withdrawAmount(userProfile.getWithdrawAmount(), user.getUserIdentifier());
 
-        if(!isWithdraw){
-            return "warning-no-enough-amount";
+        if (!isWithdraw) {
+            throw new NotEnoughCapitalException("The withdraw is denied! Your capital is less than you want to withdraw!");
         }
         return "redirect:/users/profile";
     }
-
-
 
 
 }

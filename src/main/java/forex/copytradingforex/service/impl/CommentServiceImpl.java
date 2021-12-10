@@ -10,6 +10,8 @@ import forex.copytradingforex.repository.PositionRepository;
 import forex.copytradingforex.repository.UserRepository;
 import forex.copytradingforex.service.CommentService;
 import forex.copytradingforex.web.exception.ObjectNotFoundException;
+import forex.copytradingforex.web.exception.PositionNotFoundException;
+import forex.copytradingforex.web.exception.UsernameNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +49,7 @@ public class CommentServiceImpl implements CommentService {
                 //Alternative for previous above method
                         findByIdByEntityGraph(positionId)
                 .orElseThrow(
-                        () -> new ObjectNotFoundException("Position with id " + positionId + " was not found")
+                        () -> new PositionNotFoundException(positionId)
                 );
 
         return positionEntity.getComments()
@@ -69,13 +71,13 @@ public class CommentServiceImpl implements CommentService {
 
         //- если в тесте про PostComment поставить @WithMockUser("testUser2") - t.e. users которого нет в репо, то тест
         //должен провалиться, если же он не проваливается - то поставить ето ограничение (у меня проваливается)
-                //Objects.requireNonNull(commentServiceModel.getOwner());
+        //Objects.requireNonNull(commentServiceModel.getOwner());
 
         PositionEntity position = positionRepository.findById(commentServiceModel.getPositionId()).orElseThrow(
-                () -> new ObjectNotFoundException("Position with id " + commentServiceModel.getPositionId() + " was not found"));
+                () -> new PositionNotFoundException(commentServiceModel.getPositionId()));
 
         UserEntity author = userRepository.findByUsername(commentServiceModel.getOwner()).orElseThrow(
-                () -> new ObjectNotFoundException("User with username " + commentServiceModel.getOwner() + " was not found"));
+                () -> new UsernameNotFoundException(commentServiceModel.getOwner()));
 
         CommentEntity newComment = modelMapper.map(commentServiceModel, CommentEntity.class)
                 .setApproved(false)

@@ -44,7 +44,7 @@
                                 <p th:text="|Capital, USD: *{currentCapital}|"> info</p>
                                 <p th:text="|Experience, year: *{experience}| "> info</p>
 
-                                <a th:unless="${isJoinedToCopy}" th:href="@{/traders/{id}/copy (id = *{id})}"
+                                <a th:if="!${isJoinedToCopy}" th:href="@{/traders/{id}/copy (id = *{id})}"
                                    class="btn btn-pos-details">Copy</a>
 
                             </div>

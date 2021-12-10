@@ -11,6 +11,7 @@ import forex.copytradingforex.repository.RoleRepository;
 import forex.copytradingforex.repository.UserRepository;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.web.exception.ObjectNotFoundException;
+import forex.copytradingforex.web.exception.UsernameNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -186,7 +187,7 @@ public class UserServiceImpl implements UserService {
         UserEntity investor = this.findUserByUsername(investorUsername);
 
         UserEntity trader = this.userRepository.findByIdByEntityGraph(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(id));
 
         investor.setTrader(trader);
         userRepository.save(investor);
@@ -207,7 +208,7 @@ public class UserServiceImpl implements UserService {
         UserEntity investor = this.findUserByUsername(investorUsername);
 
         UserEntity trader = this.userRepository.findByIdByEntityGraph(traderId)
-                .orElseThrow(() -> new ObjectNotFoundException("Trader was not found"));
+                .orElseThrow(() -> new ObjectNotFoundException(traderId));
 
         BigDecimal[] data = {investor.getBufferedAmount(), investor.getCurrentCapital(), trader.getCurrentCapital()};
 
@@ -281,7 +282,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findUserByUsername(String username) {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("User with " + username + " was not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(username));
     }
 
     @Override

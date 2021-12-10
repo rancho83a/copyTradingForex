@@ -28,10 +28,7 @@ public class PictureController {
         this.pictureService = pictureService;
     }
 
-    //    @GetMapping("/pictures/add")
-//    public String addPicture(){
-//        return "addPicture";
-//    }
+
     @PreAuthorize("isOwner(#id)")
     @PostMapping("/{id}/pictures/add")
     public String addPicture(PictureAddBindingModel pictureAddBindingModel,

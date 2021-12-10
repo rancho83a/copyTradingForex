@@ -14,6 +14,7 @@ import forex.copytradingforex.repository.UserRepository;
 import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.web.exception.ObjectNotFoundException;
 import forex.copytradingforex.web.exception.PositionNotFoundException;
+import forex.copytradingforex.web.exception.UsernameNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -101,7 +102,7 @@ public class PositionServiceImpl implements PositionService {
         newPosition.setEconomicIndicator(economicIndicator);
 
         UserEntity trader = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ObjectNotFoundException("Trader with id " + username + " was not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Trader with id " + username + " was not found"));
 
         newPosition.setYield(calculatePositionYield(trader.getCurrentCapital(), positionAddServiceModel.getFinancialResult()));
 

@@ -1,5 +1,6 @@
 package forex.copytradingforex.web;
 
+import forex.copytradingforex.config.TradingSettings;
 import forex.copytradingforex.events.PositionCreatedEvent;
 import forex.copytradingforex.model.binding.PositionAddBindingModel;
 import forex.copytradingforex.model.binding.PositionUpdateBindingModel;
@@ -9,6 +10,7 @@ import forex.copytradingforex.service.EconomicIndicatorService;
 import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
+import forex.copytradingforex.web.exception.NotEnoughCapitalException;
 import forex.copytradingforex.web.exception.PositionNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -80,7 +82,8 @@ public class PositionsController {
     ) {
 
         if (!userService.isTraderCanTrade(principal.getName())) {
-            return "warning-no-trade";
+           throw new NotEnoughCapitalException( String.format("You can not add position! Your capital is less than %s USD."
+                   , TradingSettings.requiredTradingCapital));
         }
 
         if (!model.containsAttribute("positionAddBindModel")) {
@@ -147,13 +150,5 @@ public class PositionsController {
         return "position-update";
     }
 
-    @ExceptionHandler({PositionNotFoundException.class})
-    public ModelAndView handleDBException(PositionNotFoundException e) {
-
-        ModelAndView modelAndView = new ModelAndView("error/position-not-found");
-        modelAndView.addObject("positionId", e.getPositionId());
-        modelAndView.setStatus(HttpStatus.NOT_FOUND);
-        return modelAndView;
-    }
 
 }

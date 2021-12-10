@@ -1,17 +1,16 @@
 package forex.copytradingforex.web;
 
 
+import forex.copytradingforex.config.TradingSettings;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
+import forex.copytradingforex.web.exception.NotEnoughCapitalException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.security.Principal;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/traders")
@@ -46,8 +45,9 @@ public class TradersController {
             @AuthenticationPrincipal CopyTradingForexUser currentInvestor) {
 
         if(!userService.canJoin(currentInvestor.getUserIdentifier())){
-
-            return "warning-no-join";
+            throw new NotEnoughCapitalException(
+                    String.format("You can not Join to trader! Your capital is less than %s USD."
+                            ,TradingSettings.requiredInvestorCapitalToJoin));
         }
 
         userService.joinToCopy(currentInvestor.getUserIdentifier(), id);
@@ -65,6 +65,8 @@ public class TradersController {
 
         return "redirect:/users/profile";
     }
+
+
 
 }
 

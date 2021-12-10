@@ -32,7 +32,6 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     public void savePicture(PictureAddServiceModel pictureAddServiceModel) {
-        //todo catch error
         UserEntity trader = userService.findUserByUsername(pictureAddServiceModel.getTraderUsername());
 
         PositionEntity position = positionService.getPictureById(pictureAddServiceModel.getPositionId());

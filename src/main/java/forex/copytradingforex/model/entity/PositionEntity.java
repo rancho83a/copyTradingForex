@@ -48,7 +48,7 @@ public class PositionEntity extends BaseEntity{
     @ManyToOne
     private UserEntity trader;
 
-    @OneToOne(mappedBy = "position",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "position", cascade = CascadeType.REMOVE)
    // @JoinColumn(name = "picture_id", referencedColumnName = "id")
     private PictureEntity picture;
 
