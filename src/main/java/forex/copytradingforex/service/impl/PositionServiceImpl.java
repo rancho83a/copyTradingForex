@@ -13,6 +13,7 @@ import forex.copytradingforex.repository.PositionRepository;
 import forex.copytradingforex.repository.UserRepository;
 import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.web.exception.ObjectNotFoundException;
+import forex.copytradingforex.web.exception.PositionNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionDetailsView findById(Long id, String currentUser) {
         PositionEntity positionEntity = this.positionRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Position with id: " + id + " was not found"));
+                .orElseThrow(() ->  new PositionNotFoundException(id));
         PositionDetailsView positionDetailsView = modelMapper.map(positionEntity, PositionDetailsView.class);
 
 
@@ -133,7 +134,7 @@ public class PositionServiceImpl implements PositionService {
         PositionUpdateServiceModel serviceModel = modelMapper.map(updateBindingModel, PositionUpdateServiceModel.class);
 
         PositionEntity positionEntity = positionRepository.findById(serviceModel.getId())
-                .orElseThrow(() -> new ObjectNotFoundException("Position with id " + serviceModel.getId() + " was not found"));
+                .orElseThrow(() -> new PositionNotFoundException(serviceModel.getId()));
         positionEntity.setTrade(serviceModel.getTrade())
                 .setOpenTime(serviceModel.getOpenTime())
                 .setCloseTime(serviceModel.getCloseTime())
@@ -146,7 +147,7 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public PositionEntity getPictureById(Long id) {
         return this.positionRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("Position with id: " + id + " was not found"));
+                .orElseThrow(() -> new PositionNotFoundException(id));
     }
 
     private boolean isMaster(UserEntity user) {
@@ -190,8 +191,4 @@ public class PositionServiceImpl implements PositionService {
         }
         return delta;
     }
-
-
-    //TODO scheduler - fee every 1 or 2 hours - 0.01 USD
-    //TODO scheduler - every week Remuneration or when disconnect
 }

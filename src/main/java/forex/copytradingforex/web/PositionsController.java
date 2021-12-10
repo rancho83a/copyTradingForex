@@ -9,13 +9,16 @@ import forex.copytradingforex.service.EconomicIndicatorService;
 import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
+import forex.copytradingforex.web.exception.PositionNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -39,7 +42,7 @@ public class PositionsController {
     }
 
     @GetMapping("/all")
-    public String allPositions(Model model) {
+    public String allPositions(Model model)  {
         model.addAttribute("positions", this.positionService.getAllPositions());
         return "positions";
     }
@@ -49,12 +52,16 @@ public class PositionsController {
     @GetMapping("/{id}/details")
     public String showPosition(@PathVariable Long id, Model model,
                                // Principal principal){
-                               @AuthenticationPrincipal CopyTradingForexUser currentUser) {
+                               @AuthenticationPrincipal CopyTradingForexUser currentUser)
+    {
         //   @AuthenticationPrincipal UserDetails principal) {
-        // model.addAttribute("position", this.positionService.findById(id, principal.getName()));
 
-        model.addAttribute("position", this.positionService.findById(id, currentUser.getUserIdentifier()));
-        return "position-details";
+
+
+            model.addAttribute("position", this.positionService.findById(id, currentUser.getUserIdentifier()));
+
+
+       return "position-details";
     }
 
     //DELETE
@@ -138,6 +145,15 @@ public class PositionsController {
     @GetMapping("/{id}/update/errors")
     public String updatePositionErrors(@PathVariable Long id) {
         return "position-update";
+    }
+
+    @ExceptionHandler({PositionNotFoundException.class})
+    public ModelAndView handleDBException(PositionNotFoundException e) {
+
+        ModelAndView modelAndView = new ModelAndView("error/position-not-found");
+        modelAndView.addObject("positionId", e.getPositionId());
+        modelAndView.setStatus(HttpStatus.NOT_FOUND);
+        return modelAndView;
     }
 
 }
