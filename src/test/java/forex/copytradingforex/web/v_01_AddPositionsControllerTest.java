@@ -102,6 +102,24 @@ class v_01_AddPositionsControllerTest {
 
     }
 
+    @Test
+    @WithUserDetails(value = TEST_USERNAME_TRADER)
+    void testWrongOpenTimeAddPosition() throws Exception {
+
+        mockMvc.
+                perform(post("/positions/add")
+                        .param("economicIndicatorId", String.valueOf(INDICATOR_ID))
+                        .param("trade", TRADE.name())
+                        .param("openTime", LocalDateTime.now().toString())
+                        .param("closeTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")))
+                        .param("openPrice", String.valueOf(BigDecimal.ONE))
+                        .param("closePrice", String.valueOf(BigDecimal.TEN))
+                        .param("financialResult", String.valueOf(BigDecimal.valueOf(1000)))
+
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection());
+    }
 
     private static final Long INDICATOR_ID = 1L;
     private static final TradeEnum TRADE = TradeEnum.BUY;

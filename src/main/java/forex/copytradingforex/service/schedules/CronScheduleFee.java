@@ -21,12 +21,11 @@ public class CronScheduleFee {
         this.userService = userService;
     }
 
-
     @Scheduled(cron = "${schedulers.subscriptionFeeCron}")
     //@Scheduled(cron = "${schedulers.subscriptionFeeCronDefense}")
     public void paySubscriptionFee() {
         List<UserEntity> tradersWithInvestors = userService.getTradersWithInvestors();
-        LOGGER.info("Size of Traders with investors: " + tradersWithInvestors.size());
+      //  LOGGER.info("Size of Traders with investors: " + tradersWithInvestors.size());
         final UserEntity[] master = {userService.findUserByUsername("master")};
 
         tradersWithInvestors
@@ -35,14 +34,14 @@ public class CronScheduleFee {
                     //if trader has money >= fee
                     if (trader.getCurrentCapital().compareTo(TradingSettings.subscriptionFee) > -1) {
 
-                        LOGGER.info("Trader`s Capital BEFORE subscription Fee payment: " + trader.getCurrentCapital() + " USD");
-                        LOGGER.info("Master`s Capital BEFORE subscription Fee payment: " + master[0].getCurrentCapital() + " USD");
+//                        LOGGER.info("Trader`s Capital BEFORE subscription Fee payment: " + trader.getCurrentCapital() + " USD");
+//                        LOGGER.info("Master`s Capital BEFORE subscription Fee payment: " + master[0].getCurrentCapital() + " USD");
                         trader.setCurrentCapital(trader.getCurrentCapital().subtract(TradingSettings.subscriptionFee));
                         master[0].setCurrentCapital(master[0].getCurrentCapital().add(TradingSettings.subscriptionFee));
                         UserEntity updatedTrader = userService.save(trader);
                         master[0] = userService.save(master[0]);
-                        LOGGER.info("Trader`s Capital AFTER subscription Fee payment: " + updatedTrader.getCurrentCapital() + " USD");
-                        LOGGER.info("Master`s Capital AFTER subscription Fee payment: " + master[0].getCurrentCapital() + " USD");
+//                        LOGGER.info("Trader`s Capital AFTER subscription Fee payment: " + updatedTrader.getCurrentCapital() + " USD");
+//                        LOGGER.info("Master`s Capital AFTER subscription Fee payment: " + master[0].getCurrentCapital() + " USD");
                     }
                 });
     }
@@ -51,15 +50,15 @@ public class CronScheduleFee {
     //@Scheduled(cron = "${schedulers.subscriptionFeeCronDefense1min}")
     public void payRemunerationFee() {
         List<UserEntity> investors = userService.getInvestorDueRemunerationFee();
-        LOGGER.info("Size of Investors Due Remuneration Fee: " + investors.size());
+        //LOGGER.info("Size of Investors Due Remuneration Fee: " + investors.size());
 
 
         investors.forEach(investor -> {
             UserEntity trader = investor.getTrader();
-
-            LOGGER.info("Trader`s Capital BEFORE remuneration Fee payment: " + trader.getCurrentCapital() + " USD");
-            LOGGER.info("Investor`s Capital BEFORE remuneration Fee payment: " + investor.getCurrentCapital() + " USD");
-            LOGGER.info("Investor`s BufferedAmount BEFORE remuneration Fee payment: " + investor.getBufferedAmount() + " USD");
+//
+//            LOGGER.info("Trader`s Capital BEFORE remuneration Fee payment: " + trader.getCurrentCapital() + " USD");
+//            LOGGER.info("Investor`s Capital BEFORE remuneration Fee payment: " + investor.getCurrentCapital() + " USD");
+//            LOGGER.info("Investor`s BufferedAmount BEFORE remuneration Fee payment: " + investor.getBufferedAmount() + " USD");
 
             BigDecimal[] data = {investor.getBufferedAmount(), investor.getCurrentCapital(), trader.getCurrentCapital()};
 
@@ -72,9 +71,9 @@ public class CronScheduleFee {
             trader = userService.save(trader);
             investor = userService.save(investor);
 
-            LOGGER.info("Trader`s Capital BEFORE remuneration Fee payment: " + trader.getCurrentCapital() + " USD");
-            LOGGER.info("Investor`s Capital BEFORE remuneration Fee payment: " + investor.getCurrentCapital() + " USD");
-            LOGGER.info("Investor`s BufferedAmount BEFORE remuneration Fee payment: " + investor.getBufferedAmount() + " USD");
+//            LOGGER.info("Trader`s Capital BEFORE remuneration Fee payment: " + trader.getCurrentCapital() + " USD");
+//            LOGGER.info("Investor`s Capital BEFORE remuneration Fee payment: " + investor.getCurrentCapital() + " USD");
+//            LOGGER.info("Investor`s BufferedAmount BEFORE remuneration Fee payment: " + investor.getBufferedAmount() + " USD");
         });
     }
 }
