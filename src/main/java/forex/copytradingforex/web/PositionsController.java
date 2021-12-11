@@ -56,13 +56,10 @@ public class PositionsController {
                                // Principal principal){
                                @AuthenticationPrincipal CopyTradingForexUser currentUser)
     {
-        //   @AuthenticationPrincipal UserDetails principal) {
-
-
-
             model.addAttribute("position", this.positionService.findById(id, currentUser.getUserIdentifier()));
-
-
+        if(!model.containsAttribute("noUploadedPicture")){
+            model.addAttribute("noUploadedPicture", false);
+        }
        return "position-details";
     }
 

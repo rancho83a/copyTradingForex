@@ -44,12 +44,12 @@ class UserRegistrationControllerTest {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private FundHistoryRepository fundHistoryRepository;
+
 
     @BeforeEach
     void setup() {
-
+        userRepository.deleteAll();
+        roleRepository.deleteAll();
     }
 
     @AfterEach

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -33,16 +34,20 @@ public class PictureController {
     @PostMapping("/{id}/pictures/add")
     public String addPicture(PictureAddBindingModel pictureAddBindingModel,
                              @PathVariable Long id,
-                             Principal principal
+                             Principal principal,
+                             RedirectAttributes redirectAttributes
     ) throws IOException {
 
-//todo если просто нажать кнопку - ошибка
-        PictureAddServiceModel pictureAddServiceModel = createPictureEntity(pictureAddBindingModel.getPicture(), pictureAddBindingModel.getTitle());
+        if(pictureAddBindingModel.getPicture().isEmpty()){
+            redirectAttributes.addFlashAttribute("noUploadedPicture", true);
+            return "redirect:/positions/" + id + "/details";
+        }
+        PictureAddServiceModel pictureAddServiceModel = createPictureEntity(pictureAddBindingModel.getPicture(),
+                pictureAddBindingModel.getTitle());
         pictureAddServiceModel.setPositionId(id);
         pictureAddServiceModel.setTraderUsername(principal.getName());
 
         pictureService.savePicture(pictureAddServiceModel);
-
 
         return "redirect:/positions/" + id + "/details";
     }

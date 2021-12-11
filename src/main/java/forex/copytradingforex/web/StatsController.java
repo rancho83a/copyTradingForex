@@ -2,8 +2,8 @@ package forex.copytradingforex.web;
 
 import forex.copytradingforex.service.StatsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class StatsController {
@@ -14,11 +14,8 @@ public class StatsController {
     }
 
     @GetMapping("/statistics")
-    public ModelAndView statistics(){
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.addObject("stats", statsService.getStats());
-        modelAndView.setViewName("stats");
-        return modelAndView;
+    public String statistics(Model model){
+        model.addAttribute("stats", statsService.getStats());
+        return "stats";
     }
 }
