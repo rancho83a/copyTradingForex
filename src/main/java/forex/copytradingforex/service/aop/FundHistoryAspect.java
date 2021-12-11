@@ -1,13 +1,13 @@
 package forex.copytradingforex.service.aop;
 
+import forex.copytradingforex.model.entity.FundHistoryEntity;
 import forex.copytradingforex.model.entity.UserEntity;
+import forex.copytradingforex.service.FundHistoryService;
 import forex.copytradingforex.service.UserService;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -18,12 +18,14 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class FundHistoryAspect {
     private final UserService userService;
-    private BigDecimal capitalBeforeWithdraw =BigDecimal.valueOf(1000);
+    private BigDecimal capitalBeforeWithdraw;
+    private final FundHistoryService fundHistoryService;
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(FundHistoryAspect.class);
+    //public static final Logger LOGGER = LoggerFactory.getLogger(FundHistoryAspect.class);
 
-    public FundHistoryAspect(UserService userService) {
+    public FundHistoryAspect(UserService userService, FundHistoryService fundHistoryService) {
         this.userService = userService;
+        this.fundHistoryService = fundHistoryService;
     }
 
     @Pointcut("execution(* forex.copytradingforex.service.impl.UserServiceImpl.depositAmount(..))")
@@ -34,20 +36,14 @@ public class FundHistoryAspect {
     public void afterDepositAddHistoryRecord(BigDecimal amount, String username) {
         UserEntity user = userService.findUserByUsername(username);
 
-        StringBuilder fundHistory = new StringBuilder(user.getFundHistory() == null ? "" : user.getFundHistory());
+        FundHistoryEntity fundHistory = new FundHistoryEntity()
+                .setAmount(amount)
+                .setCreated(LocalDateTime.now())
+                .setOperation("Deposit")
+                .setCurrentCapital(user.getCurrentCapital())
+                .setUser(user);
 
-        StringBuilder newRecord = new StringBuilder()
-                .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .append(" -- Deposit -- ").append(amount).append(" USD ")
-                .append(" --  Current Capital: ").append(user.getCurrentCapital()).append(" USD")
-                .append(System.lineSeparator());
-
-
-        user.setFundHistory(fundHistory.insert(0,newRecord).append(System.lineSeparator()));
-
-        userService.save(user);
-
-        LOGGER.info(user.getFundHistory().toString());
+        fundHistoryService.save(fundHistory);
     }
 
     @Pointcut("execution(* forex.copytradingforex.service.impl.UserServiceImpl.withdrawAmount(..))")
@@ -58,7 +54,7 @@ public class FundHistoryAspect {
     @Before(value = "truckWithdraw() && args(amount,username)", argNames = "amount,username")
     public void beforeWithdrawAddHistoryRecord(BigDecimal amount, String username) {
         UserEntity user = userService.findUserByUsername(username);
-        capitalBeforeWithdraw=user.getCurrentCapital();
+        capitalBeforeWithdraw = user.getCurrentCapital();
     }
 
 
@@ -66,22 +62,17 @@ public class FundHistoryAspect {
     public void afterWithdrawAddHistoryRecord(BigDecimal amount, String username) {
         UserEntity user = userService.findUserByUsername(username);
 
-        if(capitalBeforeWithdraw.compareTo(user.getCurrentCapital())==0){
+        if (capitalBeforeWithdraw.compareTo(user.getCurrentCapital()) == 0) {
             return;
         }
 
-        StringBuilder fundHistory = new StringBuilder(user.getFundHistory() == null ? "" : user.getFundHistory());
+        FundHistoryEntity fundHistory = new FundHistoryEntity()
+                .setAmount(amount)
+                .setCreated(LocalDateTime.now())
+                .setOperation("Withdraw")
+                .setCurrentCapital(user.getCurrentCapital())
+                .setUser(user);
 
-        StringBuilder newRecord = new StringBuilder()
-                .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .append(" -- Withdraw -- ").append(amount).append(" USD")
-                .append(" --  Current Capital: ").append(user.getCurrentCapital()).append(" USD")
-                .append(System.lineSeparator());
-
-        user.setFundHistory(fundHistory.insert(0,newRecord));
-
-        userService.save(user);
-
-        LOGGER.info(user.getFundHistory().toString());
-    }
+        fundHistoryService.save(fundHistory);
+   }
 }

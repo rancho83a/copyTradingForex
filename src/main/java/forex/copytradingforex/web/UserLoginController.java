@@ -1,14 +1,12 @@
 package forex.copytradingforex.web;
 
-import forex.copytradingforex.config.TradingSettings;
 import forex.copytradingforex.model.view.UserProfileViewModel;
+import forex.copytradingforex.service.FundHistoryService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
 import forex.copytradingforex.web.exception.NotEnoughCapitalException;
-import forex.copytradingforex.web.exception.ObjectNotFoundException;
-import forex.copytradingforex.web.exception.PositionNotFoundException;
-import forex.copytradingforex.web.exception.UsernameNotFoundException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.math.BigDecimal;
@@ -27,9 +24,11 @@ import java.math.BigDecimal;
 @Controller
 public class UserLoginController {
     private final UserService userService;
+    private final FundHistoryService fundHistoryService;
 
-    public UserLoginController(UserService userService) {
+    public UserLoginController(UserService userService, FundHistoryService fundHistoryService) {
         this.userService = userService;
+        this.fundHistoryService = fundHistoryService;
     }
 
     @Transactional //fetch=Lazy => za proxy oject  pri vikaneto na RoleEntity rtqbva context, bez transactional go nqma
@@ -83,6 +82,9 @@ public class UserLoginController {
         if (!userService.isTraderCanTrade(currentUser.getUserIdentifier())) {
             model.addAttribute("traderCanNotTrade", true);
         }
+
+        model.addAttribute("fundHistory", this.userService.getAllFundHistory(currentUser.getUsername()));
+
         return "profile";
     }
 
@@ -90,15 +92,14 @@ public class UserLoginController {
     @PostMapping("/users/deposit")
     public String depositAmount(@RequestParam("depositAmount") String amount,
                                 RedirectAttributes redirectAttributes,
-                                @AuthenticationPrincipal CopyTradingForexUser currentUser
+                                @AuthenticationPrincipal UserDetails currentUser
     ) {
 
         if (amount.isBlank()) {
             redirectAttributes.addFlashAttribute("wrongAmount", true);
             return "redirect:/users/profile";
         }
-        userService.depositAmount(new BigDecimal(amount), currentUser.getUserIdentifier());
-
+        userService.depositAmount(new BigDecimal(amount), currentUser.getUsername());
         return "redirect:/users/profile";
     }
 

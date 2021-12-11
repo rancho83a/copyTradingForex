@@ -21,16 +21,6 @@ public class UserProfileViewModel {
     Long myTraderId;
     BigDecimal bufferedAmount;
     BigDecimal commission;
-    StringBuilder fundHistory;
-
-    public StringBuilder getFundHistory() {
-        return fundHistory;
-    }
-
-    public UserProfileViewModel setFundHistory(StringBuilder fundHistory) {
-        this.fundHistory = fundHistory;
-        return this;
-    }
 
     public BigDecimal getBufferedAmount() {
         return bufferedAmount;
@@ -125,15 +115,6 @@ public class UserProfileViewModel {
         this.username = username;
         return this;
     }
-
-//    public BigDecimal getInitialCapital() {
-//        return initialCapital;
-//    }
-//
-//    public UserProfileViewModel setInitialCapital(BigDecimal initialCapital) {
-//        this.initialCapital = initialCapital;
-//        return this;
-//    }
 
     public String getImageUrl() {
         return imageUrl;

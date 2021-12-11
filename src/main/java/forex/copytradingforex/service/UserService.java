@@ -2,6 +2,7 @@ package forex.copytradingforex.service;
 
 import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.service.UserRegistrationServiceModel;
+import forex.copytradingforex.model.view.FundHistoryViewModel;
 import forex.copytradingforex.model.view.UserProfileViewModel;
 
 import java.math.BigDecimal;
@@ -47,5 +48,7 @@ public interface UserService {
     UserEntity save(UserEntity trader);
 
     List<UserEntity> getInvestorDueRemunerationFee();
+
+    List<FundHistoryViewModel> getAllFundHistory(String username);
 }
 

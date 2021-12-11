@@ -43,12 +43,9 @@ public class UserEntity extends BaseEntity {
 
     @Column(columnDefinition = "Decimal(19,2) default '0.00'")
     private BigDecimal totalWithdraw;
+
     @Column(columnDefinition = "Decimal(19,2) default '0.00'")
     private BigDecimal bufferedAmount;
-
-    @Lob
-    private StringBuilder fundHistory;
-
 
     @ManyToMany(fetch = FetchType.LAZY)
     //@ManyToMany(fetch = FetchType.EAGER)
@@ -63,6 +60,17 @@ public class UserEntity extends BaseEntity {
     @OneToMany(mappedBy = "trader")
     private List<PositionEntity> positions;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<FundHistoryEntity> fundHistoryRecords;
+
+    public List<FundHistoryEntity> getFundHistoryRecords() {
+        return fundHistoryRecords;
+    }
+
+    public UserEntity setFundHistoryRecords(List<FundHistoryEntity> fundHistoryRecords) {
+        this.fundHistoryRecords = fundHistoryRecords;
+        return this;
+    }
 
     public UserEntity getTrader() {
         return trader;
@@ -188,15 +196,6 @@ public class UserEntity extends BaseEntity {
 
     public UserEntity setBufferedAmount(BigDecimal bufferedAmount) {
         this.bufferedAmount = bufferedAmount;
-        return this;
-    }
-
-    public StringBuilder getFundHistory() {
-        return fundHistory;
-    }
-
-    public UserEntity setFundHistory(StringBuilder fundHistory) {
-        this.fundHistory = fundHistory;
         return this;
     }
 

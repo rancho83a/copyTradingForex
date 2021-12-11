@@ -123,10 +123,29 @@
 
                     <div class="col-lg-7 how-it-works">
 
-                      <h2>Fund History</h2>
-                        <p th:text="*{fundHistory}">
+                        <h2>Fund History</h2>
 
-                        </p>
+                        <table class="table table-dark">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Operation</th>
+                                <th scope="col">Amount, USD</th>
+                                <th scope="col">Current Capital, USD</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="fh : ${fundHistory}">
+                                <th scope="row" th:text="${fh.id}">1</th>
+                                <td th:text="${fh.created}">Date</td>
+                                <td th:text="${fh.operation}">Operation</td>
+                                <td th:text="${fh.amount}">Amount</td>
+                                <td th:text="${fh.currentCapital}">Amount</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
 
                     </div>
 

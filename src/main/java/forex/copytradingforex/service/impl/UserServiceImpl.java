@@ -1,11 +1,13 @@
 package forex.copytradingforex.service.impl;
 
 import forex.copytradingforex.config.TradingSettings;
+import forex.copytradingforex.model.entity.FundHistoryEntity;
 import forex.copytradingforex.model.entity.RoleEntity;
 import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.entity.enums.RoleEnum;
 import forex.copytradingforex.model.service.UserRegistrationServiceModel;
 import forex.copytradingforex.model.service.UserProfileServiceModel;
+import forex.copytradingforex.model.view.FundHistoryViewModel;
 import forex.copytradingforex.model.view.UserProfileViewModel;
 import forex.copytradingforex.repository.RoleRepository;
 import forex.copytradingforex.repository.UserRepository;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -311,6 +314,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserEntity> getInvestorDueRemunerationFee() {
         return this.userRepository.findAllByBufferedAmountGreaterThan(BigDecimal.ZERO);
+    }
+
+    @Transactional
+    @Override
+    public List<FundHistoryViewModel> getAllFundHistory(String username) {
+       return  this.findUserByUsername(username).getFundHistoryRecords()
+                .stream()
+                .map(this::mapToFundHistoryViewModel)
+                .collect(Collectors.toList());
+    }
+
+    private FundHistoryViewModel mapToFundHistoryViewModel(FundHistoryEntity fundHistoryEntity) {
+        FundHistoryViewModel viewModel = modelMapper.map(fundHistoryEntity, FundHistoryViewModel.class);
+        viewModel.setUser(fundHistoryEntity.getUser().getFullName())
+                .setCreated(fundHistoryEntity.getCreated().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        return viewModel;
     }
 
     private BigDecimal calculateCurrentCapital(BigDecimal currentCapital, BigDecimal financialResult) {

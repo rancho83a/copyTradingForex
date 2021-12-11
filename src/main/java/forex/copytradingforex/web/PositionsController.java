@@ -116,8 +116,8 @@ public class PositionsController {
     //UPDATE
     @PreAuthorize("isOwner(#id)")
     @GetMapping("/{id}/update")
-    public String editOffer(@PathVariable Long id, Model model,
-                            @AuthenticationPrincipal CopyTradingForexUser currentUser) {
+    public String editPosition(@PathVariable Long id, Model model,
+                               @AuthenticationPrincipal CopyTradingForexUser currentUser) {
 
         PositionDetailsView positionDetailsView = positionService.findById(id, currentUser.getUserIdentifier());
         PositionUpdateBindingModel updateBindingModel = positionService.mapDetailsViewToUpdateBindingModel(positionDetailsView);

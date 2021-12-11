@@ -3,6 +3,7 @@ package forex.copytradingforex.web;
 import forex.copytradingforex.model.entity.RoleEntity;
 import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.entity.enums.RoleEnum;
+import forex.copytradingforex.repository.FundHistoryRepository;
 import forex.copytradingforex.repository.RoleRepository;
 import forex.copytradingforex.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -27,25 +28,27 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class UserRegistrationControllerTest {
 
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     PasswordEncoder encoder;
-
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FundHistoryRepository fundHistoryRepository;
 
     @BeforeEach
     void setup() {
-
 
     }
 
@@ -53,7 +56,6 @@ class UserRegistrationControllerTest {
     void tearDown() {
         userRepository.deleteAll();
         roleRepository.deleteAll();
-
     }
 
     @Test
@@ -95,7 +97,6 @@ class UserRegistrationControllerTest {
                         contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 ).
                 andExpect(status().is3xxRedirection());
-        //        andExpect(status().isCreated());
 
         Assertions.assertEquals(1, userRepository.count());
 

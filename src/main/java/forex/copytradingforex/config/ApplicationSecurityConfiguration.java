@@ -41,7 +41,6 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 //can change with @PreAuthorize(hasRole('MASTER')) over method
                 .antMatchers("/statistics").hasRole(RoleEnum.MASTER.name())
 
-                //todo errorhandling 403
                 .antMatchers("/positions/add").hasRole(RoleEnum.TRADER.name())
                 .antMatchers("/traders/**").hasRole(RoleEnum.INVESTOR.name())
 
