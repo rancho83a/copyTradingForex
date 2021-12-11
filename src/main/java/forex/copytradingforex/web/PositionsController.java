@@ -11,9 +11,7 @@ import forex.copytradingforex.service.PositionService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
 import forex.copytradingforex.web.exception.NotEnoughCapitalException;
-import forex.copytradingforex.web.exception.PositionNotFoundException;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -103,9 +100,9 @@ public class PositionsController {
         PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel,
                 trader.getUsername());
 
-//        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUsername(),
-//                savedPositionAddServiceModel.getYield());
-//        eventPublisher.publishEvent(event);
+        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUsername(),
+                savedPositionAddServiceModel.getYield());
+        eventPublisher.publishEvent(event);
 
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }

@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class v_01_AddPositionsControllerTest {
+class AddPositionsControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -105,29 +105,10 @@ class v_01_AddPositionsControllerTest {
 
     }
 
-    @Test
-    @WithUserDetails(value = TEST_USERNAME_TRADER)
-    void testWrongOpenTimeAddPosition() throws Exception {
-
-        mockMvc.
-                perform(post("/positions/add")
-                        .param("economicIndicatorId", String.valueOf(INDICATOR_ID))
-                        .param("trade", TRADE.name())
-                        .param("openTime", LocalDateTime.now().toString())
-                        .param("closeTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")))
-                        .param("openPrice", String.valueOf(BigDecimal.ONE))
-                        .param("closePrice", String.valueOf(BigDecimal.TEN))
-                        .param("financialResult", String.valueOf(BigDecimal.valueOf(1000)))
-
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
-                .andExpect(status().is3xxRedirection());
-    }
-
     private static final Long INDICATOR_ID = 1L;
     private static final TradeEnum TRADE = TradeEnum.BUY;
     private static final String DESCRIPTION  = "description.........";
-
+    private static final BigDecimal FINANCIAL_RESULT = BigDecimal.TEN;
 
 
     @Test
@@ -182,7 +163,7 @@ class v_01_AddPositionsControllerTest {
 
                 .setPeriodicity(PeriodicityEnum.MONTHLY)
                 .setTradingRule(tradingRule);
-        economicIndicatorRepository.save(indicator);
+        indicator = economicIndicatorRepository.save(indicator);
 
         mockMvc.
                 perform(post("/positions/add")
@@ -192,7 +173,7 @@ class v_01_AddPositionsControllerTest {
                         .param("closeTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")))
                         .param("openPrice", String.valueOf(BigDecimal.ONE))
                         .param("closePrice", String.valueOf(BigDecimal.TEN))
-                        .param("financialResult", String.valueOf(BigDecimal.valueOf(1000)))
+                        .param("financialResult",String.valueOf(FINANCIAL_RESULT))
 
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
@@ -205,6 +186,8 @@ class v_01_AddPositionsControllerTest {
         PositionEntity newPosition = newCreatedPositionOpt.get();
         Assertions.assertEquals(TEST_USERNAME_TRADER, newPosition.getTrader().getUsername());
         Assertions.assertNull(newPosition.getPicture());
+
+        Assertions.assertEquals(FINANCIAL_RESULT, newPosition.getFinancialResult());
         Assertions.assertEquals(CountryEnum.UK, newPosition.getEconomicIndicator().getCountry().getName());
         Assertions.assertEquals(DESCRIPTION, newPosition.getEconomicIndicator().getDescription());
         Assertions.assertEquals(PeriodicityEnum.MONTHLY, newPosition.getEconomicIndicator().getPeriodicity());
@@ -217,6 +200,26 @@ class v_01_AddPositionsControllerTest {
         Assertions.assertEquals(CurrencyCodeEnum.USD, newPosition.getEconomicIndicator().getCurrencyPair().getQuoteCurrency().getCode());
         Assertions.assertEquals("US Dollar", newPosition.getEconomicIndicator().getCurrencyPair().getQuoteCurrency().getName());
         Assertions.assertEquals(CentralBankEnum.FED , newPosition.getEconomicIndicator().getCurrencyPair().getQuoteCurrency().getCountry().getCentralBank());
+    }
+
+
+    @Test
+    @WithUserDetails(value = TEST_USERNAME_TRADER)
+    void testWrongOpenTimeAddPosition() throws Exception {
+
+        mockMvc.
+                perform(post("/positions/add")
+                        .param("economicIndicatorId", String.valueOf(INDICATOR_ID))
+                        .param("trade", TRADE.name())
+                        .param("openTime", LocalDateTime.now().toString())
+                        .param("closeTime", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")))
+                        .param("openPrice", String.valueOf(BigDecimal.ONE))
+                        .param("closePrice", String.valueOf(BigDecimal.TEN))
+                        .param("financialResult", String.valueOf(BigDecimal.valueOf(1000)))
+
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().is3xxRedirection());
     }
 
 
