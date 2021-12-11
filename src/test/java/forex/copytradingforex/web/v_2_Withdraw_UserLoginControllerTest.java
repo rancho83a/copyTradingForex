@@ -1,5 +1,6 @@
 package forex.copytradingforex.web;
 
+import forex.copytradingforex.model.entity.FundHistoryEntity;
 import forex.copytradingforex.model.entity.RoleEntity;
 import forex.copytradingforex.model.entity.UserEntity;
 import forex.copytradingforex.model.entity.enums.RoleEnum;
@@ -18,8 +19,10 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -49,6 +52,8 @@ class v_2_Withdraw_UserLoginControllerTest {
 
     @PostConstruct
     void setUp() {
+        userRepository.deleteAll();
+       roleRepository.deleteAll();
         RoleEntity traderTest = new RoleEntity().setRole(RoleEnum.TRADER);
         roleRepository.save(traderTest);
 
@@ -79,6 +84,7 @@ class v_2_Withdraw_UserLoginControllerTest {
 
     @Test
     @WithUserDetails(value = TEST_USERNAME)
+    @Transactional
     void testWithdrawAmount() throws Exception {
 
 
@@ -92,6 +98,12 @@ class v_2_Withdraw_UserLoginControllerTest {
         UserEntity actual = userRepository.findByUsername(TEST_USERNAME).get();
 
         Assertions.assertEquals(BigDecimal.valueOf(9).setScale(2), actual.getCurrentCapital());
+        UserEntity user = userRepository.findByUsername(TEST_USERNAME).get();
+        FundHistoryEntity fundHistory = user.getFundHistoryRecords().get(0);
+        Assertions.assertEquals( WITHDRAW_AMOUNT,fundHistory.getAmount());
+        Assertions.assertEquals( "Withdraw",fundHistory.getOperation());
+        Assertions.assertEquals( BigDecimal.valueOf(9).setScale(2),fundHistory.getCurrentCapital());
+        Assertions.assertEquals( TEST_USERNAME,fundHistory.getUser().getUsername());
     }
 
 

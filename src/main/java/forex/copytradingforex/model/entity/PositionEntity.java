@@ -164,20 +164,4 @@ public class PositionEntity extends BaseEntity{
         return this;
     }
 
-
-
-    //    private Instant created;
-//    private Instant modified;
-//
-//
-//    @PrePersist
-//    public void beforeCreate(){
-//        this.created=Instant.now();
-//    }
-//
-//    @PostPersist
-//    public void onUpdated(){
-//        this.modified=Instant.now();
-//    }
-
 }

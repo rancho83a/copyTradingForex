@@ -14,10 +14,12 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.PostConstruct;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -52,6 +54,7 @@ class v_01_AddPositionsControllerTest {
 
     @Autowired
     private EconomicIndicatorRepository economicIndicatorRepository;
+
 
     private static final String TEST_USERNAME_TRADER = "traderTest";
     private static final BigDecimal CURRENT_CAPITAL = BigDecimal.valueOf(5000);
@@ -94,11 +97,11 @@ class v_01_AddPositionsControllerTest {
         positionRepository.deleteAll();
        userRepository.deleteAll();
         roleRepository.deleteAll();
-  //      currencyRepository.deleteAll();
-//        countryRepository.deleteAll();
-//        currencyPairRepository.deleteAll();
-//        tradingRuleEntityRepository.deleteAll();
-//        economicIndicatorRepository.deleteAll();
+      currencyRepository.deleteAll();
+        currencyPairRepository.deleteAll();
+        tradingRuleEntityRepository.deleteAll();
+        economicIndicatorRepository.deleteAll();
+        countryRepository.deleteAll();
 
     }
 
@@ -123,10 +126,13 @@ class v_01_AddPositionsControllerTest {
 
     private static final Long INDICATOR_ID = 1L;
     private static final TradeEnum TRADE = TradeEnum.BUY;
+    private static final String DESCRIPTION  = "description.........";
+
 
 
     @Test
     @WithUserDetails(value = TEST_USERNAME_TRADER)
+    @Transactional
     void testAddPosition() throws Exception {
         CountryEntity country1 = new CountryEntity()
                 .setCentralBank(CentralBankEnum.BOE)
@@ -142,7 +148,7 @@ class v_01_AddPositionsControllerTest {
 
         TradingRuleEntity tradingRule = new TradingRuleEntity()
                 .setEntryPoint("entryPointRule")
-                .setExitPoint("ExitPointRule")
+                .setExitPoint("exitPointRule")
                 .setStopLoss(20)
                 .setTakeProfit(30);
          tradingRule= tradingRuleEntityRepository.save(tradingRule);
@@ -172,7 +178,7 @@ class v_01_AddPositionsControllerTest {
         indicator.setIndicator(EconomicIndicatorEnum.CPI)
                 .setCountry(country1)
                 .setCurrencyPair(currencyPair)
-                .setDescription("description.........")
+                .setDescription(DESCRIPTION)
 
                 .setPeriodicity(PeriodicityEnum.MONTHLY)
                 .setTradingRule(tradingRule);
@@ -191,10 +197,26 @@ class v_01_AddPositionsControllerTest {
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection());
-        //                .andExpect(redirectedUrl("/"));
-        long count = positionRepository.count();
-        Assertions.assertEquals(1L, positionRepository.count());
 
+        Assertions.assertEquals(1L, positionRepository.count());
+        Optional<PositionEntity> newCreatedPositionOpt = positionRepository.findByIdByEntityGraph(1L);
+        Assertions.assertTrue(newCreatedPositionOpt.isPresent());
+
+        PositionEntity newPosition = newCreatedPositionOpt.get();
+        Assertions.assertEquals(TEST_USERNAME_TRADER, newPosition.getTrader().getUsername());
+        Assertions.assertNull(newPosition.getPicture());
+        Assertions.assertEquals(CountryEnum.UK, newPosition.getEconomicIndicator().getCountry().getName());
+        Assertions.assertEquals(DESCRIPTION, newPosition.getEconomicIndicator().getDescription());
+        Assertions.assertEquals(PeriodicityEnum.MONTHLY, newPosition.getEconomicIndicator().getPeriodicity());
+        Assertions.assertEquals(EconomicIndicatorEnum.CPI, newPosition.getEconomicIndicator().getIndicator());
+        Assertions.assertEquals("entryPointRule", newPosition.getEconomicIndicator().getTradingRule().getEntryPoint());
+        Assertions.assertEquals("exitPointRule", newPosition.getEconomicIndicator().getTradingRule().getExitPoint());
+        Assertions.assertEquals(30, newPosition.getEconomicIndicator().getTradingRule().getTakeProfit());
+        Assertions.assertEquals(20, newPosition.getEconomicIndicator().getTradingRule().getStopLoss());
+        Assertions.assertEquals(CurrencyCodeEnum.GBP, newPosition.getEconomicIndicator().getCurrencyPair().getBaseCurrency().getCode());
+        Assertions.assertEquals(CurrencyCodeEnum.USD, newPosition.getEconomicIndicator().getCurrencyPair().getQuoteCurrency().getCode());
+        Assertions.assertEquals("US Dollar", newPosition.getEconomicIndicator().getCurrencyPair().getQuoteCurrency().getName());
+        Assertions.assertEquals(CentralBankEnum.FED , newPosition.getEconomicIndicator().getCurrencyPair().getQuoteCurrency().getCountry().getCentralBank());
     }
 
 

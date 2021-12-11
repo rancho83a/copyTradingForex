@@ -22,8 +22,7 @@ import java.util.List;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -38,6 +37,8 @@ class PositionsControllerTest {
     @Autowired
     private RoleRepository roleRepository;
 
+    private PositionRepository positionRepository;
+
     private static final String TEST_USERNAME_TRADER = "traderTest";
     private static final BigDecimal CURRENT_CAPITAL = BigDecimal.valueOf(5000);
 
@@ -45,14 +46,9 @@ class PositionsControllerTest {
 
     @PostConstruct
     void setUp() {
-//        currencyRepository.deleteAll();
-//        countryRepository.deleteAll();
-//        currencyPairRepository.deleteAll();
-//        tradingRuleEntityRepository.deleteAll();
-//        economicIndicatorRepository.deleteAll();
-       userRepository.deleteAll();
+
+        userRepository.deleteAll();
         roleRepository.deleteAll();
-//        positionRepository.deleteAll();
 
         RoleEntity traderRole = new RoleEntity().setRole(RoleEnum.TRADER);
         roleRepository.save(traderRole);

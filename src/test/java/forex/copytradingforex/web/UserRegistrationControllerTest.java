@@ -66,7 +66,7 @@ class UserRegistrationControllerTest {
                 .andExpect(view().name("register"));
     }
 
-    private static final String TEST_USERNAME = "testTrader";
+    private static final String TEST_USERNAME = "testTraderRegister";
     private static final String TEST_USER_EMAIL = "trader_test@test.com";
     private static final String TEST_FULL_NAME = "Test Testov";
     private static final int TEST_USER_AGE = 33;
