@@ -93,18 +93,21 @@ public class PositionsController {
     }
 
     @PostMapping("/add")
-    public String addOffer(@Valid PositionAddBindingModel positionAddBindModel,
+    public String addPosition(@Valid PositionAddBindingModel positionAddBindModel,
                            BindingResult bindingResult, RedirectAttributes redirectAttributes,
                            @AuthenticationPrincipal CopyTradingForexUser trader) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("positionAddBindModel", positionAddBindModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.positionAddBindModel", bindingResult)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.positionAddBindModel",
+                            bindingResult)
                     .addFlashAttribute("economicIndicators", economicIndicatorService.getAllEconomicIndicators());
             return "redirect:/positions/add";
         }
-        PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel, trader.getUsername());
+        PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel,
+                trader.getUsername());
 
-        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUserIdentifier(), savedPositionAddServiceModel.getYield());
+        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUserIdentifier(),
+                savedPositionAddServiceModel.getYield());
         eventPublisher.publishEvent(event);
 
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";

@@ -21,11 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
 @SpringBootTest
 @AutoConfigureMockMvc
-class StatsControllerTest {
-
+class TradersControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -35,20 +33,21 @@ class StatsControllerTest {
     @Autowired
     private RoleRepository roleRepository;
 
-    private static final String TEST_USERNAME = "masterTest";
-    private static final BigDecimal CURRENT_CAPITAL = BigDecimal.TEN;
+    private static final String TEST_USERNAME_INVESTOR = "investorTest";
+    private static final BigDecimal CURRENT_CAPITAL = BigDecimal.valueOf(5000);
 
-    private UserEntity masterTest;
-
+    private UserEntity investorTest;
 
     @PostConstruct
     void setUp() {
-        RoleEntity masterRole = new RoleEntity().setRole(RoleEnum.MASTER);
-        roleRepository.save(masterRole);
+        RoleEntity investorRole = new RoleEntity().setRole(RoleEnum.INVESTOR);
+        RoleEntity traderRole = new RoleEntity().setRole(RoleEnum.TRADER);
+        roleRepository.save(investorRole);
+        roleRepository.save(traderRole);
 
-        masterTest = new UserEntity()
-                .setUsername(TEST_USERNAME)
-                .setRoles(List.of(masterRole))
+        investorTest = new UserEntity()
+                .setUsername(TEST_USERNAME_INVESTOR)
+                .setRoles(List.of(investorRole))
                 .setCurrentCapital(CURRENT_CAPITAL)
                 .setPassword("12345")
                 .setFullName("Test Testov")
@@ -60,7 +59,7 @@ class StatsControllerTest {
                 .setTotalWithdraw(BigDecimal.ZERO)
                 .setBufferedAmount(BigDecimal.ZERO);
 
-        masterTest = this.userRepository.save(masterTest);
+        investorTest = this.userRepository.save(investorTest);
     }
 
     @AfterEach
@@ -71,14 +70,12 @@ class StatsControllerTest {
 
 
     @Test
-    @WithUserDetails(value = TEST_USERNAME)
-    void testOpenStatisticPage() throws Exception {
+    @WithUserDetails(value = TEST_USERNAME_INVESTOR)
+    void testOpenTradersPage() throws Exception {
         mockMvc.
-                perform(get("/statistics"))
+                perform(get("/traders/all"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("stats"))
-                        .andExpect(view().name("stats"));
-
+                .andExpect(model().attributeExists("traders"))
+                .andExpect(view().name("traders"));
     }
-
 }

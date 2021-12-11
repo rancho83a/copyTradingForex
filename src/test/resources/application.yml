@@ -6,6 +6,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+#  aop:
+#    auto: false
 
 cloudinary:
   api-key: 446412117829948
@@ -23,3 +25,6 @@ schedulers:
 
   #“At 00:00 on Sunday.”
   remunerationFeeCron: "0 0 0 * * 7"
+
+
+

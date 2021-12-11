@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/traders")
 public class TradersController {
@@ -40,17 +42,19 @@ public class TradersController {
 
     @GetMapping("/{id}/copy")
     public String joinToCopy(
-            Model model,
             @PathVariable Long id,
-            @AuthenticationPrincipal CopyTradingForexUser currentInvestor) {
+            //@AuthenticationPrincipal CopyTradingForexUser currentInvestor) {
+            Principal principal) {
 
-        if(!userService.canJoin(currentInvestor.getUserIdentifier())){
+      //  if(!userService.canJoin(currentInvestor.getUserIdentifier())){
+        if(!userService.canJoin(principal.getName())){
             throw new NotEnoughCapitalException(
                     String.format("You can not Join to trader! Your capital is less than %s USD."
                             ,TradingSettings.requiredInvestorCapitalToJoin));
         }
 
-        userService.joinToCopy(currentInvestor.getUserIdentifier(), id);
+       // userService.joinToCopy(currentInvestor.getUserIdentifier(), id);
+        userService.joinToCopy(principal.getName(), id);
 
         return "redirect:/users/profile";
     }
