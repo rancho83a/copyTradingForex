@@ -1,24 +1,27 @@
 package forex.copytradingforex.web;
 
-import forex.copytradingforex.model.entity.RoleEntity;
-import forex.copytradingforex.model.entity.UserEntity;
-import forex.copytradingforex.model.entity.enums.RoleEnum;
-import forex.copytradingforex.repository.RoleRepository;
-import forex.copytradingforex.repository.UserRepository;
+import forex.copytradingforex.model.entity.*;
+import forex.copytradingforex.model.entity.enums.*;
+import forex.copytradingforex.repository.*;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -42,6 +45,15 @@ class PositionsControllerTest {
 
     @PostConstruct
     void setUp() {
+//        currencyRepository.deleteAll();
+//        countryRepository.deleteAll();
+//        currencyPairRepository.deleteAll();
+//        tradingRuleEntityRepository.deleteAll();
+//        economicIndicatorRepository.deleteAll();
+       userRepository.deleteAll();
+        roleRepository.deleteAll();
+//        positionRepository.deleteAll();
+
         RoleEntity traderRole = new RoleEntity().setRole(RoleEnum.TRADER);
         roleRepository.save(traderRole);
 
@@ -64,6 +76,7 @@ class PositionsControllerTest {
 
     @AfterEach
     void tearDown() {
+
         userRepository.deleteAll();
         roleRepository.deleteAll();
     }
@@ -76,7 +89,6 @@ class PositionsControllerTest {
                 .andExpect(view().name("positions"));
     }
 
-
     @Test
     @WithUserDetails(value = TEST_USERNAME_TRADER)
     void testOpenAddPositionsPage() throws Exception {
@@ -85,7 +97,4 @@ class PositionsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("position-add"));
     }
-
-
-
 }

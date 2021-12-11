@@ -59,6 +59,8 @@ class CommentRestControllerTest {
 
     @BeforeEach
     void setup() {
+
+      userRepository.deleteAll();
         testUser = new UserEntity();
         testUser.setUsername("testUser")
                 .setCurrentCapital(BigDecimal.valueOf(1000))

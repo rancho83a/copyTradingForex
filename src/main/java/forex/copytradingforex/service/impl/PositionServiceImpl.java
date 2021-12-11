@@ -98,7 +98,9 @@ public class PositionServiceImpl implements PositionService {
         PositionAddServiceModel positionAddServiceModel = modelMapper.map(positionAddBindModel, PositionAddServiceModel.class);
         PositionEntity newPosition = modelMapper.map(positionAddServiceModel, PositionEntity.class);
 
-        EconomicIndicatorEntity economicIndicator = this.economicIndicatorRepository.getById(positionAddBindModel.getEconomicIndicatorId());
+        EconomicIndicatorEntity economicIndicator = this.economicIndicatorRepository
+                .findById(positionAddBindModel.getEconomicIndicatorId()).orElseThrow(()->
+                        new ObjectNotFoundException(positionAddBindModel.getEconomicIndicatorId()));
         newPosition.setEconomicIndicator(economicIndicator);
 
         UserEntity trader = userRepository.findByUsername(username)

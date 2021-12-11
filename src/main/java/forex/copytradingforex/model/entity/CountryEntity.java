@@ -21,7 +21,7 @@ public class CountryEntity extends BaseEntity{
 
     private String flagUrl;
 
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = CascadeType.REMOVE)
     private List<EconomicIndicatorEntity> economicIndicators;
 
     public CountryEnum getName() {

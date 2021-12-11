@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +36,6 @@ public class PositionsController {
     private final ApplicationEventPublisher eventPublisher;
 
 
-
     public PositionsController(PositionService positionService, EconomicIndicatorService economicIndicatorService, UserService userService, ApplicationEventPublisher eventPublisher) {
         this.positionService = positionService;
         this.economicIndicatorService = economicIndicatorService;
@@ -44,7 +44,7 @@ public class PositionsController {
     }
 
     @GetMapping("/all")
-    public String allPositions(Model model)  {
+    public String allPositions(Model model) {
         model.addAttribute("positions", this.positionService.getAllPositions());
         return "positions";
     }
@@ -54,33 +54,30 @@ public class PositionsController {
     @GetMapping("/{id}/details")
     public String showPosition(@PathVariable Long id, Model model,
                                // Principal principal){
-                               @AuthenticationPrincipal CopyTradingForexUser currentUser)
-    {
-            model.addAttribute("position", this.positionService.findById(id, currentUser.getUserIdentifier()));
-        if(!model.containsAttribute("noUploadedPicture")){
+                               @AuthenticationPrincipal CopyTradingForexUser currentUser) {
+        model.addAttribute("position", this.positionService.findById(id, currentUser.getUserIdentifier()));
+        if (!model.containsAttribute("noUploadedPicture")) {
             model.addAttribute("noUploadedPicture", false);
         }
-       return "position-details";
+        return "position-details";
     }
 
     //DELETE
     @PreAuthorize("isOwner(#id)")
     //@PreAuthorize("@positionServiceImpl.isOwner(#principal.name, #id)")
     @DeleteMapping("/{id}")
-    public String deletePosition(@PathVariable Long id, Principal principal) {
+    public String deletePosition(@PathVariable Long id) {
 
         this.positionService.deletePosition(id);
         return "redirect:/positions/all";
     }
 
     @GetMapping("/add")
-    public String getAddPositionPage(Model model
-            , Principal principal
+    public String getAddPositionPage(Model model, Principal principal
     ) {
-
         if (!userService.isTraderCanTrade(principal.getName())) {
-           throw new NotEnoughCapitalException( String.format("You can not add position! Your capital is less than %s USD."
-                   , TradingSettings.requiredTradingCapital));
+            throw new NotEnoughCapitalException(String.format("You can not add position! Your capital is less than %s USD."
+                    , TradingSettings.requiredTradingCapital));
         }
 
         if (!model.containsAttribute("positionAddBindModel")) {
@@ -94,8 +91,8 @@ public class PositionsController {
 
     @PostMapping("/add")
     public String addPosition(@Valid PositionAddBindingModel positionAddBindModel,
-                           BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                           @AuthenticationPrincipal CopyTradingForexUser trader) {
+                              BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                              @AuthenticationPrincipal UserDetails trader) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("positionAddBindModel", positionAddBindModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.positionAddBindModel",
@@ -106,9 +103,9 @@ public class PositionsController {
         PositionAddServiceModel savedPositionAddServiceModel = positionService.addPosition(positionAddBindModel,
                 trader.getUsername());
 
-        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUserIdentifier(),
-                savedPositionAddServiceModel.getYield());
-        eventPublisher.publishEvent(event);
+//        PositionCreatedEvent event = new PositionCreatedEvent(this, trader.getUsername(),
+//                savedPositionAddServiceModel.getYield());
+//        eventPublisher.publishEvent(event);
 
         return "redirect:/positions/" + savedPositionAddServiceModel.getId() + "/details";
     }

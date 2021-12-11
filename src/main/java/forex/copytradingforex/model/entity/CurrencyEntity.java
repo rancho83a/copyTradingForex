@@ -18,7 +18,7 @@ public class CurrencyEntity extends BaseEntity{
     @Column(unique = true, nullable = false)
     private CurrencyCodeEnum code;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private CountryEntity country;
 
     public String getName() {
