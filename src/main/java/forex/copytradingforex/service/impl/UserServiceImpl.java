@@ -196,7 +196,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(investor);
 
         trader.addInvestor(investor);
-        userRepository.save(trader);
+       // userRepository.save(trader);
     }
 
     @Override
@@ -227,7 +227,7 @@ public class UserServiceImpl implements UserService {
         }
 
         trader.removeInvestor(investor.getId());
-        userRepository.save(trader);
+       // userRepository.save(trader);
 
 
         investor.setTrader(null);

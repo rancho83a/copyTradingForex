@@ -280,12 +280,5 @@ class v1_UpdatePositionControllerTest {
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().is3xxRedirection());
-
-//        Assertions.assertEquals(1L, positionRepository.count());
-//        Optional<PositionEntity> updatedPositionOpt = positionRepository.findByIdByEntityGraph(1L);
-//        Assertions.assertTrue(updatedPositionOpt.isPresent());
-//
-//        PositionEntity newPosition = updatedPositionOpt.get();
-//        Assertions.assertEquals("12345678901", newPosition.getVideoUrl());
     }
 }

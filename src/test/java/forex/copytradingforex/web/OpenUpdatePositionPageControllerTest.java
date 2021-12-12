@@ -60,6 +60,7 @@ class OpenUpdatePositionPageControllerTest {
     private static final BigDecimal CURRENT_CAPITAL = BigDecimal.valueOf(5000);
 
     private UserEntity traderTest;
+    private PositionEntity position;
 
     @PostConstruct
     void setUp() {
@@ -110,11 +111,36 @@ class OpenUpdatePositionPageControllerTest {
     private static final BigDecimal FINANCIAL_RESULT = BigDecimal.TEN;
 
 
-
     @Test
     @WithUserDetails(value = TEST_USERNAME_TRADER)
     @Transactional
     void testUpdatePosition() throws Exception {
+        initPosition();
+
+        mockMvc.
+                perform(get("/positions/" + position.getId() + "/update"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("updateBindingModel"))
+                .andExpect(view().name("position-update"));
+    }
+
+
+
+    @Test
+    @WithUserDetails(value = TEST_USERNAME_TRADER)
+    @Transactional
+    void testOpenPositionDetailsPage() throws Exception {
+        initPosition();
+
+        mockMvc.
+                perform(get("/positions/" + position.getId() + "/details"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("position"))
+                .andExpect(view().name("position-details"));
+    }
+
+
+    private void initPosition() {
         CountryEntity country1 = new CountryEntity()
                 .setCentralBank(CentralBankEnum.BOE)
                 .setFlagUrl("flagUrl")
@@ -164,7 +190,7 @@ class OpenUpdatePositionPageControllerTest {
                 .setTradingRule(tradingRule);
         EconomicIndicatorEntity economicIndicator = economicIndicatorRepository.save(indicator);
 
-        PositionEntity position = new PositionEntity()
+        position = new PositionEntity()
                 .setEconomicIndicator(economicIndicator)
                 .setTrade(TRADE)
                 .setOpenTime(LocalDateTime.now())
@@ -173,15 +199,9 @@ class OpenUpdatePositionPageControllerTest {
                 .setClosePrice(BigDecimal.TEN)
                 .setFinancialResult(FINANCIAL_RESULT)
                 .setTrader(traderTest)
-        .setYield(FINANCIAL_RESULT.divide(CURRENT_CAPITAL, 6, RoundingMode.FLOOR));
+                .setYield(FINANCIAL_RESULT.divide(CURRENT_CAPITAL, 6, RoundingMode.FLOOR));
 
-        position=positionRepository.save(position);
-
-        mockMvc.
-                perform(get("/positions/"+position.getId()+"/update"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("updateBindingModel"))
-                .andExpect(view().name("position-update"));
+        position = positionRepository.save(position);
     }
 
 
