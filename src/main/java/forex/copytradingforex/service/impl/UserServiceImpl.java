@@ -1,6 +1,7 @@
 package forex.copytradingforex.service.impl;
 
 import forex.copytradingforex.config.TradingSettings;
+import forex.copytradingforex.model.entity.CommentEntity;
 import forex.copytradingforex.model.entity.FundHistoryEntity;
 import forex.copytradingforex.model.entity.RoleEntity;
 import forex.copytradingforex.model.entity.UserEntity;
@@ -11,6 +12,7 @@ import forex.copytradingforex.model.view.FundHistoryViewModel;
 import forex.copytradingforex.model.view.UserProfileViewModel;
 import forex.copytradingforex.repository.RoleRepository;
 import forex.copytradingforex.repository.UserRepository;
+import forex.copytradingforex.service.CommentService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.web.exception.ObjectNotFoundException;
 import forex.copytradingforex.web.exception.UsernameNotFoundException;
@@ -36,14 +38,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
     private final CopyTradingForexUserDetailsServiceImpl copyTradingForexUserService;
+    private final CommentService commentService;
     private final ModelMapper modelMapper;
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository,
-                           CopyTradingForexUserDetailsServiceImpl copyTradingForexUserService, ModelMapper modelMapper) {
+                           CopyTradingForexUserDetailsServiceImpl copyTradingForexUserService, CommentService commentService, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
         this.copyTradingForexUserService = copyTradingForexUserService;
+        this.commentService = commentService;
         this.modelMapper = modelMapper;
 
     }
@@ -323,6 +327,20 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(this::mapToFundHistoryViewModel)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean deleteProfile(String username) {
+
+        UserEntity user = this.findUserByUsername(username);
+        if(user.getCurrentCapital().compareTo(BigDecimal.ZERO)>0){
+            return false;
+        }
+        
+        this.userRepository.deleteById(user.getId());
+        return true;
+
+
     }
 
     private FundHistoryViewModel mapToFundHistoryViewModel(FundHistoryEntity fundHistoryEntity) {

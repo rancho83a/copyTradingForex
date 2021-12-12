@@ -5,20 +5,19 @@ import forex.copytradingforex.service.FundHistoryService;
 import forex.copytradingforex.service.UserService;
 import forex.copytradingforex.service.impl.CopyTradingForexUser;
 import forex.copytradingforex.web.exception.NotEnoughCapitalException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.math.BigDecimal;
+import java.security.Principal;
 
 
 @Controller
@@ -64,7 +63,6 @@ public class UserLoginController {
             model.addAttribute("traderCanNotTrade", false);
         }
 
-
         if (userService.isJoinedToCopy(currentUser.getUserIdentifier())) {
             model.addAttribute("isJoinedToCopy", true);
         }
@@ -81,6 +79,9 @@ public class UserLoginController {
 
         if (!userService.isTraderCanTrade(currentUser.getUserIdentifier())) {
             model.addAttribute("traderCanNotTrade", true);
+        }
+        if(!model.containsAttribute("canDeleteProfile")){
+            model.addAttribute("canDeleteProfile", true);
         }
 
         model.addAttribute("fundHistory", this.userService.getAllFundHistory(currentUser.getUsername()));
@@ -122,6 +123,19 @@ public class UserLoginController {
             throw new NotEnoughCapitalException("The withdraw is denied! Your capital is less than you want to withdraw!");
         }
         return "redirect:/users/profile";
+    }
+
+    //@PreAuthorize("isOwner(#id)")
+    //@PreAuthorize("@positionServiceImpl.isOwner(#principal.name, #id)")
+    @DeleteMapping("users/delete")
+    public String deleteProfile(Principal principal, RedirectAttributes redirectAttributes) {
+
+        if(!this.userService.deleteProfile(principal.getName())){
+            redirectAttributes.addFlashAttribute("canDeleteProfile", false);
+            return "redirect:/users/profile";
+        }
+
+        return "redirect:/";
     }
 
 

@@ -20,8 +20,6 @@
         <!--        Navbar-->
         <header th:replace="fragments/navbar::navigation"></header>
 
-        <!--        <input type="hidden" name="positionId" id="positionId" th:value="${position.id}">-->
-
 
         <!--Main content for every page -->
 
@@ -115,7 +113,21 @@
                     </div>
                     <div class="col-12 col-lg-6">
                         <img th:src="*{imageUrl}" class="img-fluid py-2" alt="Position image">
+<!--                        th:if="!${isJoinedToCopy}"-->
+                        <div class="mx-5" >
+<!--                            <form th:action="@{/users/{id}/delete (id = *{id})}" th:method="delete">-->
+                            <form th:action="@{/users/delete}" th:method="delete">
+                                <input type="submit" class="btn btn-pos-details px-5" value="Delete Profile"/>
+                            </form>
+                            <small th:if="!${canDeleteProfile}"
+                                   class="rounded bg-danger text-white p-1">
+                                Please withdraw your amount first!
+                            </small>
 
+<!--                            -->
+<!--                            <a  th:href="@{/users/{id}/delete (id = *{id})}"-->
+<!--                                class="btn btn-pos-details px-5">Delete Profile</a>-->
+                        </div>
                     </div>
                 </div>
 

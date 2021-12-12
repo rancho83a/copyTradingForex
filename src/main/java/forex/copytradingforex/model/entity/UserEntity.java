@@ -60,8 +60,19 @@ public class UserEntity extends BaseEntity {
     @OneToMany(mappedBy = "trader")
     private List<PositionEntity> positions;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<FundHistoryEntity> fundHistoryRecords;
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    private List<CommentEntity> comments;
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public UserEntity setComments(List<CommentEntity> comments) {
+        this.comments = comments;
+        return this;
+    }
 
     public List<FundHistoryEntity> getFundHistoryRecords() {
         return fundHistoryRecords;

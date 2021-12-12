@@ -22,12 +22,21 @@ public class EconomicIndicatorServiceImpl implements EconomicIndicatorService {
     @Override
     public List<EconomicIndicatorViewModel> getAllEconomicIndicators() {
 
+        //TODO make order by Country ASC
         List<EconomicIndicatorViewModel> indicators = this.economicIndicatorRepository.findAll()
                 .stream()
                 .map(indicator -> {
                     EconomicIndicatorViewModel economicIndicatorViewModel = modelMapper.map(indicator, EconomicIndicatorViewModel.class);
 
-                    economicIndicatorViewModel.setIndicator(indicator.getIndicator().getName());
+                    economicIndicatorViewModel.setIndicator(indicator.getIndicator().getName())
+                            .setCountry(indicator.getCountry().getName().name())
+                            .setCurrencyPair(indicator.getCurrencyPair().getName().name())
+                            .setEntryPoint(indicator.getTradingRule().getEntryPoint())
+                            .setExitPoint(indicator.getTradingRule().getExitPoint())
+                            .setTakeProfit(indicator.getTradingRule().getTakeProfit())
+                            .setStopLoss(indicator.getTradingRule().getStopLoss());
+
+
                     return economicIndicatorViewModel;
                 })
                 .collect(Collectors.toList());

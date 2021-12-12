@@ -50,5 +50,7 @@ public interface UserService {
     List<UserEntity> getInvestorDueRemunerationFee();
 
     List<FundHistoryViewModel> getAllFundHistory(String username);
+
+    boolean deleteProfile(String username);
 }
 
