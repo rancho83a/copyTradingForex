@@ -336,7 +336,7 @@ public class UserServiceImpl implements UserService {
         if(user.getCurrentCapital().compareTo(BigDecimal.ZERO)>0){
             return false;
         }
-        
+
         this.userRepository.deleteById(user.getId());
         return true;
 

@@ -6,7 +6,7 @@ Access:
 
 for any users (register or non-register)
  - "/homePage", "/users/login", "/users/register","/how-it-works","/positions/all", 
-"news/all")
+)
  - forbidden "details trade" button
 
 
