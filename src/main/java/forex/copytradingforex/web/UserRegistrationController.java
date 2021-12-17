@@ -49,21 +49,21 @@ public class UserRegistrationController {
     @PostMapping("/users/register")
     public String register(
 
-            @Valid UserRegistrationBindingModel userModel,  // throw 404 error
+            @Valid UserRegistrationBindingModel userRegistrationBindingModel,  // throw 404 error
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes) {
 
-        boolean isPasswordConfirm = userModel.getPassword().equals(userModel.getConfirmPassword());
+        boolean isPasswordConfirm = userRegistrationBindingModel.getPassword().equals(userRegistrationBindingModel.getConfirmPassword());
 
         if (bindingResult.hasErrors() || !isPasswordConfirm) {
-            redirectAttributes.addFlashAttribute("userModel", userModel);
+            redirectAttributes.addFlashAttribute("userModel", userRegistrationBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
             redirectAttributes.addFlashAttribute("isPasswordConfirm", false);
             return "redirect:/users/register";
         }
 
         UserRegistrationServiceModel userRegistrationServiceModel = modelMapper
-                .map(userModel, UserRegistrationServiceModel.class);
+                .map(userRegistrationBindingModel, UserRegistrationServiceModel.class);
 
 
         userService.registerAndLoginUser(userRegistrationServiceModel);
