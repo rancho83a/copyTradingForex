@@ -1,7 +1,6 @@
 package forex.copytradingforex.repository;
 
-import forex.copytradingforex.model.entity.PositionEntity;
-import forex.copytradingforex.model.entity.RoleEntity;
+
 import forex.copytradingforex.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

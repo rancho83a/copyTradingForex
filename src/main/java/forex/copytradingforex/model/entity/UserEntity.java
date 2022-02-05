@@ -62,6 +62,7 @@ public class UserEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<FundHistoryEntity> fundHistoryRecords;
+
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     private List<CommentEntity> comments;
 
