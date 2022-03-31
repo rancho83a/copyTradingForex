@@ -13,7 +13,6 @@ for any users (register or non-register)
 for master:
  - CRUD News
  - CRUD economic indicators
- - 
  - statistic
 
 
